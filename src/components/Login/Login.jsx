@@ -51,16 +51,16 @@ class Login extends Component {
         localStorage.setItem('CountTime', new Date());
         let jwt = getInfo().data.Role;
         if (jwt === undefined) {
-          history.push("/ex-reservation-system/#/");
+          history.push("/");
           Swal.fire(` ${jwt}`, "", 'error');
         }
         else if (jwt === "Instructor") {
           console.log(jwt);
-          Swal.fire({ icon: 'success', title: ` مرحبا  ${getInfo().data.FullName} `,showConfirmButton: false,timer: 2000 });
-          history.push('/ex-reservation-system/#/Instructor')
+          Swal.fire({ icon: 'success', title: ` مرحبا  ${getInfo().data.FullName} `,showConfirmButton: false,timer: 1500 });
+          history.push('#/Instructor')
         } else if (jwt === "SysAdmin") {
           console.log(jwt);
-          history.push("/ex-reservation-system/#/SysDashboard");
+          history.push("#/SysDashboard");
           Swal.fire({ icon: 'success', title: ` مرحبا  ${getInfo().data.FullName} `,showConfirmButton: false,timer: 1500 });
         }
          else {

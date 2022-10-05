@@ -1,25 +1,19 @@
 import React from 'react'
-import { Routes, Route } from 'react-router-dom';
-
-
+import { HashRouter as Router,Routes, Route } from 'react-router-dom';
 import Instructors from './components/Instructors/Instructors';
-import { PrivateRoute } from './RouteManagement/PrivateRoute';
+import  {PrivateRouteInstructor} from './RouteManagement/PrivateRoutes';
 import { Login } from './components/Login/Login';
 function App() {
 
   return (
-    <>
-      <Routes>
+    <Router>
+      <Routes >
         <Route path="/" element={<Login />} />
-        <Route
-          path="/ex-reservation-system/#/Instructor"
-          element={
-            <PrivateRoute>
-              <Instructors />
-            </PrivateRoute>
-          }/>
-        </Routes>
-    </>
+        <Route element={<PrivateRouteInstructor />}>
+          <Route element={<Instructors />} path="/Instructor" />
+        </Route>
+      </Routes>
+    </Router>
   )
 }
 
