@@ -1,26 +1,21 @@
 import { Navigate, Outlet } from 'react-router-dom'
 import { getInfo, checkStorage } from '../components/helperMethods';
 import React from 'react'
+let token = null;
+if (checkStorage()) token = getInfo().data.Role
 const PrivateRouteInstructor = () => {
-  let token;
-  if (checkStorage() !== null && checkStorage() !== undefined) token = getInfo().data.Role === "Instructor"
-  console.log(token);
   return (
-    token ? <Outlet /> : <Navigate to='/' />
+    token === "Instructor" ? <Outlet /> : <Navigate to='/' />
   )
 }
 const PrivateRouteStudents = () => {
-  let token;
-  if (checkStorage() !== null && checkStorage() !== undefined) token = getInfo().data.Role === "Students"
   return (
-    token ? <Outlet /> : <Navigate to='/' />
+    token === "Students" ? <Outlet /> : <Navigate to='/' />
   )
 }
-const PrivateRouteSysAdmin = () => {
-  let token;
-  if (checkStorage() !== null && checkStorage() !== undefined) token = getInfo().data.Role === "SysAdmin"
+const PrivateRouteModerator = () => {
   return (
-    token ? <Outlet /> : <Navigate to='/' />
+    token === "SysAdmin" ? <Outlet /> : <Navigate to='/' />
   )
 }
-export { PrivateRouteInstructor,PrivateRouteStudents, PrivateRouteSysAdmin };
+export { PrivateRouteInstructor, PrivateRouteStudents, PrivateRouteModerator };

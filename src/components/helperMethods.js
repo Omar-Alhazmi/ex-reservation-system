@@ -1,10 +1,10 @@
 import jwt_decode from 'jwt-decode';
 
 export const checkStorage = () => {
-  return localStorage.getItem('currentUser');
+  return (localStorage.getItem('currentUser') !== undefined && localStorage.getItem('currentUser')  !== null) ?true:false ;
 };
 export const getInfo = () => {
-  return jwt_decode(localStorage.getItem('currentUser'))
+  return (checkStorage()) ? jwt_decode(localStorage.getItem('currentUser')) : ""
 };
 export const getId = () => {
   if (checkStorage()) {

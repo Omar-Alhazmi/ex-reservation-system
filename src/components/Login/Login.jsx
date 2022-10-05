@@ -7,7 +7,7 @@ import { createBrowserHistory } from 'history';
 import apiURL from '../ApiConfig/ApiConfig';
 import { IoMdFingerPrint } from 'react-icons/io';
 import { CgLastpass} from 'react-icons/cg';
-import  logo  from "../Images/tvtc.png";
+import  logo  from "../Images/logo.png";
 const history = createBrowserHistory();
 
 class Login extends Component {
@@ -60,7 +60,7 @@ class Login extends Component {
           history.push('#/Instructor')
         } else if (jwt === "SysAdmin") {
           console.log(jwt);
-          history.push("#/SysDashboard");
+          history.push("#/Moderator/Home");
           Swal.fire({ icon: 'success', title: ` مرحبا  ${getInfo().data.FullName} `,showConfirmButton: false,timer: 1500 });
         }
          else {
