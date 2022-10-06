@@ -56,6 +56,7 @@ text-decoration: none;
 `;
 export const Image = styled.img`
     width: ${({ scrollNav }) => (scrollNav ? `100px` : `227px`)};
+    margin: auto;
     @media screen and (max-width:960px){
         width: 130px;
         display: grid;
@@ -81,7 +82,7 @@ display: flex;
 align-items: center;
 list-style: none;
 text-align: center;
-margin-right: -22px;
+margin: revert;
 background-color: #efefef;
 border-radius: 50px;
 padding: 0 10px;

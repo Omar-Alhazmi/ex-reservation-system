@@ -1,126 +1,174 @@
 import React, { Component } from 'react'
-import { InstructorFileRegistration, InstructorSingleRegistration } from '../ApiConfig/Api';
-import { validFileType } from '../helperMethods';
+import { InstructorSingleRegistration } from '../ApiConfig/Api';
 import Swal from "sweetalert2";
-import { CgSoftwareUpload } from 'react-icons/cg';
+import { AiOutlineMail, AiFillIdcard, AiOutlineMobile } from 'react-icons/ai';
+import { CgLastpass, CgRename} from 'react-icons/cg';
+import {MdOutlineIntegrationInstructions} from 'react-icons/md';
 
+import UploadFileForm from './UploadFileForm';
 export default class InstructorsManagement extends Component {
   constructor(props) {
     super(props);
     this.state = {
       show: false,
-      file: "",
-      Data: {
-        FullName: "",
-        Email: "",
-        password: "",
-        InstructorId: "",
-        Phone: "",
-        InstructorReference: "",
-        Teach: "",
-        HasPermissionTo: ""
-      }
+      FullName: "",
+      Email: "",
+      password: "",
+      InstructorId: "",
+      Phone: "",
+      InstructorReference: "",
+      Teach: "",
+      HasPermissionTo: ""
     }
-    this.handleFileChange = this.handleFileChange.bind(this);
-    this.handelFileSubmit = this.handelFileSubmit.bind(this);
+    this.handelSubmit = this.handelSubmit.bind(this);
     this.toggleHandler = this.toggleHandler.bind(this);
   }
-  InstructorRegistrationFromFile = (Team) => {
-    const { file } = this.state
-    if (file) {
-      if (!validFileType(file)) {
-        throw Swal.fire({
-          title: ` الرجاء التأكد من امتداد  الملف  ان يكون تابع لملفات {xls,xlsx} `,
-          icon: 'error',
-          showCancelButton: false,
-        })
-      }
-    }
-    InstructorFileRegistration(file)
+  RegisterSingleInstructor = (data) => {
+    InstructorSingleRegistration(data)
       .then(response => {
         console.log(response);
-        if (response === "Error") {
-          Swal.fire({
-            title: ` ${response.data.message}`,
-            icon: 'error',
-            showCancelButton: false,
-          })
+        let errMessage = response.data.message
+        console.log(errMessage);
+        if (response.data.success === false && errMessage === "Email") {
+          Swal.fire({ icon: 'error', title: "البريد الالكتروني مسجل من قبل " });
         }
-        try {
-          Swal.fire({
-            title: ` تم تسجيل المدربين  بنجاح`,
-            icon: 'success',
-            confirmButtonText: 'موافق',
-            showCancelButton: false,
-          })
-          this.toggleHandler()
+        else if (response.data.success === true) {
+          Swal.fire({ icon: 'success', title: "تم تسجيل المتدرب بنجاح  " });
         }
-        catch (error) {
-          Swal.fire({
-            title: ` ${response.data.message}`,
-            icon: 'error',
-            showCancelButton: false,
-          })
+        else {
+          Swal.fire({ icon: 'error', title: "الرجاء التأكد  من ادخال البيانات بشكل صحيح" });
         }
       })
-  }
+      .catch(error => {
+        Swal.fire({ icon: 'error', title: `حدث خطا` });
+      });
+  };
 
-  handleChange(e) {
-    const Data = { ...this.state.Data, [e.target.name]: e.target.value }
-    this.setState(() => ({ Data }))
+
+  handleChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
   }
-  handleFileChange(e) {
-    const file = e.target.files[0];
-    this.setState({ file: file })
-  }
-  handelFileSubmit = e => {
+  handelSubmit = e => {
+    const newInstructor = this.state;
     e.preventDefault();
-    const { file } = this.state
-    this.InstructorRegistrationFromFile(file);
+    this.RegisterSingleInstructor(newInstructor);
   };
   toggleHandler = (e) => {
     this.setState({ show: !this.state.show })
   }
 
   render() {
-    const { Data, file } = this.state
-    let filePh;
-    if(file !== "") filePh = file.name
-        else filePh = "الرجاء ارفاق الملف";
+    const { FullName, InstructorId, Email, Phone, password, show, InstructorReference,Teach } = this.state;
     return (
       <>
-        <div className="LoginContainer">
-          <form className='login-form' onSubmit={e => this.handelFileSubmit(e)}>
-            {/* <div className="flex-row">
-            <label className="lf--label" htmlFor="InstructorId">
-                <IoMdFingerPrint />
+        {(!show) ? <div className="LoginContainer">
+          <form className='login-form' >
+            <div className="flex-row">
+              <label className="lf--label" htmlFor="Email">
+                <AiOutlineMail />
               </label>
-              <input id="username"
+              <input id="Email"
                 required
                 className='lf--input'
-                placeholder='اسم المستخدم'
-                name="InstructorId"
+                placeholder='البريد الالكتروني'
+                name="Email"
                 type="text"
                 onChange={e => this.handleChange(e)}
-                value={this.state.InstructorId} />
-            </div> */}
-            <div className="flex-row">
-              <label className="lf--label" for="file">
-                <CgSoftwareUpload />
-              </label>
-              <input id="file"
-                //  required
-                className='lf--input uploadFile'
-                name="file"
-                accept={validFileType(file)}
-                type="file"
-                onChange={e => this.handleFileChange(e)}
-              />
-              <label className="imageLabel" for="file">{filePh}</label>
+                value={Email} />
             </div>
-            <input className='lf--submit' type='submit' value='رفع الملف وتسجيل المدربين' onClick={e => this.handelFileSubmit(e)} />
+            <div className="flex-row">
+              <label className="lf--label" htmlFor="password">
+                <CgLastpass />
+              </label>
+              <input
+                required
+                id="password"
+                className='lf--input'
+                placeholder='كلمة المرور'
+                name="password"
+                type='password'
+                onChange={e => this.handleChange(e)}
+                value={password} />
+            </div>
+            <div className="flex-row">
+              <label className="lf--label" htmlFor="NationalId">
+                <CgRename />
+              </label>
+              <input
+                required
+                id="FullName"
+                className='lf--input'
+                placeholder='اسم المدرب'
+                name="FullName"
+                type="text"
+                onChange={e => this.handleChange(e)}
+                value={FullName} />
+            </div>
+            <div className="flex-row">
+              <label className="lf--label" htmlFor="InstructorId">
+                <AiFillIdcard />
+              </label>
+              <input
+                required
+                id="InstructorId"
+                className='lf--input'
+                placeholder='رقم المدرب'
+                name="InstructorId"
+                type="number"
+                onChange={e => this.handleChange(e)}
+                value={InstructorId} />
+            </div>
+            <div className="flex-row">
+              <label className="lf--label" htmlFor="InstructorId">
+                <AiFillIdcard />
+              </label>
+              <input
+                required
+                id="InstructorReference"
+                className='lf--input'
+                placeholder='الرقم المرجعي'
+                name="InstructorReference"
+                type="number"
+                onChange={e => this.handleChange(e)}
+                value={InstructorReference} />
+            </div>
+            <div className="flex-row">
+              <label className="lf--label" htmlFor="NationalId">
+                <MdOutlineIntegrationInstructions />
+              </label>
+              <input
+                required
+                id="Teach"
+                className='lf--input'
+                placeholder='اسم المادة'
+                name="Teach"
+                type="text"
+                onChange={e => this.handleChange(e)}
+                value={Teach} />
+            </div>
+            <div className="flex-row">
+              <label className="lf--label" htmlFor="Phone">
+                <AiOutlineMobile />
+              </label>
+              <input
+                required
+                id="Phone"
+                className='lf--input'
+                placeholder='رقم الجوال '
+                name="Phone"
+                type="number"
+                onChange={e => this.handleChange(e)}
+                value={Phone} />
+            </div>
+            <input className='lf--submit' type='submit' onClick={e => this.handelSubmit(e)} value='تسجيل المدرب'/>
+            <input className='lf--submit' onClick={e => this.toggleHandler(e)} value='رفع الملف وتسجيل المدربين' />
           </form>
         </div>
+          :
+          <UploadFileForm toggleHandler={this.toggleHandler} from={"instructor"}/>
+        }
       </>
     )
   }

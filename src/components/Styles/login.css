@@ -41,7 +41,11 @@ width:45vw;
 max-width: 32em;
 }
 }
-
+@media screen and (max-width: 769px) {
+    .LoginContainer{
+      display: flex;
+    }
+}
 .flex-row {
 display: flex;
 margin-bottom: 1em;
