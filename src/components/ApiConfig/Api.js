@@ -29,7 +29,8 @@ export const InstructorSingleRegistration = async (req) => {
             Teach: req.Teach,
             HasPermissionTo: req.HasPermissionTo
         }
-    })
+    },
+    config)
 }
 //========================= Add Instructors From File =============================\\
 export const InstructorFileRegistration = async (File) => {
@@ -62,6 +63,12 @@ export const StudentSingleRegistration = async (req) => {
             StudentReference: req.StudentReference,
             Study: req.Study,
             Instructor: req.Instructor
-        }
+        },
+        config: config
     })
 }
+//========================= Register Single Student =============================\\
+export const LabRegistration = async (req) => {
+    return await axios.post(`${apiURL}api/add/new/lab`, req, config)
+}
+

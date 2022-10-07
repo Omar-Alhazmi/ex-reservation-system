@@ -91,7 +91,7 @@ export default class StudentManagement extends Component {
                 value={password} />
             </div>
             <div className="flex-row">
-              <label className="lf--label" htmlFor="NationalId">
+              <label className="lf--label" htmlFor="FullName">
                 <CgRename />
               </label>
               <input
@@ -119,7 +119,7 @@ export default class StudentManagement extends Component {
                 value={StudentId} />
             </div>
             <div className="flex-row">
-              <label className="lf--label" htmlFor="StudentId">
+              <label className="lf--label" htmlFor="StudentReference">
                 <AiFillIdcard />
               </label>
               <input
@@ -133,7 +133,7 @@ export default class StudentManagement extends Component {
                 value={StudentReference} />
             </div>
             <div className="flex-row">
-              <label className="lf--label" htmlFor="NationalId">
+              <label className="lf--label" htmlFor="Instructor">
                 <CgRename />
               </label>
               <input
@@ -147,7 +147,7 @@ export default class StudentManagement extends Component {
                 value={Instructor} />
             </div>
             <div className="flex-row">
-              <label className="lf--label" htmlFor="NationalId">
+              <label className="lf--label" htmlFor="Study">
                 <MdOutlineIntegrationInstructions />
               </label>
               <input

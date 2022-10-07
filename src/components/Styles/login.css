@@ -3,6 +3,7 @@
   height: 100vh;
   margin-top: auto;
   display: grid;
+  grid-template-areas: "a a";
   align-items: center;
   align-content: center;
 font-family: "Roboto", helvetica, arial, sans-serif;
@@ -43,7 +44,7 @@ max-width: 32em;
 }
 @media screen and (max-width: 769px) {
     .LoginContainer{
-      display: flex;
+      grid-template-areas: "a";
     }
 }
 .flex-row {
