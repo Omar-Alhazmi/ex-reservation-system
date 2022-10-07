@@ -1,17 +1,15 @@
 import React, { Component } from 'react'
-import { LabRegistration } from '../ApiConfig/Api';
+import { LabRegistration } from '../../ApiConfig/Api';
 import Swal from "sweetalert2";
-import { AiOutlineMail } from 'react-icons/ai';
-import { CgLastpass } from 'react-icons/cg';
+import { MdReduceCapacity,MdNewLabel } from 'react-icons/md';
 import dayjs from 'dayjs';
 import TextField from '@mui/material/TextField';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DesktopTimePicker } from '@mui/x-date-pickers/DesktopTimePicker';
-
-import '../../App.css'
-export default class LabsManagement extends Component {
+import InformationTable from './InformationTable'
+export default class LabManagement extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,6 +42,13 @@ export default class LabsManagement extends Component {
       });
   };
 
+  deleteLastAvailableItem = e => {
+    e.preventDefault();
+    const newArr = this.state.Available
+    newArr.pop()
+    this.setState({Available: newArr})
+
+  }
   dateAndTimeHandler = e => {
     e.preventDefault();
     const { yearAndMonth, day, timeFrom, timeTo, Available } = this.state
@@ -73,7 +78,7 @@ export default class LabsManagement extends Component {
     (newLab.Available.length === 0) ? Swal.fire({ icon: 'error', title: "الرجاء التأكد  اظافة موعد واحد على الاقل" }) : this.RegisterNewLab(newLab);
   };
   render() {
-    const { LabId, LabCapacity, yearAndMonth, day, timeFrom, timeTo } = this.state;
+    const { LabId, LabCapacity, yearAndMonth, day, timeFrom, timeTo, Available } = this.state;
     let toDay = new Date();
     let nextYear = new Date();
     nextYear = (nextYear.getFullYear() + 1) + '-' + nextYear.getMonth() + '-' + nextYear.getDate();
@@ -82,11 +87,11 @@ export default class LabsManagement extends Component {
     let lastDayInMonth = dayjs(selectedMonth).daysInMonth()
     return (
       <>
-        <div className="LoginContainer">
+        <div className="LoginContainer lab-in">
           <form className='login-form' >
             <div className="flex-row">
               <label className="lf--label" htmlFor="LabId">
-                <AiOutlineMail />
+                <MdNewLabel />
               </label>
               <input id="LabId"
                 required
@@ -99,7 +104,7 @@ export default class LabsManagement extends Component {
             </div>
             <div className="flex-row">
               <label className="lf--label" htmlFor="LabCapacity">
-                <CgLastpass />
+                < MdReduceCapacity />
               </label>
               <input
                 required
@@ -149,8 +154,10 @@ export default class LabsManagement extends Component {
               </div>
             </LocalizationProvider>
             <input className='lf--submit' type='submit' onClick={e => this.dateAndTimeHandler(e)} value='اظافة الموعد' />
+            <input className='lf--submit' type='submit' onClick={e => this.deleteLastAvailableItem(e)} value='حذف اخر موعد ' />
             <input className='lf--submit' onClick={e => this.handelSubmit(e)} value='اظافة القاعة وتسجيل المواعيد' />
           </form>
+          <InformationTable data={Available} LabId={LabId} LabCapacity={LabCapacity} />
         </div>
       </>
     )

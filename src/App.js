@@ -4,7 +4,7 @@ import Instructors from './components/Instructors/Instructors';
 import ModeratorNave from './components/Moderator/ModeratorNave';
 import Home from './components/Moderator/Home'
 import InstructorsManagement from './components/Moderator/InstructorsManagement';
-import LabsManagement from './components/Moderator/LabsManagement';
+import LabsManagement from './components/Moderator/LabsManagement/LabManagement';
 import StudentManagement from './components/Moderator/StudentManagement'
 import { PrivateRouteInstructor, PrivateRouteModerator } from './RouteManagement/PrivateRoutes';
 import { Login } from './components/Login/Login';
