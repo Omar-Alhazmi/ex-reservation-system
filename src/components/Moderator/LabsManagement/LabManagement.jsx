@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { LabRegistration } from '../../ApiConfig/Api';
 import Swal from "sweetalert2";
-import { MdReduceCapacity,MdNewLabel } from 'react-icons/md';
+import { MdReduceCapacity, MdNewLabel } from 'react-icons/md';
 import dayjs from 'dayjs';
 import TextField from '@mui/material/TextField';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -46,7 +46,7 @@ export default class LabManagement extends Component {
     e.preventDefault();
     const newArr = this.state.Available
     newArr.pop()
-    this.setState({Available: newArr})
+    this.setState({ Available: newArr })
 
   }
   dateAndTimeHandler = e => {
@@ -84,7 +84,7 @@ export default class LabManagement extends Component {
     nextYear = (nextYear.getFullYear() + 1) + '-' + nextYear.getMonth() + '-' + nextYear.getDate();
     toDay = (toDay.getFullYear()) + '-' + toDay.getMonth() + '-' + toDay.getDate();
     let selectedMonth = ` ${(dayjs(yearAndMonth.$d).toJSON()).slice(0, 8)}01`
-    let lastDayInMonth = dayjs(selectedMonth).daysInMonth()
+    let lastDayInMonth = dayjs(selectedMonth).daysInMonth();
     return (
       <>
         <div className="LoginContainer lab-in">
@@ -124,15 +124,15 @@ export default class LabManagement extends Component {
                   minDate={dayjs(toDay)}
                   maxDate={dayjs(nextYear)}
                   value={yearAndMonth}
-                  onChange={(newValue) => { this.setState({ yearAndMonth: newValue }) }}
+                  onChange={(newValue) => { this.setState({ yearAndMonth: newValue, day: selectedMonth }) }}
                   // onChange={e => this.handleChange(e)}
                   renderInput={(params) => <TextField {...params} helperText={null} />}
                 />
                 {(yearAndMonth !== "") ? <DatePicker
                   views={['day']}
                   label="اليوم"
-                  minDate={dayjs(selectedMonth)}
-                  maxDate={dayjs(selectedMonth.slice(0, 9) + lastDayInMonth)}
+                  minDate={selectedMonth}
+                  maxDate={selectedMonth.slice(0, 9) + lastDayInMonth}
                   value={day}
                   onChange={(newValue) => { this.setState({ day: newValue }) }}
                   renderInput={(params) => <TextField {...params} helperText={null} />}

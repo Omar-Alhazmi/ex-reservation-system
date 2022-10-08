@@ -1,0 +1,79 @@
+.chartBar{
+    display: grid;
+    border: black solid 1px;
+    padding: 2%;
+    margin: 10px;
+    margin-top: 56px;
+  }
+  .tableHeader{
+    text-align: center;
+  }
+  .tHeadContainer{
+    text-align: center;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 4;
+    color: #ffffff;
+    background: #324960;
+    -webkit-box-shadow:-3px 6px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 0px 0 rgb(0 0 0 / 0%);
+
+  }
+  .tableBody{
+    text-align: right;
+  }
+  .chartContainer{
+    display: flex;
+      align-items: center;
+      justify-content: center;
+      align-content: space-around;
+      flex-wrap: wrap;
+    }
+  .genderChart{
+    display: flex;
+     height: 375px; 
+      width: 375px;
+  }
+  .chartDiscretion{
+    border-bottom: solid black 1px;
+    text-align: center;
+  }
+  
+  @media screen and (max-width: 600px) {
+    .chartContainer{
+      display: grid;
+      border:none;
+    }
+    .genderChart{
+      display: block;
+      width: fit-content;
+      height: fit-content;
+    }
+  }
+  @media screen and (max-width: 407px) {
+  .chartBar{
+    border: none;
+  }
+}
+@media screen and (max-width: 393px){
+  .chartDiscretion{
+    border-bottom: none;
+  }
+}
+@media screen and(max-width: 279) {
+  .chartBar {
+    display: block;
+    padding: 0;
+    margin: 0;
+    margin-top: 56px;
+}
+}
+@media (max-width: 767px) {
+ tbody tr {
+    display: table-cell;
+}
+ tbody tr:nth-child(odd) {
+    background: none;
+}
+}
+  

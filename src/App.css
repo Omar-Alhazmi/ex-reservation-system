@@ -1,12 +1,20 @@
-*,
+/* *,
 *::after,
 *::before {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
+} */
 .MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-outlined.MuiFormLabel-colorPrimary.Mui-error.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-outlined.css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root
 {
   left: auto!important;
   margin: 0 2rem;
 }
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@700&display=swap');
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding: 0; 
+    font-family:' Amiri Encode Sans Expanded Roboto', sans-serif;
+    font-family: 'Amiri', serif;
+  }

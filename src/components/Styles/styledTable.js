@@ -2,7 +2,7 @@ import styled from 'styled-components'
 export const TableWrapper  = styled.div`
     margin: 10px 70px 70px;
     box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
-    @media (max-width: 767px) {        
+    @media (max-width: 767px) {
         &:before{
         display: block;
         text-align: right;
@@ -78,7 +78,7 @@ export const TableTd = styled.td`
     text-align: right;
     padding: 8px;
     border-left: 1px solid #f8f8f8;
-    font-size: 1rem;
+    font-size: 12px;
     @media (max-width: 767px) {
         padding: 20px .625em .625em .625em;
         height: 60px;
