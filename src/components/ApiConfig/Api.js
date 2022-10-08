@@ -71,4 +71,8 @@ export const StudentSingleRegistration = async (req) => {
 export const LabRegistration = async (req) => {
     return await axios.post(`${apiURL}api/add/new/lab`, req, config)
 }
+//---------------All GET Request-------------------//
 
+export const getStudentsByInstructorId = (id) => {
+    return axios.get(`${apiURL}api/Find/All/Division/by/instructorId/${id}`);
+  }
