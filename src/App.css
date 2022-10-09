@@ -10,6 +10,12 @@
   left: auto!important;
   margin: 0 2rem;
 }
+.isBooked{
+  background-color: #ff5722;
+}
+.available{
+  background-color: #8bc34a;
+}
 @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@700&display=swap');
 *{
     box-sizing:border-box;

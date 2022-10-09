@@ -22,7 +22,7 @@
   animation-delay: -0.16s;
 }
 .spinner.tableSp{
-  margin: 80px auto;
+  margin: 20px auto;
 }
 .spinner:before,
 .spinner:after {

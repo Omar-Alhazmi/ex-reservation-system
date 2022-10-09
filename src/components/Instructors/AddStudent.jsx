@@ -1,9 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import StudentManagement from '../Moderator/StudentManagement';
+import { getInfo } from '../helperMethods';
 
 export default class AddStudent extends Component {
   render() {
     return (
-      <div>AddStudent</div>
+      <>
+      <StudentManagement  id={getInfo().data.InstructorId} />
+      </>
     )
   }
 }

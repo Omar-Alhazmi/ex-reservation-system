@@ -42,7 +42,7 @@ const ModeratorNave = ({ toggle }) => {
                                    offset={-80}
                                 >ادارة المعامل</MainHeader.NavLinks>
                             </MainHeader.NavItem>
-                            {/* | */}
+                            |
                             <MainHeader.NavItem>
                                 <MainHeader.NavLinks
                                     to={'/Moderator/InstructorsManagement'}
@@ -53,7 +53,7 @@ const ModeratorNave = ({ toggle }) => {
                                    offset={-80}
                                 >ادارة المدربين</MainHeader.NavLinks>
                             </MainHeader.NavItem>
-                            {/* | */}
+                            |
                             <MainHeader.NavItem>
                                 <MainHeader.NavLinks
                                     to="/Moderator/StudentManagement"
