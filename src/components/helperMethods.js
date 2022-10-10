@@ -14,7 +14,17 @@ export const getId = () => {
     return getInfo().data._id
   }
 }
-
+export const dateFormat = (date) => {
+  let displayDate = new Date(date)
+  displayDate = displayDate.toString().split(' ')
+  return `${displayDate[0]} ${displayDate[1]} ${displayDate[2]} ${displayDate[3]}`
+}
+export const timeFormat = (date) => {
+  let displayDate = new Date(date)
+  displayDate = displayDate.toString().split(' ')
+  displayDate = displayDate[4].split(':')
+  return displayDate[0] + ':' + displayDate[1]
+}
 export const validFileType = (file) => {
   const fileTypes = [
     "application/vnd.ms-excel",

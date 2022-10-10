@@ -72,12 +72,19 @@ export const LabRegistration = async (req) => {
     return await axios.post(`${apiURL}api/add/new/lab`, req, config)
 }
 export const NewLabBooking = async (req,id) => {
-    return await axios.post(`${apiURL}api/instructor/booking/new/lab/id`, req, config)
+    return await axios.post(`${apiURL}api/instructor/booking/new/lab/${id}`, req, config)
 }
 
 //---------------All GET Request-------------------//
 export const getInstructorById = (id) => {
     return axios.get(`${apiURL}api/get/all/Instructor/${id}`);
+  }
+  
+  export const getAllAvailableLabs = () => {
+    return axios.get(`${apiURL}api/get/all/available/lab`);
+  }
+  export const getAllBookedLabByInstructorId = (id) => {
+    return axios.get(`${apiURL}api/Find/all/booked/Lab/${id}`,config);
   }
   export const getAllLabs = (id) => {
     return axios.get(`${apiURL}api/get/all/lab`);

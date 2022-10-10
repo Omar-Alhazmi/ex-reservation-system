@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { getStudentsByInstructorId } from '../ApiConfig/Api';
-import { getId } from '../helperMethods'
+import { getAllBookedLabByInstructorId } from '../ApiConfig/Api';
+import { getId,dateFormat,timeFormat } from '../helperMethods';
 import * as StyledTable from '../Styles/styledTable'
 
 import '../Styles/spinner.css'
@@ -15,8 +15,9 @@ export default class InstructorHome extends Component {
 
   componentDidMount() {
     // Mack API call 
-    getStudentsByInstructorId(getId())
+    getAllBookedLabByInstructorId(getId())
       .then((response) => {
+        console.log(response);
         this.setState({ response: response.data })
       })
       // console.log(response);
@@ -26,22 +27,9 @@ export default class InstructorHome extends Component {
       })
   }
   render() {
-    if (!this.state.response) {
+    if (this.state.response) {
       allStudents = (
         <StyledTable.TableContainer>
-          <StyledTable.TableHedContainer>
-            <tr>
-              <StyledTable.TableTh className="tableHeader"> رقم الشعبة</StyledTable.TableTh>
-              <StyledTable.TableTh className="tableHeader"><div class="spinner tableSp">Loading...</div></StyledTable.TableTh>
-            </tr>
-          </StyledTable.TableHedContainer>
-          <StyledTable.TableHedContainer>
-            <tr>
-              <StyledTable.TableTh className="tableHeader"> الرقم الاكاديمي</StyledTable.TableTh>
-              <StyledTable.TableTh className="tableHeader"> اسم المتدرب</StyledTable.TableTh>
-              <StyledTable.TableTh className="tableHeader"> رقم الجوال</StyledTable.TableTh>
-            </tr>
-          </StyledTable.TableHedContainer>
           <StyledTable.TableBodyContainer>
             <StyledTable.TableTr>
               <StyledTable.TableTd className="tableBody"><div class="spinner tableSp">Loading...</div></StyledTable.TableTd>
@@ -54,42 +42,35 @@ export default class InstructorHome extends Component {
     }
     if (this.state.response) {
       if (this.state.response.length > 0) {
-        allStudents = this.state.response.map((headers, index) => {
-          console.log(headers);
-          return (
-            <StyledTable.TableContainer key={index}>
-               <StyledTable.TableHedContainer>
-            <tr>
-              <StyledTable.TableTh className="tableHeader"> رقم الشعبة</StyledTable.TableTh>
-              <StyledTable.TableTh className="tableHeader">{headers.DivisionId}</StyledTable.TableTh>
-            </tr>
+        allStudents = this.state.response.map((BookedLab, BookedLabIndex) => {
+                return (
+                  <StyledTable.TableTr key={BookedLabIndex}>
+                    <StyledTable.TableTd className="tableBody">{BookedLab.LabReference}</StyledTable.TableTd>
+                    <StyledTable.TableTd className="tableBody">{BookedLab.LabCapacity}</StyledTable.TableTd>
+                    <StyledTable.TableTd className="tableBody">{dateFormat(BookedLab.From)}</StyledTable.TableTd>
+                    <StyledTable.TableTd className="tableBody">{`${timeFormat(BookedLab.From)} - ${timeFormat(BookedLab.To)}`}</StyledTable.TableTd>
+                  </StyledTable.TableTr>
+                )
+              })
+            }
+      }
+    return (
+      <StyledTable.TableWrapper>
+        <StyledTable.TableContainer>
+          <StyledTable.TableHedContainer>
           </StyledTable.TableHedContainer>
           <StyledTable.TableHedContainer>
             <tr>
-              <StyledTable.TableTh className="tableHeader"> الرقم الاكاديمي</StyledTable.TableTh>
-              <StyledTable.TableTh className="tableHeader"> اسم المتدرب</StyledTable.TableTh>
-              <StyledTable.TableTh className="tableHeader"> رقم الجوال</StyledTable.TableTh>
+              <StyledTable.TableTh className="tableHeader"> رقم القاعة</StyledTable.TableTh>
+              <StyledTable.TableTh className="tableHeader"> الطاقة الاستيعابية</StyledTable.TableTh>
+              <StyledTable.TableTh className="tableHeader"> التاريخ</StyledTable.TableTh>
+              <StyledTable.TableTh className="tableHeader"> الوقت</StyledTable.TableTh>
             </tr>
           </StyledTable.TableHedContainer>
           <StyledTable.TableBodyContainer>
-              {headers.Students.map((data, dataIndex) => {
-                return ( 
-                <StyledTable.TableTr key={dataIndex}>
-                  <StyledTable.TableTd className="tableBody">{data.StudentId}</StyledTable.TableTd>
-                  <StyledTable.TableTd className="tableBody">{data.FullName}</StyledTable.TableTd>
-                  <StyledTable.TableTd className="tableBody">{data.Phone}</StyledTable.TableTd>
-                </StyledTable.TableTr>
-                )
-              })}
-              </StyledTable.TableBodyContainer>
-            </StyledTable.TableContainer>
-          )
-        })
-      }
-    }
-    return (
-      <StyledTable.TableWrapper>
-        {allStudents}
+            {allStudents}
+          </StyledTable.TableBodyContainer>
+        </StyledTable.TableContainer>
       </StyledTable.TableWrapper >
     )
   }
