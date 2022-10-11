@@ -77,7 +77,7 @@ export default class LabBooking extends Component {
     }
     return (
       <div>
-         {(LabFilter)?<button className="modal__btn secondary--nav" onClick={e =>this.filterHandler(e)}>اظهار القاعات المتاحة</button> :<button className="modal__btn secondary--nav" onClick={e =>this.filterHandler(e)}>اظهار جميع القاعات </button>}     
+         {(LabFilter)?<button className="modal__btn secondary--nav" onClick={e =>this.filterHandler(e)}>اظهار القاعات المتاحة فقط</button> :<button className="modal__btn secondary--nav" onClick={e =>this.filterHandler(e)}>اظهار جميع القاعات </button>}     
            <Cards.TeamContainer>
           <Cards.CardsContainer id="Teams" >
             <Cards.CardsWrapper>

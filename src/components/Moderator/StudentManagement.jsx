@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { StudentSingleRegistration } from '../ApiConfig/Api';
 import Swal from "sweetalert2";
 import { AiOutlineMail, AiFillIdcard, AiOutlineMobile } from 'react-icons/ai';
-import { CgLastpass, CgRename} from 'react-icons/cg';
-import {MdOutlineIntegrationInstructions} from 'react-icons/md';
+import { CgLastpass, CgRename } from 'react-icons/cg';
+import { MdOutlineIntegrationInstructions } from 'react-icons/md';
 import UploadFileForm from './UploadFileForm';
 
 export default class StudentManagement extends Component {
@@ -50,7 +50,7 @@ export default class StudentManagement extends Component {
     });
   }
   handelSubmit = e => {
-    if(this.props.id)this.setState({ Instructor: this.props.id }) 
+    if (this.props.id) this.setState({ Instructor: this.props.id })
     const newStudent = this.state;
     e.preventDefault();
     this.RegisterSingleStudent(newStudent);
@@ -59,10 +59,10 @@ export default class StudentManagement extends Component {
     this.setState({ show: !this.state.show })
   }
   render() {
-    const { FullName, StudentId, Email, Phone, password, show, StudentReference,Study, Instructor} = this.state;
+    const { FullName, StudentId, Email, Phone, password, show, StudentReference, Study, Instructor } = this.state;
     return (
       <>
-        {(!show) ? <div className="LoginContainer">
+        <div className="LoginContainer">
           <form className='login-form' >
             <div className="flex-row">
               <label className="lf--label" htmlFor="Email">
@@ -133,21 +133,21 @@ export default class StudentManagement extends Component {
                 onChange={e => this.handleChange(e)}
                 value={StudentReference} />
             </div>
-        {(this.props.id)?"":
-        <div className="flex-row">
-              <label className="lf--label" htmlFor="Instructor">
-                <CgRename />
-              </label>
-              <input
-                required
-                id="Instructor"
-                className='lf--input'
-                placeholder='رقم المدرب'
-                name="Instructor"
-                type="text"
-                onChange={e => this.handleChange(e)}
-                value={Instructor} />
-            </div>}
+            {(this.props.id) ? "" :
+              <div className="flex-row">
+                <label className="lf--label" htmlFor="Instructor">
+                  <CgRename />
+                </label>
+                <input
+                  required
+                  id="Instructor"
+                  className='lf--input'
+                  placeholder='رقم المدرب'
+                  name="Instructor"
+                  type="text"
+                  onChange={e => this.handleChange(e)}
+                  value={Instructor} />
+              </div>}
             <div className="flex-row">
               <label className="lf--label" htmlFor="Study">
                 <MdOutlineIntegrationInstructions />
@@ -176,13 +176,11 @@ export default class StudentManagement extends Component {
                 onChange={e => this.handleChange(e)}
                 value={Phone} />
             </div>
-            <input className='lf--submit' type='submit' onClick={e => this.handelSubmit(e)} value='تسجيل المتدرب'/>
-            {(this.props.id)?"": <input className='lf--submit' onClick={e => this.toggleHandler(e)} value='رفع الملف وتسجيل المتدربين' />}
+            <input className='lf--submit' type='submit' onClick={e => this.handelSubmit(e)} value='تسجيل المتدرب' />
+            {(this.props.id) ? "" : <input className='lf--submit' onClick={e => this.toggleHandler(e)} value='رفع الملف وتسجيل المتدربين' />}
           </form>
         </div>
-          :
-          <UploadFileForm toggleHandler={this.toggleHandler} from={"students"} />
-        }
+        {(!show) ? "" : <UploadFileForm toggleHandler={this.toggleHandler} from={"students"} />}
       </>
     )
   }

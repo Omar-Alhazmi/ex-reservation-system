@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { InstructorSingleRegistration } from '../ApiConfig/Api';
 import Swal from "sweetalert2";
 import { AiOutlineMail, AiFillIdcard, AiOutlineMobile } from 'react-icons/ai';
-import { CgLastpass, CgRename} from 'react-icons/cg';
-import {MdOutlineIntegrationInstructions} from 'react-icons/md';
+import { CgLastpass, CgRename } from 'react-icons/cg';
+import { MdOutlineIntegrationInstructions } from 'react-icons/md';
 
 import UploadFileForm from './UploadFileForm';
 export default class InstructorsManagement extends Component {
@@ -60,10 +60,10 @@ export default class InstructorsManagement extends Component {
   }
 
   render() {
-    const { FullName, InstructorId, Email, Phone, password, show, InstructorReference,Teach } = this.state;
+    const { FullName, InstructorId, Email, Phone, password, show, InstructorReference, Teach } = this.state;
     return (
       <>
-        {(!show) ? <div className="LoginContainer">
+        <div className="LoginContainer">
           <form className='login-form' >
             <div className="flex-row">
               <label className="lf--label" htmlFor="Email">
@@ -162,12 +162,11 @@ export default class InstructorsManagement extends Component {
                 onChange={e => this.handleChange(e)}
                 value={Phone} />
             </div>
-            <input className='lf--submit' type='submit' onClick={e => this.handelSubmit(e)} value='تسجيل المدرب'/>
+            <input className='lf--submit' type='submit' onClick={e => this.handelSubmit(e)} value='تسجيل المدرب' />
             <input className='lf--submit' onClick={e => this.toggleHandler(e)} value='رفع الملف وتسجيل المدربين' />
           </form>
         </div>
-          :
-          <UploadFileForm toggleHandler={this.toggleHandler} from={"instructor"}/>
+        {(!show) ? "" : <UploadFileForm toggleHandler={this.toggleHandler} from={"instructor"} />
         }
       </>
     )
