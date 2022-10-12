@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { NewLabBooking } from '../ApiConfig/Api'
 import Swal from "sweetalert2";
-import { getId,dateFormat,timeFormat } from '../helperMethods';
+import { getId, dateFormat, timeFormat } from '../helperMethods';
 import { createBrowserHistory } from 'history';
 
 const history = createBrowserHistory();
@@ -22,12 +22,12 @@ export default class BookingConformation extends Component {
     };
     handleSubmit = e => {
         e.preventDefault();
-        const { From, To, Lab, labId, LabCapacity } = this.props.data;
-        const newBooking = { From: From, To: To, Lab_id: Lab, LabReference: labId, LabCapacity: LabCapacity }
+        const { From, To, Lab, labId, LabCapacity, For } = this.props.data;
+        const newBooking = { From: From, To: To, Lab_id: Lab, LabReference: labId, LabCapacity: LabCapacity, For: For }
         this.NewBooking(newBooking);
     }
     render() {
-        const { From, To, labId} = this.props.data
+        const { From, To, labId } = this.props.data
         const date = dateFormat(From);
         const time = `${timeFormat(From)} - ${timeFormat(To)}`;
         let labDisplay = ""

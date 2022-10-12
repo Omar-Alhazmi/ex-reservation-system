@@ -4,7 +4,7 @@ import InstructorNave from './components/Instructors/InstructorNave';
 import InstructorSidebar from './components/Instructors/InstructorSidebar';
 import InstructorHome from './components/Instructors/InstructorHome';
 import AddStudent from './components/Instructors/AddStudent';
-import LabBooking from './components/Instructors/LabBooking';
+import LabBooking from './components/Instructors/SelectSubjectMod';
 
 import ModeratorNave from './components/Moderator/ModeratorNave';
 import Sidebar from './components/Moderator/ModeratorSidebar';

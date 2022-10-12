@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-export const TableWrapper  = styled.div`
+export const TableWrapper = styled.div`
     margin: 10px 70px 70px;
     box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
     @media (max-width: 767px) {
@@ -66,19 +66,18 @@ export const TableTh = styled.th`
         overflow-x: hidden;
         overflow-y: auto;
         width: 120px;
-        font-size: 13px;
+        font-size: 1rem;
         text-overflow: ellipsis;
-        text-align: right;
+        text-align: center;
         border-bottom: 1px solid #f7f7f9;
-        text-align: right;
         border-bottom: 1px solid #f7f7f9;
 }
 `
 export const TableTd = styled.td`
-    text-align: right;
+    text-align: center;
     padding: 8px;
     border-left: 1px solid #f8f8f8;
-    font-size: 12px;
+    font-size: 1rem;
     @media (max-width: 767px) {
         padding: 20px .625em .625em .625em;
         height: 60px;
@@ -109,7 +108,7 @@ export const TableTr = styled.tr`
     }
     }
 `
-export const AcReButton =styled.button`
+export const AcReButton = styled.button`
 -webkit-appearance: none;
     padding: 6%;
     background: -webkit-gradient(to right, #a2ccb6 0%, #fceeb5 50%, #ee786e 100%);

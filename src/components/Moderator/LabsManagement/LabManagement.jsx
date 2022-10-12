@@ -9,6 +9,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DesktopTimePicker } from '@mui/x-date-pickers/DesktopTimePicker';
 import InformationTable from './InformationTable'
+import DisplayAllLabs from './DisplayAllLabs'
 export default class LabManagement extends Component {
   constructor(props) {
     super(props);
@@ -60,6 +61,7 @@ export default class LabManagement extends Component {
       let tto = timeTo.$d.toString().split(" ");
       tf = tf[4]
       tto = tto[4]
+      console.log(tf,tto);
       const From = `${ym}${d} ${tf}`
       const To = `${ym}${d} ${tto}`
       if(new Date(From).getTime() > new Date(To).getTime()){
@@ -88,10 +90,11 @@ export default class LabManagement extends Component {
     const { LabId, LabCapacity, yearAndMonth, day, timeFrom, timeTo, Available } = this.state;
     let toDay = new Date();
     let nextYear = new Date();
-    nextYear = (nextYear.getFullYear() + 1) + '-' + nextYear.getMonth() + '-' + nextYear.getDate();
-    toDay = (toDay.getFullYear()) + '-' + toDay.getMonth() + '-' + toDay.getDate();
+    let nextYearFormate = (nextYear.getFullYear() + 1)+ '-' +(nextYear.getMonth()+1) + '-' + nextYear.getDate();
+    let toDayFormate = (toDay.getFullYear())  + '-' + (toDay.getMonth()+1) + '-' + toDay.getDate();
     let selectedMonth = ` ${(dayjs(yearAndMonth.$d).toJSON()).slice(0, 8)}01`
     let lastDayInMonth = dayjs(selectedMonth).daysInMonth();
+  
     return (
       <>
         <div className="LoginContainer lab-in">
@@ -128,8 +131,8 @@ export default class LabManagement extends Component {
                 <DatePicker
                   views={['year', 'month']}
                   label="السنة والشهر"
-                  minDate={dayjs(toDay)}
-                  maxDate={dayjs(nextYear)}
+                  minDate={dayjs(toDayFormate)}
+                  maxDate={dayjs(nextYearFormate)}
                   value={yearAndMonth}
                   onChange={(newValue) => { this.setState({ yearAndMonth: newValue, day: selectedMonth }) }}
                   // onChange={e => this.handleChange(e)}
@@ -139,7 +142,7 @@ export default class LabManagement extends Component {
                   views={['day']}
                   label="اليوم"
                   minDate={selectedMonth}
-                  maxDate={selectedMonth.slice(0, 9) + lastDayInMonth}
+                  maxDate={selectedMonth + lastDayInMonth}
                   value={day}
                   onChange={(newValue) => { this.setState({ day: newValue }) }}
                   renderInput={(params) => <TextField {...params} helperText={null} />}
@@ -166,6 +169,7 @@ export default class LabManagement extends Component {
           </form>
           <InformationTable data={Available} LabId={LabId} LabCapacity={LabCapacity} />
         </div>
+        <DisplayAllLabs />
       </>
     )
   }

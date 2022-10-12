@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import * as Cards from '../Styles/cards'
 import { getAllLabs,getAllAvailableLabs } from '../ApiConfig/Api';
 import BookingConformation from './BookingConformation'
+
 import {dateFormat,timeFormat} from '../helperMethods';
 export default class LabBooking extends Component {
   constructor(props) {
@@ -59,7 +60,7 @@ export default class LabBooking extends Component {
   }
   render() {
     const { data, toggle, labId, from, to, lab_id, LabCapacity,LabFilter } = this.state
-    const propsData = { From: from, To: to, Lab: lab_id, labId: labId, LabCapacity: LabCapacity }
+    const propsData = { From: from, To: to, Lab: lab_id, labId: labId, LabCapacity: LabCapacity,For: this.props.For }
     let allLabs = <div class="spinner">Loading...</div>
     if (data.length > 0) {
       allLabs = data.map((lab, labIndex) => {
