@@ -2,6 +2,7 @@ import { Navigate, Outlet } from 'react-router-dom'
 import { getInfo, checkStorage } from '../components/helperMethods';
 import React from 'react'
 let token = null;
+console.log(getInfo().data.StudentId );
 if (checkStorage()) token = getInfo().data.Role
 const PrivateRouteInstructor = () => {
   return (
@@ -10,7 +11,7 @@ const PrivateRouteInstructor = () => {
 }
 const PrivateRouteStudents = () => {
   return (
-    token === "Students" ? <Outlet /> : <Navigate to='/' />
+    (getInfo().data.StudentId !== null || getInfo().data.StudentId !== undefined) ? <Outlet /> : <Navigate to='/' />
   )
 }
 const PrivateRouteModerator = () => {

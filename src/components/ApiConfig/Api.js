@@ -77,6 +77,12 @@ export const NewLabBooking = async (req,id) => {
 export const StudentReserveNewTest = async (req,id) => {
     return await axios.post(`${apiURL}api/student/book/new/test/${id}`, req)
 }
+export const InstructorsLogin = async (req) => {
+    return await axios.post(`${apiURL}api/Instructor/login`, req)
+}
+export const StudentsLogin = async (req) => {
+    return await axios.post(`${apiURL}api/Student/login`, req)
+}
 //---------------All GET Request-------------------//
 export const getInstructorById = (id) => {
     return axios.get(`${apiURL}api/get/all/Instructor/${id}`);

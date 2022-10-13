@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
-import InstructorNave from './components/Instructors/InstructorNave';
+import InstructorNav from './components/Instructors/InstructorNav';
 import InstructorSidebar from './components/Instructors/InstructorSidebar';
 import InstructorHome from './components/Instructors/InstructorHome';
 import AddStudent from './components/Instructors/AddStudent';
@@ -12,8 +12,13 @@ import Home from './components/Moderator/Home'
 import InstructorsManagement from './components/Moderator/InstructorsManagement';
 import LabsManagement from './components/Moderator/LabsManagement/LabManagement';
 import StudentManagement from './components/Moderator/StudentManagement'
-import { PrivateRouteInstructor, PrivateRouteModerator } from './RouteManagement/PrivateRoutes';
+import { PrivateRouteInstructor, PrivateRouteModerator,PrivateRouteStudents } from './RouteManagement/PrivateRoutes';
 import { Login } from './components/Login/Login';
+
+import StudentHome from './components/Students/StudentHome';
+import StudentsNav from './components/Students/StudentsNav'
+import StudentsSide from './components/Students/StudentsSide'
+
 function App() {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -24,8 +29,17 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route element={<PrivateRouteStudents />}>
+        <Route element={<StudentsNav toggle={toggle} />} path="/Students">
+          <Route element={<StudentsSide toggle={toggle} isOpen={isOpen} />} path="/Students">
+            <Route element={<StudentHome />} path="Home" />
+            {/* <Route element={<AddStudent />} path='AddStudent' />
+            <Route element={<LabBooking />} path='LabBooking' /> */}
+          </Route>
+          </Route>
+        </Route>
         <Route element={<PrivateRouteInstructor />}>
-        <Route element={<InstructorNave toggle={toggle} />} path="/Instructor">
+        <Route element={<InstructorNav toggle={toggle} />} path="/Instructor">
           <Route element={<InstructorSidebar toggle={toggle} isOpen={isOpen} />} path="/Instructor">
             <Route element={<InstructorHome />} path="Home" />
             <Route element={<AddStudent />} path='AddStudent' />

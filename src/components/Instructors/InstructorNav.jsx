@@ -6,7 +6,7 @@ import { animateScroll as scroll } from 'react-scroll';
 import logo from '../Images/logo.png'
 import { Outlet } from 'react-router-dom'
 import '../../App.css'
-const InstructorNave = ({ toggle }) => {
+const InstructorNav = ({ toggle }) => {
     const [scrollNav, setScroll] = useState(false);
     const navOnChange = () => {
         if (window.scrollY >= 30) {
@@ -71,4 +71,4 @@ const InstructorNave = ({ toggle }) => {
         </>
     )
 }
-export default InstructorNave
+export default InstructorNav
