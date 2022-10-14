@@ -75,7 +75,7 @@ export const NewLabBooking = async (req,id) => {
     return await axios.post(`${apiURL}api/instructor/booking/new/lab/${id}`, req, config)
 }
 export const StudentReserveNewTest = async (req,id) => {
-    return await axios.post(`${apiURL}api/student/book/new/test/${id}`, req)
+    return await axios.post(`${apiURL}api/student/book/new/test/${id}`, req,config)
 }
 export const InstructorsLogin = async (req) => {
     return await axios.post(`${apiURL}api/Instructor/login`, req)
@@ -83,23 +83,28 @@ export const InstructorsLogin = async (req) => {
 export const StudentsLogin = async (req) => {
     return await axios.post(`${apiURL}api/Student/login`, req)
 }
+export const getAllTestAvailableForStudent = (id,req) => {
+    return axios.post(`${apiURL}api/get/all/available/test/byStudent/${id}`,req, config);
+  }
+
 //---------------All GET Request-------------------//
 export const getInstructorById = (id) => {
     return axios.get(`${apiURL}api/get/all/Instructor/${id}`);
   }
   
   export const getAllAvailableLabs = () => {
-    return axios.get(`${apiURL}api/get/all/available/lab`);
+    return axios.get(`${apiURL}api/get/all/available/lab`,config);
   }
   export const getAllBookedLabByInstructorId = (id) => {
     return axios.get(`${apiURL}api/Find/all/booked/Lab/${id}`,config);
   }
+  export const getAllBookedLabByStudentId = (id) => {
+    return axios.get(`${apiURL}api/Find/all/booked/test/${id}`,config);
+  }
+  
   export const getAllLabs = (id) => {
     return axios.get(`${apiURL}api/get/all/lab`);
   }
 export const getStudentsByInstructorId = (id) => {
     return axios.get(`${apiURL}api/Find/All/Division/by/instructorId/${id}`);
-  }
-  export const getAllTestAvailableForStudent = (id,req) => {
-    return axios.get(`${apiURL}  api/get/all/available/test/byStudent/${id}`,req);
   }

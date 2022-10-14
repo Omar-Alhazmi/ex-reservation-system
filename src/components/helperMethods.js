@@ -4,10 +4,10 @@ export const checkStorage = () => {
   return (localStorage.getItem('currentUser') !== undefined && localStorage.getItem('currentUser')  !== null) ?true:false ;
 };
 export const getToken = () => {
-  return (checkStorage()) ? localStorage.getItem('currentUser') : ""
+  return (checkStorage()) ? localStorage.getItem('currentUser') : false
 };
 export const getInfo = () => {
-  return (checkStorage()) ? jwt_decode(localStorage.getItem('currentUser')) : ""
+  return (checkStorage()) ? jwt_decode(localStorage.getItem('currentUser')) : false
 };
 export const getId = () => {
   if (checkStorage()) {

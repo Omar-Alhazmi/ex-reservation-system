@@ -82,7 +82,8 @@ class Login extends Component {
                 Swal.fire(` ${jwt}`, "حدث خطأ", 'error');
               } else {
                 Swal.fire({ icon: 'success', title: ` مرحبا  ${getInfo().data.FullName} `, showConfirmButton: false, timer: 1500 });
-                history.push('#/Students')
+                history.push('#/Students/Home')
+                window.location.reload(false);
               }
             }
           } catch {

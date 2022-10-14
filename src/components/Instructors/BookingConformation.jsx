@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { NewLabBooking } from '../ApiConfig/Api'
+import { NewLabBooking,StudentReserveNewTest } from '../ApiConfig/Api'
 import Swal from "sweetalert2";
-import { getId, dateFormat, timeFormat } from '../helperMethods';
+import { getId, dateFormat, timeFormat, getInfo } from '../helperMethods';
 import { createBrowserHistory } from 'history';
 
 const history = createBrowserHistory();
@@ -9,11 +9,22 @@ const history = createBrowserHistory();
 export default class BookingConformation extends Component {
 
     NewBooking = (data) => {
-        NewLabBooking(data, getId())
+        let currentUser
+        if(getInfo().data.Role === "Instructor") currentUser= NewLabBooking  
+        else{
+             currentUser = StudentReserveNewTest
+             data = {BookingRefId:this.props.data.Lab}
+        }
+        currentUser(data, getId())
             .then(response => {
                 Swal.fire({ icon: 'success', title: "تم حجز القاعة بنجاح " });
+                if(getInfo().data.Role === "Instructor"){
                 history.push('#/Instructor/Home');
                 window.location.reload(false);
+                }else{
+                    history.push('#/Students/Home');
+                    window.location.reload(false);
+                }
             })
             .catch(error => {
                 console.log(error);

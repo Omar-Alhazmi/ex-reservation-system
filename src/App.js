@@ -4,7 +4,7 @@ import InstructorNav from './components/Instructors/InstructorNav';
 import InstructorSidebar from './components/Instructors/InstructorSidebar';
 import InstructorHome from './components/Instructors/InstructorHome';
 import AddStudent from './components/Instructors/AddStudent';
-import LabBooking from './components/Instructors/SelectSubjectMod';
+import SelectSubjectMod from './components/Instructors/SelectSubjectMod';
 
 import ModeratorNave from './components/Moderator/ModeratorNave';
 import Sidebar from './components/Moderator/ModeratorSidebar';
@@ -15,9 +15,9 @@ import StudentManagement from './components/Moderator/StudentManagement'
 import { PrivateRouteInstructor, PrivateRouteModerator,PrivateRouteStudents } from './RouteManagement/PrivateRoutes';
 import { Login } from './components/Login/Login';
 
-import StudentHome from './components/Students/StudentHome';
-import StudentsNav from './components/Students/StudentsNav'
+import {StudentsNav} from './components/Students/StudentsNav'
 import StudentsSide from './components/Students/StudentsSide'
+import StudentsHome from './components/Students/StudentsHome'
 
 function App() {
   const [isOpen, setIsOpen] = useState(false)
@@ -32,9 +32,9 @@ function App() {
         <Route element={<PrivateRouteStudents />}>
         <Route element={<StudentsNav toggle={toggle} />} path="/Students">
           <Route element={<StudentsSide toggle={toggle} isOpen={isOpen} />} path="/Students">
-            <Route element={<StudentHome />} path="Home" />
-            {/* <Route element={<AddStudent />} path='AddStudent' />
-            <Route element={<LabBooking />} path='LabBooking' /> */}
+            <Route element={<SelectSubjectMod />} path="ExamReservation" />
+             <Route element={<StudentsHome />} path="Home" />
+            {/* <Route element={<SelectSubjectMod />} path='SelectSubjectMod' /> */} 
           </Route>
           </Route>
         </Route>
@@ -43,7 +43,7 @@ function App() {
           <Route element={<InstructorSidebar toggle={toggle} isOpen={isOpen} />} path="/Instructor">
             <Route element={<InstructorHome />} path="Home" />
             <Route element={<AddStudent />} path='AddStudent' />
-            <Route element={<LabBooking />} path='LabBooking' />
+            <Route element={<SelectSubjectMod />} path='LabBooking' />
           </Route>
           </Route>
         </Route>
