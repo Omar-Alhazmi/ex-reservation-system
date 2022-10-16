@@ -18,6 +18,9 @@
 .available{
   background-color: #8bc34a;
 }
+.update--active{
+  
+}
 .tableBody.table--operation--container{
   display: flex;
   justify-content: space-around;

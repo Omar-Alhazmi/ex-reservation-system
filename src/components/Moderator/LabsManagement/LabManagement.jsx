@@ -20,18 +20,17 @@ export default class LabManagement extends Component {
       yearAndMonth: "",
       day: "",
       timeFrom: "",
-      timeTo: ""
+      timeTo: "",
+      updateIsActive: false,
+      _id: ""
     }
     this.handelSubmit = this.handelSubmit.bind(this);
   }
   RegisterNewLab = (data) => {
     LabRegistration(data)
       .then(response => {
-        console.log(response);
-        let errMessage = response.data.message
-        console.log(errMessage);
         if (response.status === 200) {
-          Swal.fire({ icon: 'success', title: "تم اظافة القاعة بنجاح  " });
+          Swal.fire({ icon: 'success', title: response.data.message });
         }
         else {
           Swal.fire({ icon: 'error', title: "الرجاء التأكد  من ادخال البيانات بشكل صحيح" });
@@ -39,8 +38,10 @@ export default class LabManagement extends Component {
       })
       .catch(error => {
         console.log(error);
-        if(error.response.data.header === "all_data_up_to_date") Swal.fire({ icon: 'warning', title: error.response.data.message});
-        Swal.fire({ icon: 'error', title: `حدث خطا` });
+        if (error.response.data) {
+          if (error.response.data.header === "all_data_up_to_date") Swal.fire({ icon: 'warning', title: error.response.data.message });
+        }
+        else Swal.fire({ icon: 'error', title: `حدث خطا` });
       });
   };
 
@@ -53,27 +54,28 @@ export default class LabManagement extends Component {
   }
   dateAndTimeHandler = e => {
     e.preventDefault();
-    const { yearAndMonth, day, timeFrom, timeTo,Available } = this.state
-    if (yearAndMonth.toString().length > 0 && day.toString().length > 0 && timeFrom.toString().length >0 && timeTo.toString().length > 0) {
+    const { yearAndMonth, day, timeFrom, timeTo, Available } = this.state
+    if (yearAndMonth.toString().length > 0 && day.toString().length > 0 && timeFrom.toString().length > 0 && timeTo.toString().length > 0) {
       let ym = (dayjs(yearAndMonth.$d).toJSON()).slice(0, 8);
       let d = day.$D;
       let tf = timeFrom.$d.toString().split(" ");
       let tto = timeTo.$d.toString().split(" ");
       tf = tf[4]
       tto = tto[4]
-      console.log(tf,tto);
+      console.log(tf, tto);
       const From = `${ym}${d} ${tf}`
       const To = `${ym}${d} ${tto}`
-      if(new Date(From).getTime() > new Date(To).getTime()){
+      if (new Date(From).getTime() > new Date(To).getTime()) {
         Swal.fire({ icon: 'error', title: "الرجاء التأكد  من ادخال الوقت بشكل صحيح" });
         console.log("if");
-        this.setState({timeFrom: "" ,timeTo: "" })
+        this.setState({ timeFrom: "", timeTo: "" })
         return;
-      }else{
+      } else {
         this.setState(prevState => ({
-        Available: [...prevState.Available, { From, To, isAvailable: true }]
-      }))
-      console.log(Available);}
+          Available: [...prevState.Available, { From, To, isAvailable: true, State: true }]
+        }))
+        console.log(Available);
+      }
     }
     else Swal.fire({ icon: 'error', title: "الرجاء التأكد  من ادخال البيانات بشكل صحيح" })
   }
@@ -84,22 +86,35 @@ export default class LabManagement extends Component {
     const { LabId, LabCapacity, Available } = this.state, newLab = { LabId, LabCapacity, Available };
     e.preventDefault();
     (newLab.Available.length === 0) ? Swal.fire({ icon: 'error', title: "الرجاء التأكد  اظافة موعد واحد على الاقل" }) :
-    (LabId.length > 0 && LabCapacity.length > 0 )?this.RegisterNewLab(newLab):Swal.fire({ icon: 'error', title: "الرجاء التأكد  من ادخال البيانات بشكل صحيح"});
+      (LabId.length > 0 && LabCapacity.length > 0) ? this.RegisterNewLab(newLab) : Swal.fire({ icon: 'error', title: "الرجاء التأكد  من ادخال البيانات بشكل صحيح" });
   };
+  handelUpdateSubmit = e => {
+    const { _id, LabCapacity, Available } = this.state, newLab = { _id, LabCapacity, Available };
+    e.preventDefault();
+    (newLab.Available.length === 0) ? Swal.fire({ icon: 'error', title: "الرجاء التأكد  اظافة موعد واحد على الاقل" }) :
+      (_id.length > 0 && LabCapacity.length > 0) ? this.RegisterNewLab(newLab) : Swal.fire({ icon: 'error', title: "الرجاء التأكد  من ادخال البيانات بشكل صحيح" });
+  };
+  onChange = (LabCapacity, LabId, Available, _id) => {
+    console.log(LabCapacity, LabId, Available, _id);
+    this.setState({ LabCapacity: LabCapacity, LabId: LabId, Available: Available, _id: _id });
+  }
+
+  handelUpdate = () => {
+    this.setState({ updateIsActive: !this.state.updateIsActive })
+  }
   render() {
-    const { LabId, LabCapacity, yearAndMonth, day, timeFrom, timeTo, Available } = this.state;
+    const { LabId, LabCapacity, yearAndMonth, day, timeFrom, timeTo, Available, updateIsActive } = this.state;
     let toDay = new Date();
     let nextYear = new Date();
-    let nextYearFormate = (nextYear.getFullYear() + 1)+ '-' +(nextYear.getMonth()+1) + '-' + nextYear.getDate();
-    let toDayFormate = (toDay.getFullYear())  + '-' + (toDay.getMonth()+1) + '-' + toDay.getDate();
+    let nextYearFormate = (nextYear.getFullYear() + 1) + '-' + (nextYear.getMonth() + 1) + '-' + nextYear.getDate();
+    let toDayFormate = (toDay.getFullYear()) + '-' + (toDay.getMonth() + 1) + '-' + toDay.getDate();
     let selectedMonth = ` ${(dayjs(yearAndMonth.$d).toJSON()).slice(0, 8)}01`
     let lastDayInMonth = dayjs(selectedMonth).daysInMonth();
-  
     return (
       <>
         <div className="LoginContainer lab-in">
           <form className='login-form' >
-            <div className="flex-row">
+            {(updateIsActive) ? "" : <div className="flex-row">
               <label className="lf--label" htmlFor="LabId">
                 <MdNewLabel />
               </label>
@@ -111,7 +126,7 @@ export default class LabManagement extends Component {
                 type="text"
                 onChange={e => this.handleChange(e)}
                 value={LabId} />
-            </div>
+            </div>}
             <div className="flex-row">
               <label className="lf--label" htmlFor="LabCapacity">
                 < MdReduceCapacity />
@@ -165,11 +180,11 @@ export default class LabManagement extends Component {
             </LocalizationProvider>
             <input className='lf--submit' type='submit' onClick={e => this.dateAndTimeHandler(e)} value='اضافة الموعد' />
             <input className='lf--submit' type='submit' onClick={e => this.deleteLastAvailableItem(e)} value='حذف اخر موعد ' />
-            <input className='lf--submit' onClick={e => this.handelSubmit(e)} value='اضافة القاعة وتسجيل المواعيد' />
+            <input className='lf--submit' onClick={(updateIsActive) ? e => this.handelUpdateSubmit(e) : e => this.handelSubmit(e)} value={(updateIsActive) ? "تحديث بيانات القاعة" :'اضافة القاعة وتسجيل المواعيد'} />
           </form>
           <InformationTable data={Available} LabId={LabId} LabCapacity={LabCapacity} />
         </div>
-        <DisplayAllLabs />
+        {(!updateIsActive) ? <DisplayAllLabs onNameChange={this.onChange} handelUpdate={this.handelUpdate} /> : ""}
       </>
     )
   }

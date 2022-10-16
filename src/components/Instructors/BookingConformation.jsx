@@ -28,7 +28,8 @@ export default class BookingConformation extends Component {
             })
             .catch(error => {
                 console.log(error);
-                Swal.fire({ icon: 'error', title: error });
+                if(error.response.data)Swal.fire({ icon: 'warning', title: error.response.data.message });
+                else Swal.fire({ icon: 'error', title: error });
             });
     };
     handleSubmit = e => {
