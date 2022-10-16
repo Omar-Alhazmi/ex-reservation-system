@@ -91,6 +91,10 @@ export const getAllTestAvailableForStudent = (id,req) => {
 export const UpdateLabById = async (req,id) => {
     return await axios.post(`${apiURL}api/update/lab/${id}`, req, config)
 }
+export const RemoveAppointmentByLabId = async (req,id) => {
+    return await axios.post(`${apiURL}api/remove/appointment/by/Lab/${id}`, req, config)
+}
+
 //---------------All GET Request-------------------//
 export const getInstructorById = (id) => {
     return axios.get(`${apiURL}api/get/all/Instructor/${id}`);

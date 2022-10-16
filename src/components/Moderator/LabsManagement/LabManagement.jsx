@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { LabRegistration } from '../../ApiConfig/Api';
+import { LabRegistration, UpdateLabById, RemoveAppointmentByLabId } from '../../ApiConfig/Api';
 import Swal from "sweetalert2";
 import { MdReduceCapacity, MdNewLabel } from 'react-icons/md';
 import dayjs from 'dayjs';
@@ -21,6 +21,7 @@ export default class LabManagement extends Component {
       day: "",
       timeFrom: "",
       timeTo: "",
+      DeleteAppointments:[],
       updateIsActive: false,
       _id: ""
     }
@@ -44,13 +45,48 @@ export default class LabManagement extends Component {
         else Swal.fire({ icon: 'error', title: `حدث خطا` });
       });
   };
-
+  LabUpdate = (data) => {
+    UpdateLabById(data, data._id)
+      .then(response => {
+        if (response.status === 200) {
+          Swal.fire({ icon: 'success', title: response.data.message });
+        }
+        else {
+          Swal.fire({ icon: 'error', title: "الرجاء التأكد  من ادخال البيانات بشكل صحيح" });
+        }
+      })
+      .catch(error => {
+        console.log(error);
+        if (error.response.data) {
+          if (error.response.data.header === "all_data_up_to_date") Swal.fire({ icon: 'warning', title: error.response.data.message });
+        }
+        else Swal.fire({ icon: 'error', title: `حدث خطا` });
+      });
+  };
+  RemoveAppointment = (data) => {
+    RemoveAppointmentByLabId(data, data._id)
+      .then(response => {
+        if (response.status === 200) {
+          Swal.fire({ icon: 'success', title: response.data.message });
+        }
+        else {
+          Swal.fire({ icon: 'error', title: "الرجاء التأكد  من ادخال البيانات بشكل صحيح" });
+        }
+      })
+      .catch(error => {
+        console.log(error);
+        if (error.response.data) {
+          if (error.response.data.header === "all_data_up_to_date") Swal.fire({ icon: 'warning', title: error.response.data.message });
+        }
+        else Swal.fire({ icon: 'error', title: `حدث خطا` });
+      });
+  };
+  
   deleteLastAvailableItem = e => {
     e.preventDefault();
     const newArr = this.state.Available
     newArr.pop()
     this.setState({ Available: newArr })
-
   }
   dateAndTimeHandler = e => {
     e.preventDefault();
@@ -88,22 +124,31 @@ export default class LabManagement extends Component {
     (newLab.Available.length === 0) ? Swal.fire({ icon: 'error', title: "الرجاء التأكد  اظافة موعد واحد على الاقل" }) :
       (LabId.length > 0 && LabCapacity.length > 0) ? this.RegisterNewLab(newLab) : Swal.fire({ icon: 'error', title: "الرجاء التأكد  من ادخال البيانات بشكل صحيح" });
   };
-  handelUpdateSubmit = e => {
-    const { _id, LabCapacity, Available } = this.state, newLab = { _id, LabCapacity, Available };
+  handelDeleteSubmit = e => {
+    const { _id,  DeleteAppointments } = this.state, DeleteAppointment = { _id,  DeleteAppointments };
     e.preventDefault();
-    (newLab.Available.length === 0) ? Swal.fire({ icon: 'error', title: "الرجاء التأكد  اظافة موعد واحد على الاقل" }) :
-      (_id.length > 0 && LabCapacity.length > 0) ? this.RegisterNewLab(newLab) : Swal.fire({ icon: 'error', title: "الرجاء التأكد  من ادخال البيانات بشكل صحيح" });
+    (DeleteAppointment.DeleteAppointments.length === 0) ? Swal.fire({ icon: 'error', title: "الرجاء التأكد  اختيار موعد واحد على الاقل" }) :
+    this.RemoveAppointment(DeleteAppointment);
+  };
+  handelUpdateSubmit = e => {
+    const { _id, LabCapacity, Available } = this.state, UpdateLab = { _id, LabCapacity, Available };
+    e.preventDefault();
+    (UpdateLab.Available.length === 0) ? Swal.fire({ icon: 'error', title: "الرجاء التأكد  اظافة موعد واحد على الاقل" }) :
+      (_id.length > 0 && LabCapacity > 0) ? this.LabUpdate(UpdateLab) : Swal.fire({ icon: 'error', title: "الرجاء التأكد  من ادخال البيانات بشكل صحيح" });
   };
   onChange = (LabCapacity, LabId, Available, _id) => {
     console.log(LabCapacity, LabId, Available, _id);
     this.setState({ LabCapacity: LabCapacity, LabId: LabId, Available: Available, _id: _id });
   }
-
+  RemoveOnChange = (DeleteAppointments) => {
+    console.log(DeleteAppointments);
+    this.setState({ DeleteAppointments: DeleteAppointments});
+  }
   handelUpdate = () => {
     this.setState({ updateIsActive: !this.state.updateIsActive })
   }
   render() {
-    const { LabId, LabCapacity, yearAndMonth, day, timeFrom, timeTo, Available, updateIsActive } = this.state;
+    const { LabId, LabCapacity, yearAndMonth, day, timeFrom, timeTo, Available, updateIsActive,DeleteAppointments } = this.state;
     let toDay = new Date();
     let nextYear = new Date();
     let nextYearFormate = (nextYear.getFullYear() + 1) + '-' + (nextYear.getMonth() + 1) + '-' + nextYear.getDate();
@@ -180,9 +225,10 @@ export default class LabManagement extends Component {
             </LocalizationProvider>
             <input className='lf--submit' type='submit' onClick={e => this.dateAndTimeHandler(e)} value='اضافة الموعد' />
             <input className='lf--submit' type='submit' onClick={e => this.deleteLastAvailableItem(e)} value='حذف اخر موعد ' />
-            <input className='lf--submit' onClick={(updateIsActive) ? e => this.handelUpdateSubmit(e) : e => this.handelSubmit(e)} value={(updateIsActive) ? "تحديث بيانات القاعة" :'اضافة القاعة وتسجيل المواعيد'} />
+            <input className='lf--submit' type='submit' onClick={e => this.handelDeleteSubmit(e)} value=' حذف المواعيد المحددة' />
+            <input className='lf--submit' onClick={(updateIsActive) ? e => this.handelUpdateSubmit(e) : e => this.handelSubmit(e)} value={(updateIsActive) ? "تحديث بيانات القاعة" : 'اضافة القاعة وتسجيل المواعيد'} />
           </form>
-          <InformationTable data={Available} LabId={LabId} LabCapacity={LabCapacity} />
+          <InformationTable data={Available} LabId={LabId} LabCapacity={LabCapacity} DeleteAppointments={DeleteAppointments} onNameChange={this.RemoveOnChange} updateIsActive={updateIsActive}/>
         </div>
         {(!updateIsActive) ? <DisplayAllLabs onNameChange={this.onChange} handelUpdate={this.handelUpdate} /> : ""}
       </>
