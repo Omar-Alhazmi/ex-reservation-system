@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { getAllLabs } from '../../ApiConfig/Api';
+import { getAllLabs, RemoveLabById } from '../../ApiConfig/Api';
 import * as StyledTable from '../../Styles/styledTable'
 import { dateFormat, timeFormat } from '../../helperMethods';
 import { MdOutlineEditCalendar, MdDeleteSweep } from 'react-icons/md';
+import Swal from "sweetalert2";
 
 export default class DisplayAllLabs extends Component {
     constructor(props) {
@@ -26,16 +27,45 @@ export default class DisplayAllLabs extends Component {
         const CurrentLab = data[labIndex]
 
         for (let dataTimeIndex = 0; dataTimeIndex < CurrentLab.Available.length; dataTimeIndex++) {
-            let from =  new Date(CurrentLab.Available[dataTimeIndex].From)
+            let from = new Date(CurrentLab.Available[dataTimeIndex].From)
             let to = new Date(CurrentLab.Available[dataTimeIndex].To)
             from = (from.getFullYear()) + '-' + (from.getMonth() + 1) + '-' + from.getDate() + " : " + from.toString().split(" ")[4]
             to = (to.getFullYear()) + '-' + (to.getMonth() + 1) + '-' + to.getDate() + " : " + to.toString().split(" ")[4]
-            CurrentLab.Available[dataTimeIndex].From =  from
-            CurrentLab.Available[dataTimeIndex].To =  to   
+            CurrentLab.Available[dataTimeIndex].From = from
+            CurrentLab.Available[dataTimeIndex].To = to
         }
-        this.props.onNameChange(CurrentLab.LabCapacity,CurrentLab.LabId,CurrentLab.Available,CurrentLab._id)
+        this.props.onNameChange(CurrentLab.LabCapacity, CurrentLab.LabId, CurrentLab.Available, CurrentLab._id)
         this.props.handelUpdate()
     }
+    RemoveLab = (lab_id) => {
+        RemoveLabById(lab_id)
+            .then(response => {
+                if (response.status === 200) {
+                    Swal.fire({ icon: 'success', title: response.data.message });
+                    window.location.reload(false);
+                }
+                else Swal.fire({ icon: 'error', title: `حدث خطا` });
+            });
+    };
+
+    DeleteHandel = (labIndex) => {
+        const { data } = this.state
+        Swal.fire({
+            title: 'تأكيد الحذف',
+            text: "سيتم حذف القاعة  وجميع المواعيد المتعلقة بها نهائيا",
+            icon: 'warning',
+            showDenyButton: true,
+            confirmButtonColor: '#d33',
+            denyButtonColor: '#3085d6',
+            confirmButtonText: 'نعم, تأكيد الحذف  ',
+            denyButtonText: `رجوع`,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.RemoveLab(data[labIndex]._id);
+            }
+        })
+    }
+
     render() {
         const { data } = this.state
         let allLabs = (
@@ -66,7 +96,7 @@ export default class DisplayAllLabs extends Component {
                             <StyledTable.TableBodyContainer>
                                 <StyledTable.TableTd className="tableBody">{lab.LabId}</StyledTable.TableTd>
                                 <StyledTable.TableTd className="tableBody">{lab.LabCapacity}</StyledTable.TableTd>
-                                <StyledTable.TableTd className="tableBody table--operation--container"><div onClick={()=>this.updateToggleHandler(labIndex)} className='single--icon' ><MdOutlineEditCalendar color='#00bcd4' /></div>  |  <div className='single--icon'> <MdDeleteSweep color='#ff5722' /></div></StyledTable.TableTd>
+                                <StyledTable.TableTd className="tableBody table--operation--container"><div onClick={() => this.updateToggleHandler(labIndex)} className='single--icon' ><MdOutlineEditCalendar color='#00bcd4' /></div>  |  <div onClick={() => this.DeleteHandel(labIndex)} className='single--icon'> <MdDeleteSweep color='#ff5722' /></div></StyledTable.TableTd>
                             </StyledTable.TableBodyContainer>
                             <StyledTable.TableHedContainer>
                                 <tr>
@@ -96,8 +126,6 @@ export default class DisplayAllLabs extends Component {
         }
         return (
             <div>
-                {/* {(this.state.updateIsActive)? */}
-                {/* <UpdateLab updateIsActive={this.state.updateIsActive}/> */}
                 {allLabs}
             </div>
         )

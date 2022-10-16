@@ -49,6 +49,7 @@ export const TableTh = styled.th`
     text-align: center;
     padding: 8px;
     color: #ffffff;
+    font-size: 1.2rem;
     background: #4FC3A1;
     &:nth-child(odd) {
     color: #ffffff;

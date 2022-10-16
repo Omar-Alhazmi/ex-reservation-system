@@ -32,6 +32,7 @@ export default class LabManagement extends Component {
       .then(response => {
         if (response.status === 200) {
           Swal.fire({ icon: 'success', title: response.data.message });
+          window.location.reload(false);
         }
         else {
           Swal.fire({ icon: 'error', title: "الرجاء التأكد  من ادخال البيانات بشكل صحيح" });
@@ -50,6 +51,7 @@ export default class LabManagement extends Component {
       .then(response => {
         if (response.status === 200) {
           Swal.fire({ icon: 'success', title: response.data.message });
+          window.location.reload(false);
         }
         else {
           Swal.fire({ icon: 'error', title: "الرجاء التأكد  من ادخال البيانات بشكل صحيح" });
@@ -68,6 +70,7 @@ export default class LabManagement extends Component {
       .then(response => {
         if (response.status === 200) {
           Swal.fire({ icon: 'success', title: response.data.message });
+          window.location.reload(false);
         }
         else {
           Swal.fire({ icon: 'error', title: "الرجاء التأكد  من ادخال البيانات بشكل صحيح" });
@@ -128,7 +131,20 @@ export default class LabManagement extends Component {
     const { _id,  DeleteAppointments } = this.state, DeleteAppointment = { _id,  DeleteAppointments };
     e.preventDefault();
     (DeleteAppointment.DeleteAppointments.length === 0) ? Swal.fire({ icon: 'error', title: "الرجاء التأكد  اختيار موعد واحد على الاقل" }) :
-    this.RemoveAppointment(DeleteAppointment);
+    Swal.fire({
+      title: 'تأكيد الحذف',
+      text: "سيتم حف جميع المواعيد المحددة نهائيا",
+      icon: 'warning',
+      showDenyButton: true,
+      confirmButtonColor: '#d33',
+      denyButtonColor: '#3085d6',
+      confirmButtonText: 'نعم, حذف الاوقات المحددة',
+      denyButtonText: `رجوع`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.RemoveAppointment(DeleteAppointment);
+      }
+    })
   };
   handelUpdateSubmit = e => {
     const { _id, LabCapacity, Available } = this.state, UpdateLab = { _id, LabCapacity, Available };

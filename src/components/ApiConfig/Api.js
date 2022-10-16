@@ -91,13 +91,17 @@ export const getAllTestAvailableForStudent = (id,req) => {
 export const UpdateLabById = async (req,id) => {
     return await axios.post(`${apiURL}api/update/lab/${id}`, req, config)
 }
-export const RemoveAppointmentByLabId = async (req,id) => {
-    return await axios.post(`${apiURL}api/remove/appointment/by/Lab/${id}`, req, config)
-}
+
 
 //---------------All GET Request-------------------//
 export const getInstructorById = (id) => {
     return axios.get(`${apiURL}api/get/all/Instructor/${id}`);
+  }
+  export const getInstructors = () => {
+    return axios.get(`${apiURL}api/get/all/Instructor`);
+  }
+  export const getAllDivision = () => {
+    return axios.get(`${apiURL}api/Find/All/Divisions`);
   }
   
   export const getAllAvailableLabs = () => {
@@ -110,9 +114,16 @@ export const getInstructorById = (id) => {
     return axios.get(`${apiURL}api/Find/all/booked/test/${id}`,config);
   }
   
-  export const getAllLabs = (id) => {
+  export const getAllLabs = () => {
     return axios.get(`${apiURL}api/get/all/lab`);
   }
 export const getStudentsByInstructorId = (id) => {
     return axios.get(`${apiURL}api/Find/All/Division/by/instructorId/${id}`);
+  }
+  //---------------All remove Request-------------------//
+export const RemoveAppointmentByLabId = async (req,id) => {
+    return await axios.post(`${apiURL}api/remove/appointment/by/Lab/${id}`, req, config)
+}
+  export const RemoveLabById = (id) => {
+    return axios.delete(`${apiURL}api/delete/lab/by/${id}`);
   }
