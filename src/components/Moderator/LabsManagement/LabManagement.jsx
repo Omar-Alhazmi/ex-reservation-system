@@ -163,6 +163,9 @@ export default class LabManagement extends Component {
   handelUpdate = () => {
     this.setState({ updateIsActive: !this.state.updateIsActive })
   }
+  handelBackClicked = () => {
+    this.setState({ updateIsActive: !this.state.updateIsActive,Available:[],LabId:"",LabCapacity:0 })
+  }
   render() {
     const { LabId, LabCapacity, yearAndMonth, day, timeFrom, timeTo, Available, updateIsActive,DeleteAppointments } = this.state;
     let toDay = new Date();
@@ -175,7 +178,7 @@ export default class LabManagement extends Component {
       <>
         <div className="LoginContainer lab-in">
           <form className='login-form' >
-            {(updateIsActive) ? "" : <div className="flex-row">
+            {(updateIsActive) ? <input className='lf--submit' onClick={e => this.handelBackClicked(e)} value={'العودة الى ادارة المواعيد -->' } />: <div className="flex-row">
               <label className="lf--label" htmlFor="LabId">
                 <MdNewLabel />
               </label>
@@ -241,7 +244,7 @@ export default class LabManagement extends Component {
             </LocalizationProvider>
             <input className='lf--submit' type='submit' onClick={e => this.dateAndTimeHandler(e)} value='اضافة الموعد' />
             <input className='lf--submit' type='submit' onClick={e => this.deleteLastAvailableItem(e)} value='حذف اخر موعد ' />
-            <input className='lf--submit' type='submit' onClick={e => this.handelDeleteSubmit(e)} value=' حذف المواعيد المحددة' />
+            {(updateIsActive) ? <input className='lf--submit' type='submit' onClick={e => this.handelDeleteSubmit(e)} value=' حذف المواعيد المحددة' />:""}
             <input className='lf--submit' onClick={(updateIsActive) ? e => this.handelUpdateSubmit(e) : e => this.handelSubmit(e)} value={(updateIsActive) ? "تحديث بيانات القاعة" : 'اضافة القاعة وتسجيل المواعيد'} />
           </form>
           <InformationTable data={Available} LabId={LabId} LabCapacity={LabCapacity} DeleteAppointments={DeleteAppointments} onNameChange={this.RemoveOnChange} updateIsActive={updateIsActive}/>

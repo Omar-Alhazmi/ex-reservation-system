@@ -4,7 +4,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { getAllLabs, getInstructors, getAllDivision } from '../ApiConfig/Api'
 import SummaryTable from './SummaryTable';
-import { LabelContainer, LabelCard, CardHeadLine, ChartContainer, LabelsContainer, DoughnutContainer, CardParagraph } from '../Styles/StyledChart'
+import { LabelContainer, LabelCard, CardHeadLine, ChartContainer, LabelsContainer, DoughnutContainer, CardParagraph ,DoughnutContainerLear2,DoughnutTitle} from '../Styles/StyledChart'
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default class Home extends Component {
@@ -33,7 +33,7 @@ export default class Home extends Component {
         for (let currentDivision = 0; currentDivision < response.data.length; currentDivision++) {
           StudentCount += response.data[currentDivision].Students.length
         }
-        this.setState({ DivisionCount: response.data ,StudentCount: StudentCount });
+        this.setState({ DivisionCount: response.data, StudentCount: StudentCount });
       })
       .catch((error) => {
       })
@@ -71,8 +71,8 @@ export default class Home extends Component {
         {
           data: [AvailableLab, BookedLab],
           backgroundColor: [
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 99, 132, 0.2)',
+            '#528fa7',
+            '#ff5722',
 
           ],
           borderColor: [
@@ -93,7 +93,11 @@ export default class Home extends Component {
           <ChartContainer>
             <DoughnutContainer>
               {AvailableLab === 0 && BookedLab === 0 ? <div className="spinner">Loading...</div> :
-                <Doughnut data={genderData} />}
+                <DoughnutContainerLear2>
+                <DoughnutTitle>نسبة حجز القاعات</DoughnutTitle>
+                  <Doughnut data={genderData} />
+                </DoughnutContainerLear2>
+              }
             </DoughnutContainer>
             <LabelsContainer>
               <LabelContainer>

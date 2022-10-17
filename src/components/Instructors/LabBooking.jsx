@@ -18,7 +18,7 @@ export default class LabBooking extends Component {
       to: "",
       LabCapacity: "",
       lab_id: "",
-      LabFilter:false
+      LabFilter: false
     }
   }
   componentDidMount() {
@@ -42,10 +42,11 @@ export default class LabBooking extends Component {
   filterHandler = e => {
     e.preventDefault();
     const {LabFilter,allLabs,filteredLab}=this.state
-    if(LabFilter)this.setState({ data: filteredLab }) 
-    else this.setState({ data: allLabs })
     this.setState({ LabFilter: !LabFilter })
+    if(!LabFilter)this.setState({ data: filteredLab }) 
+    else this.setState({ data: allLabs })
   }
+
   labHandler = (labIndex, AvailableIndex) => {
     const { data } = this.state
     const time = data[labIndex].Available[AvailableIndex]
@@ -78,7 +79,7 @@ export default class LabBooking extends Component {
     }
     return (
       <div>
-         {(LabFilter)?<button className="modal__btn secondary--nav" onClick={e =>this.filterHandler(e)}>اظهار القاعات المتاحة فقط</button> :<button className="modal__btn secondary--nav" onClick={e =>this.filterHandler(e)}>اظهار جميع القاعات </button>}     
+        <button className="modal__btn secondary--nav" onClick={e =>this.filterHandler(e)} > {(!LabFilter)?'اظهار القاعات المتاحة فقط' : 'اظهار جميع القاعات'}</button>      
            <Cards.TeamContainer>
           <Cards.CardsContainer id="Teams" >
             <Cards.CardsWrapper>

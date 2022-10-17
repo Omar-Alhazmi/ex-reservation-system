@@ -3,6 +3,7 @@ export const TableWrapper = styled.div`
     margin: 10px 70px 70px;
     box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
     @media (max-width: 767px) {
+        margin: auto;
         &:before{
         display: block;
         text-align: right;

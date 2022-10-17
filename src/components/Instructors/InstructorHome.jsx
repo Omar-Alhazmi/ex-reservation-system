@@ -2,14 +2,16 @@ import React, { Component } from 'react'
 import { getAllBookedLabByInstructorId } from '../ApiConfig/Api';
 import { getId,dateFormat,timeFormat } from '../helperMethods';
 import * as StyledTable from '../Styles/styledTable'
-
+import StudentBookedInfo from './StudentBookedInfo';
 import '../Styles/spinner.css'
 let allStudents
 export default class InstructorHome extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      response: false
+      response: [],
+      selectedRef:false,
+      students:[]
     }
   }
 
@@ -26,8 +28,13 @@ export default class InstructorHome extends Component {
       .catch((error) => {
       })
   }
+  selectHandler = (index) =>{
+    const {selectedRef,response} = this.state
+    this.setState({selectedRef: !selectedRef,students: response[index]})
+  }
   render() {
-    if (this.state.response) {
+    const {response, selectedRef,students} = this.state
+    if (response) {
       allStudents = (
         <StyledTable.TableContainer>
           <StyledTable.TableBodyContainer>
@@ -40,11 +47,11 @@ export default class InstructorHome extends Component {
         </StyledTable.TableContainer>
       )
     }
-    if (this.state.response) {
-      if (this.state.response.length > 0) {
-        allStudents = this.state.response.map((BookedLab, BookedLabIndex) => {
+    if (response) {
+      if (response.length > 0) {
+        allStudents = response.map((BookedLab, BookedLabIndex) => {
                 return (
-                  <StyledTable.TableTr key={BookedLabIndex}>
+                  <StyledTable.TableTr key={BookedLabIndex} onClick={()=>this.selectHandler(BookedLabIndex)}>
                     <StyledTable.TableTd className="tableBody">{BookedLab.LabReference}</StyledTable.TableTd>
                     <StyledTable.TableTd className="tableBody">{BookedLab.LabCapacity}</StyledTable.TableTd>
                     <StyledTable.TableTd className="tableBody">{dateFormat(BookedLab.From)}</StyledTable.TableTd>
@@ -55,7 +62,8 @@ export default class InstructorHome extends Component {
             }
       }
     return (
-      <StyledTable.TableWrapper>
+      <div>
+      {(!selectedRef)?<StyledTable.TableWrapper>
         <StyledTable.TableContainer>
           <StyledTable.TableHedContainer>
           </StyledTable.TableHedContainer>
@@ -72,6 +80,8 @@ export default class InstructorHome extends Component {
           </StyledTable.TableBodyContainer>
         </StyledTable.TableContainer>
       </StyledTable.TableWrapper >
+     :<StudentBookedInfo data={students} toggle={this.selectHandler}/>}
+      </div>
     )
   }
 }

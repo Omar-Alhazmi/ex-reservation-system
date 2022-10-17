@@ -6,14 +6,14 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-background: #8391a4;
+// background: #8391a4;
 `;
 export const TeamContainer = styled.div`
   height:  fit-content;
   margin-top: 10px;
   padding: 10px;
   display:grid;
-  background: #8391a4;
+//   background: #8391a4;
 `
 export const CardsWrapper = styled.div `
 max-width: 1000px;

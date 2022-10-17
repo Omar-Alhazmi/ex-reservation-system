@@ -8,14 +8,27 @@ export const LabelContainer = styled.div`
 }
 `
 export const DoughnutContainer = styled.div`
-display: flex;
+display: grid;
 height: 375px; 
  width: 375px;
  @media screen and (max-width: 600px) {
-      display: block;
+      display: grid;
+      margin:auto;
       width: 75vw;
       height: fit-content;
     }
+`
+export const DoughnutContainerLear2 = styled.div`
+display: grid;
+margin:auto;
+@media screen and (max-width: 600px) {
+    width: 75vw;
+}
+`
+export const DoughnutTitle = styled.label`
+text-align: center;
+border-bottom: 1px solid gray;
+color: darkslategray;
 `
 export const LabelCard = styled.div`
   border-top: 3px solid ${({greenLine,yellowLine,blueLine,orangeLine}) => (greenLine ? '#45d3d3' : 
@@ -37,10 +50,7 @@ export const LabelCard = styled.div`
 }
 @media (max-width: 450px) {
         height: 200px;
-        margin: 57px;
-}
-@media (max-width: 387px) {
-    margin: 23px;
+        margin: 10vw 0px;
 }
 @media (max-width: 300px){
     width: none;
@@ -85,6 +95,9 @@ export const LabelsContainer = styled.div`
     grid-template-columns: repeat(2, 1fr);
     @media screen and (max-width: 600px) {
         grid-template-columns: repeat(1, 1fr);
+        justify-content: space-between;
+        justify-items: center;
+
 `
 export const ChartContainer = styled.div`
     display: flex;

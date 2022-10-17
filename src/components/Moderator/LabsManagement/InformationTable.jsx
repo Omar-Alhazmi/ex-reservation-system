@@ -25,7 +25,7 @@ export default class InformationTable extends Component {
             if (data.length > 0) {
                 allTimes = data.map((data, index) => {
                     return (
-                        <StyledTable.TableTr key={index} className={(this.props.DeleteAppointments.includes(this.props.data[index])) ? "delete-appointment-clicked" : "delete-appointment"} onClick={() => this.handleAppointmentDeletion(index)}>
+                        <StyledTable.TableTr key={index} className={(this.props.DeleteAppointments.includes(this.props.data[index])) ? "delete-appointment-clicked" : "delete-appointment"}  onClick={(this.props.updateIsActive)? () => this.handleAppointmentDeletion(index): ""}>
                             <StyledTable.TableTd className="tableBody">{data.From}</StyledTable.TableTd>
                             <StyledTable.TableTd className="tableBody">{data.To}</StyledTable.TableTd>
                         </StyledTable.TableTr>
