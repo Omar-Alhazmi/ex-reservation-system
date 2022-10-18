@@ -32,6 +32,9 @@
   justify-content: space-around;
   font-size: 1.4rem;
 }
+.date-cell{
+  direction: ltr;
+}
 .single--icon{
   cursor: pointer;
 }

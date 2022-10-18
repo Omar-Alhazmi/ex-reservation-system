@@ -1,4 +1,5 @@
 import jwt_decode from 'jwt-decode';
+import moment from 'moment';
 
 export const checkStorage = () => {
   return (localStorage.getItem('currentUser') !== undefined && localStorage.getItem('currentUser')  !== null) ?true:false ;
@@ -17,7 +18,12 @@ export const getId = () => {
 export const dateFormat = (date) => {
   let displayDate = new Date(date)
   displayDate = displayDate.toString().split(' ')
-  return `${displayDate[0]} ${displayDate[1]} ${displayDate[2]} ${displayDate[3]}`
+  return `${displayDate[2]} ${displayDate[1]} ${displayDate[3]}`
+}
+export const DayIs = (date) => {
+  let displayDate = new Date(date)
+  displayDate = displayDate.toString().split(' ')
+  return `${displayDate[0]}`
 }
 export const timeFormat = (date) => {
   let displayDate = new Date(date)
@@ -31,6 +37,16 @@ export const validFileType = (file) => {
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
   ];
   return fileTypes.includes(file.type);
+}
+
+
+
+export const checkOverlappingDates = (timeFrom, timeTo,checkTimeConflict) => {
+   return checkTimeConflict.some((elem) => {
+      return (!((moment(timeTo).diff(moment(elem.From))) < 0 ||
+         (moment(timeFrom).diff(moment(elem.To))) > 0
+      ))
+   })
 }
 export const validFileTypePDF = (file) => {
   const fileTypes = [

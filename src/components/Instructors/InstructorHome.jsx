@@ -51,11 +51,11 @@ export default class InstructorHome extends Component {
       if (response.length > 0) {
         allStudents = response.map((BookedLab, BookedLabIndex) => {
                 return (
-                  <StyledTable.TableTr key={BookedLabIndex} onClick={()=>this.selectHandler(BookedLabIndex)}>
+                  <StyledTable.TableTr className='single--icon' key={BookedLabIndex} onClick={()=>this.selectHandler(BookedLabIndex)}>
                     <StyledTable.TableTd className="tableBody">{BookedLab.LabReference}</StyledTable.TableTd>
                     <StyledTable.TableTd className="tableBody">{BookedLab.LabCapacity}</StyledTable.TableTd>
-                    <StyledTable.TableTd className="tableBody">{dateFormat(BookedLab.From)}</StyledTable.TableTd>
-                    <StyledTable.TableTd className="tableBody">{`${timeFormat(BookedLab.From)} - ${timeFormat(BookedLab.To)}`}</StyledTable.TableTd>
+                    <StyledTable.TableTd className="tableBody date-cell">{dateFormat(BookedLab.From)}</StyledTable.TableTd>
+                    <StyledTable.TableTd className="tableBody date-cell">{`${timeFormat(BookedLab.From)} - ${timeFormat(BookedLab.To)}`}</StyledTable.TableTd>
                   </StyledTable.TableTr>
                 )
               })

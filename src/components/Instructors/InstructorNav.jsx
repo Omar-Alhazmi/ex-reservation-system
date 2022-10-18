@@ -40,7 +40,7 @@ const InstructorNav = ({ toggle }) => {
                                     to={'/Instructor/AddStudent'}
                                     duration={500}
                                    offset={-80}
-                                >اظافة متدرب</MainHeader.NavLinks>
+                                >اضافة متدرب</MainHeader.NavLinks>
                             </MainHeader.NavItem>
                             {/* | */}
                             <MainHeader.NavItem>

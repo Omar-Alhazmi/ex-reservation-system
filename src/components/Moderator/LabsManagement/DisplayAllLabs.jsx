@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { getAllLabs, RemoveLabById } from '../../ApiConfig/Api';
 import * as StyledTable from '../../Styles/styledTable'
-import { dateFormat, timeFormat } from '../../helperMethods';
+import { dateFormat, timeFormat,DayIs } from '../../helperMethods';
 import { MdOutlineEditCalendar, MdDeleteSweep } from 'react-icons/md';
 import Swal from "sweetalert2";
 
@@ -75,6 +75,7 @@ export default class DisplayAllLabs extends Component {
                         <StyledTable.TableTd className="tableBody"><div className="spinner tableSp">Loading...</div></StyledTable.TableTd>
                         <StyledTable.TableTd className="tableBody"><div className="spinner tableSp">Loading...</div></StyledTable.TableTd>
                         <StyledTable.TableTd className="tableBody"><div className="spinner tableSp">Loading...</div></StyledTable.TableTd>
+                        <StyledTable.TableTd className="tableBody"><div className="spinner tableSp">Loading...</div></StyledTable.TableTd>
                     </StyledTable.TableTr>
                 </StyledTable.TableBodyContainer>
             </StyledTable.TableContainer>
@@ -89,29 +90,31 @@ export default class DisplayAllLabs extends Component {
                                 <tr>
                                     <StyledTable.TableTh className="tableHeader"> رقم القاعة</StyledTable.TableTh>
                                     <StyledTable.TableTh className="tableHeader"> الطاقة الاستيعابية</StyledTable.TableTh>
-                                    <StyledTable.TableTh className="tableHeader"> ادارة القاعة</StyledTable.TableTh>
+                                    <StyledTable.TableTh colSpan={2}  className="tableHeader"> ادارة القاعة</StyledTable.TableTh>
 
                                 </tr>
                             </StyledTable.TableHedContainer>
                             <StyledTable.TableBodyContainer>
                                 <StyledTable.TableTd className="tableBody">{lab.LabId}</StyledTable.TableTd>
                                 <StyledTable.TableTd className="tableBody">{lab.LabCapacity}</StyledTable.TableTd>
-                                <StyledTable.TableTd className="tableBody table--operation--container"><div onClick={() => this.updateToggleHandler(labIndex)} className='single--icon' ><MdOutlineEditCalendar color='#00bcd4' /></div>  |  <div onClick={() => this.DeleteHandel(labIndex)} className='single--icon'> <MdDeleteSweep color='#ff5722' /></div></StyledTable.TableTd>
+                                <StyledTable.TableTd className="tableBody table--operation--container"><div onClick={() => this.updateToggleHandler(labIndex)} className='single--icon' ><MdOutlineEditCalendar color='#00bcd4' /></div>  </StyledTable.TableTd>
+                               <StyledTable.TableTd> <div onClick={() => this.DeleteHandel(labIndex)} className='single--icon'> <MdDeleteSweep color='#ff5722' /> </div></StyledTable.TableTd>
                             </StyledTable.TableBodyContainer>
                             <StyledTable.TableHedContainer>
                                 <tr>
+                                    <StyledTable.TableTh className="tableHeader"> اليوم</StyledTable.TableTh>
                                     <StyledTable.TableTh className="tableHeader"> التاريخ</StyledTable.TableTh>
                                     <StyledTable.TableTh className="tableHeader"> الوقت</StyledTable.TableTh>
                                     <StyledTable.TableTh className="tableHeader"> الحالة</StyledTable.TableTh>
-
                                 </tr>
                             </StyledTable.TableHedContainer>
                             <StyledTable.TableBodyContainer>
                                 {lab.Available.map((available, AvailableIndex) => {
                                     return (
                                         <StyledTable.TableTr key={AvailableIndex}>
-                                            <StyledTable.TableTd className="tableBody">{dateFormat(available.From)}</StyledTable.TableTd>
-                                            <StyledTable.TableTd className="tableBody">{`${timeFormat(available.From)} - ${timeFormat(available.To)}`}</StyledTable.TableTd>
+                                           <StyledTable.TableTd className="tableBody">{DayIs(available.From)}</StyledTable.TableTd>
+                                            <StyledTable.TableTd className="tableBody date-cell">{dateFormat(available.From)}</StyledTable.TableTd>
+                                            <StyledTable.TableTd className="tableBody date-cell">{`${timeFormat(available.From)} - ${timeFormat(available.To)}`}</StyledTable.TableTd>
                                             <StyledTable.TableTd className="tableBody">{(available.isAvailable) ? "متاح" : "محجوزة"}</StyledTable.TableTd>
                                         </StyledTable.TableTr>
                                     )

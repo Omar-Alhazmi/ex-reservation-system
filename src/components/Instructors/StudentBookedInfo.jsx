@@ -2,25 +2,9 @@ import React, { Component } from 'react'
 import * as StyledTable from '../Styles/styledTable'
 import jsPDF from "jspdf";
 import autoTable from 'jspdf-autotable';
-import font from './Amiri-Regular-normal.js';
 export default class StudentBookedInfo extends Component {
-    saveFileHandler = () => {
-        const doc = new jsPDF()
-        doc.getFontList();
-        doc.addFileToVFS('Amiri-Regular-normal.ttf', font);
-        doc.addFont('Amiri-Regular-normal.ttf', 'Amiri-Regular', 'normal');
-        doc.setFont('Amiri-Regular')
-        autoTable(doc, {
-            head: [['تسيسيتن', 'طذنتظطذنت', 'نتظذنتظ']],
-            body: [
-                ['ذظط', 'سشيشسيشس', 'طظذظطذ'],
-                ['Castille', 'castille@example.com', 'Spain'],
-                // ...
-            ],
-        })
-        doc.save('table.pdf')
-
-    }
+    // saveFileHandler = () => {
+    // }
     render() {
         let allStudents = (
             <StyledTable.TableContainer>
@@ -48,7 +32,7 @@ export default class StudentBookedInfo extends Component {
 
         return (
             <StyledTable.TableWrapper>
-                <button onClick={() => this.saveFileHandler()}> click me</button>
+                {/* <button onClick={() => this.saveFileHandler()}> click me</button> */}
                 <StyledTable.TableContainer id='studentTable'>
                     <StyledTable.TableHedContainer>
                     </StyledTable.TableHedContainer>

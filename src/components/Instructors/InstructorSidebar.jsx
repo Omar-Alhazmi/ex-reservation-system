@@ -16,7 +16,7 @@ export default function InstructorSidebar({isOpen,toggle}) {
     <SidebarWrapper>
        <SidebarMenu>
        <SidebarLink to="/Instructor/Home" onClick={toggle}>الرئيسية </SidebarLink>
-        <SidebarLink to="/Instructor/AddStudent" onClick={toggle} > اظافة متدرب </SidebarLink>
+        <SidebarLink to="/Instructor/AddStudent" onClick={toggle} > اضافة متدرب </SidebarLink>
         <SidebarLink to="/Instructor/LabBooking" onClick={toggle}>حجز القاعات</SidebarLink>
        </SidebarMenu>
        <SideBtnWrap>
