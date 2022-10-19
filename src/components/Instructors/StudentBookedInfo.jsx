@@ -1,10 +1,22 @@
 import React, { Component } from 'react'
 import * as StyledTable from '../Styles/styledTable'
-import jsPDF from "jspdf";
-import autoTable from 'jspdf-autotable';
+import PrintStudentTable from './PrintStudentTable'
+import { examDuration } from '../helperMethods';
+import ReactToPrint from "react-to-print";
+import '../Styles/printStyle.css'
+import { FcPrint } from 'react-icons/fc';
 export default class StudentBookedInfo extends Component {
-    // saveFileHandler = () => {
-    // }
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            toggle: false
+        }
+    }
+    saveFileHandler = () => {
+        this.setState({ toggle: !this.state.toggle })
+    }
+
     render() {
         let allStudents = (
             <StyledTable.TableContainer>
@@ -24,32 +36,35 @@ export default class StudentBookedInfo extends Component {
                         <StyledTable.TableTd className="tableBody">{currentStudentIndex + 1}</StyledTable.TableTd>
                         <StyledTable.TableTd className="tableBody">{currentStudent.StudentId}</StyledTable.TableTd>
                         <StyledTable.TableTd className="tableBody">{currentStudent.FullName}</StyledTable.TableTd>
-                        <StyledTable.TableTd className="tableBody">{"  \t\t\t \t "}</StyledTable.TableTd>
                     </StyledTable.TableTr>
                 )
             })
         }
 
         return (
-            <StyledTable.TableWrapper>
-                {/* <button onClick={() => this.saveFileHandler()}> click me</button> */}
-                <StyledTable.TableContainer id='studentTable'>
-                    <StyledTable.TableHedContainer>
-                    </StyledTable.TableHedContainer>
-                    <StyledTable.TableHedContainer>
-                        <tr>
-                            <StyledTable.TableTh className="tableHeader">{" "}</StyledTable.TableTh>
-                            <StyledTable.TableTh className="tableHeader">  الرقم الاكاديمي</StyledTable.TableTh>
-                            <StyledTable.TableTh className="tableHeader"> اسم المتدرب</StyledTable.TableTh>
-                            <StyledTable.TableTh className="tableHeader">{"\t التوقيع"}</StyledTable.TableTh>
-
-                        </tr>
-                    </StyledTable.TableHedContainer>
-                    <StyledTable.TableBodyContainer>
-                        {allStudents}
-                    </StyledTable.TableBodyContainer>
-                </StyledTable.TableContainer>
-            </StyledTable.TableWrapper >
+            <>
+                <div className='print--icon--container'>
+                    <ReactToPrint
+                        trigger={() => <FcPrint className='print--icon' />}
+                        content={() => this.componentRef}
+                    />
+                    <PrintStudentTable ref={el => (this.componentRef = el)} student={this.props.data.Student} subject={this.props.data.For} duration={examDuration(this.props.data.From, this.props.data.To)} />
+                </div>
+                <StyledTable.TableWrapper>
+                    <StyledTable.TableContainer id='studentTable'>
+                        <StyledTable.TableHedContainer>
+                            <StyledTable.Tr>
+                                <StyledTable.TableTh className="tableHeader">{" "}</StyledTable.TableTh>
+                                <StyledTable.TableTh className="tableHeader">  الرقم الاكاديمي</StyledTable.TableTh>
+                                <StyledTable.TableTh className="tableHeader"> اسم المتدرب</StyledTable.TableTh>
+                            </StyledTable.Tr>
+                        </StyledTable.TableHedContainer>
+                        <StyledTable.TableBodyContainer>
+                            {allStudents}
+                        </StyledTable.TableBodyContainer>
+                    </StyledTable.TableContainer>
+                </StyledTable.TableWrapper >
+            </>
         )
     }
 }

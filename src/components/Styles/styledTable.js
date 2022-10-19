@@ -101,14 +101,21 @@ export const TableTd = styled.td`
     }
 `
 export const TableTr = styled.tr`
+
 &:nth-child(even) {
     background: #F8F8F8;
 }
 @media (max-width: 767px) {
+    display: table-cell;
 &:nth-child(even) {
         background: transparent;
     }
     }
+`
+export const Tr = styled.tr`
+@media (max-width: 767px) {
+display: table-cell;
+}
 `
 export const AcReButton = styled.button`
 -webkit-appearance: none;

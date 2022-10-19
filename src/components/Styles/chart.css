@@ -68,10 +68,7 @@
     margin-top: 56px;
 }
 }
-@media (max-width: 767px) {
- tbody tr {
-    display: table-cell;
-}
+@media (max-width: 760px) {
  tbody tr:nth-child(odd) {
     background: none;
 }

@@ -68,12 +68,12 @@ export default class InstructorHome extends Component {
           <StyledTable.TableHedContainer>
           </StyledTable.TableHedContainer>
           <StyledTable.TableHedContainer>
-            <tr>
+            <StyledTable.Tr>
               <StyledTable.TableTh className="tableHeader"> رقم القاعة</StyledTable.TableTh>
               <StyledTable.TableTh className="tableHeader"> الطاقة الاستيعابية</StyledTable.TableTh>
               <StyledTable.TableTh className="tableHeader"> التاريخ</StyledTable.TableTh>
               <StyledTable.TableTh className="tableHeader"> الوقت</StyledTable.TableTh>
-            </tr>
+            </StyledTable.Tr>
           </StyledTable.TableHedContainer>
           <StyledTable.TableBodyContainer>
             {allStudents}

@@ -87,12 +87,12 @@ export default class DisplayAllLabs extends Component {
                     <StyledTable.TableWrapper key={labIndex} >
                         <StyledTable.TableContainer>
                             <StyledTable.TableHedContainer>
-                                <tr>
+                                <StyledTable.Tr>
                                     <StyledTable.TableTh className="tableHeader"> رقم القاعة</StyledTable.TableTh>
                                     <StyledTable.TableTh className="tableHeader"> الطاقة الاستيعابية</StyledTable.TableTh>
                                     <StyledTable.TableTh colSpan={2}  className="tableHeader"> ادارة القاعة</StyledTable.TableTh>
 
-                                </tr>
+                                </StyledTable.Tr>
                             </StyledTable.TableHedContainer>
                             <StyledTable.TableBodyContainer>
                                 <StyledTable.TableTd className="tableBody">{lab.LabId}</StyledTable.TableTd>
@@ -101,12 +101,12 @@ export default class DisplayAllLabs extends Component {
                                <StyledTable.TableTd> <div onClick={() => this.DeleteHandel(labIndex)} className='single--icon'> <MdDeleteSweep color='#ff5722' /> </div></StyledTable.TableTd>
                             </StyledTable.TableBodyContainer>
                             <StyledTable.TableHedContainer>
-                                <tr>
+                                <StyledTable.Tr>
                                     <StyledTable.TableTh className="tableHeader"> اليوم</StyledTable.TableTh>
                                     <StyledTable.TableTh className="tableHeader"> التاريخ</StyledTable.TableTh>
                                     <StyledTable.TableTh className="tableHeader"> الوقت</StyledTable.TableTh>
                                     <StyledTable.TableTh className="tableHeader"> الحالة</StyledTable.TableTh>
-                                </tr>
+                                </StyledTable.Tr>
                             </StyledTable.TableHedContainer>
                             <StyledTable.TableBodyContainer>
                                 {lab.Available.map((available, AvailableIndex) => {

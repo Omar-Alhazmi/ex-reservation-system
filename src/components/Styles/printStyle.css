@@ -1,0 +1,85 @@
+.header,
+.header-space,
+.footer,
+.footer-space {
+  height: 100px;
+}
+.print--icon{
+  cursor: pointer;
+  font-size: 3rem;
+}
+.print--icon--container{
+  display: flex;
+    position: absolute;
+    top: 15%;
+    right: 5%;
+}
+.print--icon:hover{
+  font-size: 5rem;
+}
+div.header {
+  position: fixed;
+  top: 0;
+  justify-content: center;
+  border-bottom: solid 1px;
+  display: none;
+
+}
+.print--heder--subject{
+  display: none;
+  margin-right: 15px;
+    align-self: center;
+    position: fixed;
+    top: 2%;
+}
+.print--container {
+  width: 100%;
+}
+td.content--container{
+  padding: 5%;
+}
+.table--cell{
+  border: solid 1px;
+  padding: 5px;
+}
+table.print--mode {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+.print--heder--duration{
+  display: none;
+  margin-right: 15px;
+  align-self: center;
+  position: fixed;
+  top: 5%;
+}
+.hide{
+  display: none;
+}
+.table--direction{
+  direction: rtl;
+}
+@media print {
+  .hide{
+    display: table;
+  }
+  .header {
+    display: flex!important;
+    width: 100%;
+  }
+  .print--heder--duration,.print--heder--subject{
+    display: block;
+  }
+  nav {
+    display: none;
+  }
+  tr,
+  th,
+  td {
+    page-break-inside: avoid !important;
+    page-break-after: auto;
+  }
+
+
+}

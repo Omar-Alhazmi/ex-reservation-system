@@ -38,20 +38,20 @@ export default class InformationTable extends Component {
                 <StyledTable.TableWrapper>
                     <StyledTable.TableContainer>
                         <StyledTable.TableHedContainer>
-                            <tr>
+                            <StyledTable.Tr>
                                 <StyledTable.TableTh className="tableHeader">رقم القاعة</StyledTable.TableTh>
                                 <StyledTable.TableTh className="tableHeader">الطاقة الاستيعابية</StyledTable.TableTh>
-                            </tr>
+                            </StyledTable.Tr>
                         </StyledTable.TableHedContainer>
                         <StyledTable.TableBodyContainer>
                             <StyledTable.TableTd className="tableBody">{(LabId !== "") ? LabId : <div class="spinner tableSp">Loading...</div>}</StyledTable.TableTd>
                             <StyledTable.TableTd className="tableBody">{(LabCapacity !== 0) ? LabCapacity : <div class="spinner tableSp">Loading...</div>}</StyledTable.TableTd>
                         </StyledTable.TableBodyContainer>
                         <StyledTable.TableHedContainer>
-                            <tr>
+                            <StyledTable.Tr>
                                 <StyledTable.TableTh className="tableHeader">بداية الفترة</StyledTable.TableTh>
                                 <StyledTable.TableTh className="tableHeader">نهاية الفترة</StyledTable.TableTh>
-                            </tr>
+                            </StyledTable.Tr>
                         </StyledTable.TableHedContainer>
                         <StyledTable.TableBodyContainer>
                             {allTimes}

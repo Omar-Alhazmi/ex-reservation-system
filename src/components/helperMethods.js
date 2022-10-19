@@ -31,6 +31,11 @@ export const timeFormat = (date) => {
   displayDate = displayDate[4].split(':')
   return displayDate[0] + ':' + displayDate[1]
 }
+export const examDuration = (from,to)=>{
+  const hours =  (new Date(to).getHours() - new Date(from).getHours());  
+  const minutes = (new Date(to).getMinutes() - new Date(from).getMinutes());
+  return `${hours}:${minutes}`
+}
 export const validFileType = (file) => {
   const fileTypes = [
     "application/vnd.ms-excel",
