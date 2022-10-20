@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react'
 import { FaBars } from 'react-icons/fa';
 import { IconContext } from 'react-icons';
 import * as MainHeader from '../Styles/MainHeaderStyle'
-import { animateScroll as scroll } from 'react-scroll';
+// import { animateScroll as scroll } from 'react-scroll';
 import logo from '../Images/logo.png'
 import { Outlet } from 'react-router-dom'
+import Instructors from './Instructors';
 import '../../App.css'
 const InstructorNav = ({ toggle }) => {
     const [scrollNav, setScroll] = useState(false);
+    const [hide, setHidden] = useState(false);
+
     const navOnChange = () => {
         if (window.scrollY >= 30) {
             setScroll(true);
@@ -19,7 +22,10 @@ const InstructorNav = ({ toggle }) => {
         window.addEventListener('scroll', navOnChange);
     }, []);
     const toggleHandler = () => {
-        scroll.scrollToTop();
+        setHidden(true)
+    };
+    const displayDivision = ()=>{
+        setHidden(false)
     };
     const logout = (e) => {
         localStorage.clear();
@@ -30,19 +36,29 @@ const InstructorNav = ({ toggle }) => {
             <IconContext.Provider value={{ color: '#607d8b' }}>
                 <MainHeader.Nav scrollNav={scrollNav}>
                     <MainHeader.NavContainer >
-                        <MainHeader.NavLogo to='/Instructor/Home' onClick={toggleHandler}><MainHeader.Image scrollNav={scrollNav} duration={500} src={logo} alt="" /> </MainHeader.NavLogo>
+                        <MainHeader.NavLogo to='/Instructor/' onClick={displayDivision}><MainHeader.Image scrollNav={scrollNav} duration={500} src={logo} alt="" /> </MainHeader.NavLogo>
                         <MainHeader.ResponsiveIcon onClick={toggle}>
                             <FaBars className="FaBarsIcon" />
                         </MainHeader.ResponsiveIcon>
                         <MainHeader.NavMenu>
+                        <MainHeader.NavItem>
+                                <MainHeader.NavLinks
+                                    to={'/Instructor/Home'}
+                                    duration={500}
+                                   offset={-80}
+                                   onClick={toggleHandler}
+                                >استعراض الحجوزات</MainHeader.NavLinks>
+                            </MainHeader.NavItem>
+                            |
                             <MainHeader.NavItem>
                                 <MainHeader.NavLinks
                                     to={'/Instructor/AddStudent'}
                                     duration={500}
                                    offset={-80}
+                                   onClick={toggleHandler}
                                 >اضافة متدرب</MainHeader.NavLinks>
                             </MainHeader.NavItem>
-                            {/* | */}
+                            |
                             <MainHeader.NavItem>
                                 <MainHeader.NavLinks
                                     to={'/Instructor/LabBooking'}
@@ -50,10 +66,10 @@ const InstructorNav = ({ toggle }) => {
                                     duration={500}
                                     spy={true.toString()}
                                     exact={true.toString()}
+                                    onClick={toggleHandler}
                                    offset={-80}
                                 > حجز القاعات</MainHeader.NavLinks>
                             </MainHeader.NavItem>
-                            {/* | */}
                         </MainHeader.NavMenu>
                         <MainHeader.LogoutContainer>
                             <MainHeader.Logout
@@ -67,6 +83,7 @@ const InstructorNav = ({ toggle }) => {
                     </MainHeader.NavContainer>
                 </MainHeader.Nav>
             </IconContext.Provider>
+            <Instructors hide={hide}/>
             <Outlet />
         </>
     )

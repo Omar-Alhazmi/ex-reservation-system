@@ -15,6 +15,11 @@ export const getId = () => {
     return getInfo().data._id
   }
 }
+export const getFullName = () => {
+  if (checkStorage()) {
+    return getInfo().data.FullName
+  }
+}
 export const dateFormat = (date) => {
   let displayDate = new Date(date)
   displayDate = displayDate.toString().split(' ')

@@ -15,6 +15,17 @@
   cursor: auto!important;
   
 }
+.hide{
+  display: none;
+}
+.display{
+  display: contents;
+}
+.display--name{
+  margin-right: 4%;
+    margin-top: 2%;
+    color: #607d8b;
+}
 .available{
   background-color: #8bc34a;
 }
