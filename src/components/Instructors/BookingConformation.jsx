@@ -43,7 +43,7 @@ export default class BookingConformation extends Component {
         const date = dateFormat(From);
         const time = `${timeFormat(From)} - ${timeFormat(To)}`;
         let labDisplay = ""
-        if (labId.length === 10) labDisplay = `المبنى: ${labId[4]} الدور: ${labId[5]} القاعة: ${labId.slice(7, 10)}`
+        if (labId.length === 10) labDisplay = ` المبنى: ${labId[4]} - الدور: ${labId[5]}  - القاعة: ${labId.slice(7, 10)} `
         return (
             <div className='modalContainer'>
                 <div className="modal-container" id="modal-opened">

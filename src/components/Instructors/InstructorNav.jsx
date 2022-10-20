@@ -2,14 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { FaBars } from 'react-icons/fa';
 import { IconContext } from 'react-icons';
 import * as MainHeader from '../Styles/MainHeaderStyle'
-// import { animateScroll as scroll } from 'react-scroll';
 import logo from '../Images/logo.png'
 import { Outlet } from 'react-router-dom'
 import Instructors from './Instructors';
 import '../../App.css'
 const InstructorNav = ({ toggle }) => {
     const [scrollNav, setScroll] = useState(false);
-    const [hide, setHidden] = useState(false);
+    const [hide, setHidden] = useState(true);
 
     const navOnChange = () => {
         if (window.scrollY >= 30) {

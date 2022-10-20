@@ -46,20 +46,24 @@
   }
   
   .modal__title {
-    font-size: 3.2rem;
+    font-size: 2rem;
   }
   .form__container{
     display: grid;
     justify-content: center;
   }
   .modal__description {
-    margin-top: 2rem;
+    margin-top: 1rem;
     font-size: 1.6rem;
     font-style: italic;
   }
-  
+  .modal__details{
+    width: 100%;
+    display: grid;
+    margin-right: 4rem;
+  }
   .modal__text {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
   .fileLabel{
     cursor: pointer;

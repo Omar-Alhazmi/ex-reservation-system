@@ -63,7 +63,7 @@ export default class InstructorsManagement extends Component {
     const { FullName, InstructorId, Email, Phone, password, show, InstructorReference, Teach } = this.state;
     return (
       <>
-        <div className="LoginContainer">
+        <div className="LoginContainer avoid--element-conflict">
           <form className='login-form' >
             <div className="flex-row">
               <label className="lf--label" htmlFor="Email">

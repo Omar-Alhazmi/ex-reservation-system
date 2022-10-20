@@ -1,10 +1,10 @@
-/* *,
+*,
 *::after,
 *::before {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-} */
+}
 .MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-outlined.MuiFormLabel-colorPrimary.Mui-error.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-outlined.css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root
 {
   left: auto!important;
@@ -14,6 +14,9 @@
   background-color: #ff5722;
   cursor: auto!important;
   
+}
+.avoid--element-conflict{
+  margin-top: 1rem;
 }
 .hide{
   display: none;

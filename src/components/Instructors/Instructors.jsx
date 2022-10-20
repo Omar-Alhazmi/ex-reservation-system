@@ -1,14 +1,17 @@
 import React, { Component } from 'react'
 import { getStudentsByInstructorId } from '../ApiConfig/Api';
 import * as TableElement from '../Styles/styledTable';
-import { getFullName,getId } from '../helperMethods'
+import { getFullName, getId } from '../helperMethods'
 import '../../App.css'
+import '../Styles/searchBar.css';
 export default class Instructors extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      data: []
+      data: [],
+      filteredData: [],
+      searchIn: null
     }
   }
   componentDidMount() {
@@ -21,23 +24,46 @@ export default class Instructors extends Component {
         console.log(error);
       })
   }
-  render() {
+  handleSearchChange = (e, index) => {
     const { data } = this.state;
+    const filteredData = data[index].Students.filter(Students => Students.FullName.includes(e.target.value) || Students.StudentId.includes(e.target.value))
+    this.setState({ filteredData, searchIn: index })
+  }
+  dataSet = (students) => {
+    return (
+      students.map((currentStudent, stdIndex) => {
+        return <TableElement.TableTr key={stdIndex}>
+          <TableElement.TableTd>{currentStudent.StudentId}</TableElement.TableTd>
+          <TableElement.TableTd>{currentStudent.FullName}</TableElement.TableTd>
+          <TableElement.TableTd>{currentStudent.Phone}</TableElement.TableTd>
+        </TableElement.TableTr>
+      }))
+  }
+  render() {
+    const { data, filteredData,searchIn } = this.state;
     let allDivision = "..."
     if (data.length !== 0) {
       allDivision = data.map((currentDiv, index) => {
-        return <TableElement.TableWrapper className={this.props.hide?  'hide' : 'display'} key={index}>
+        return <TableElement.TableWrapper className={this.props.hide ? 'hide' : 'display'} key={index}>
           <TableElement.TableContainer>
             <TableElement.TableHedContainer>
               <TableElement.TableTr>
                 <TableElement.TableTh>رقم الشعبة</TableElement.TableTh>
-                <TableElement.TableTh colSpan={2}>المادة</TableElement.TableTh>
+                <TableElement.TableTh>المادة</TableElement.TableTh>
+                <TableElement.TableTh className='search--body'><form
+                  onSubmit={(e) => e.preventDefault()}
+                  className='search--form'>
+                  <label className='search--label' for="search">Search</label>
+                  <input className='search--input' onChange={(e) => this.handleSearchChange(e, index)} id="search" type="search" pattern=".*\S.*" required />
+                  <span class="caret"></span>
+                </form></TableElement.TableTh>
               </TableElement.TableTr>
             </TableElement.TableHedContainer>
             <TableElement.TableBodyContainer>
               <TableElement.TableTr>
                 <TableElement.TableTd>{currentDiv.DivisionId}</TableElement.TableTd>
-                <TableElement.TableTd colSpan={2}>{currentDiv.Subject}</TableElement.TableTd>
+                <TableElement.TableTd >{currentDiv.Subject}</TableElement.TableTd>
+                <TableElement.TableTd >{`\t\t\t\t\t\t`}</TableElement.TableTd>
               </TableElement.TableTr>
             </TableElement.TableBodyContainer>
             <TableElement.TableHedContainer>
@@ -48,13 +74,7 @@ export default class Instructors extends Component {
               </TableElement.TableTr>
             </TableElement.TableHedContainer>
             <TableElement.TableBodyContainer>
-              {currentDiv.Students.map((currentStudent, stdIndex) => {
-                return <TableElement.TableTr key={stdIndex}>
-                  <TableElement.TableTd>{currentStudent.StudentId}</TableElement.TableTd>
-                  <TableElement.TableTd>{currentStudent.FullName}</TableElement.TableTd>
-                  <TableElement.TableTd>{currentStudent.Phone}</TableElement.TableTd>
-                </TableElement.TableTr>
-              })}
+              {(filteredData.length > 0 && searchIn === index) ? this.dataSet(filteredData) : this.dataSet(currentDiv.Students)}
             </TableElement.TableBodyContainer>
           </TableElement.TableContainer>
         </TableElement.TableWrapper>
