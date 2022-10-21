@@ -124,6 +124,9 @@ export const getStudentsByInstructorId = (id) => {
 export const RemoveAppointmentByLabId = async (req,id) => {
     return await axios.post(`${apiURL}api/remove/appointment/by/Lab/${id}`, req, config)
 }
+export const RemoveExamBookedByStudentId = async (id,req) => {
+  return await axios.post(`${apiURL}api/student/delete/booked/test/${id}`, req, config)
+}
   export const RemoveLabById = (id) => {
     return axios.delete(`${apiURL}api/delete/lab/by/${id}`);
   }

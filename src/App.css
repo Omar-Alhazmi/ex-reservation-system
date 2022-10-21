@@ -52,6 +52,12 @@
 .single--icon{
   cursor: pointer;
 }
+.setting--icons{
+  font-size: 1.5rem;
+}
+.setting--icons:hover{
+  font: 1.8em;
+}
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

@@ -50,7 +50,7 @@ export const TableTh = styled.th`
     text-align: center;
     padding: 8px;
     color: #ffffff;
-    font-size: 1rem;
+    font-size: 1.2rem;
     background: #4FC3A1;
     &:nth-child(odd) {
     color: #ffffff;
@@ -79,7 +79,7 @@ export const TableTd = styled.td`
     text-align: center;
     padding: 8px;
     border-left: 1px solid #f8f8f8;
-    font-size: 0.75rem;
+    font-size: 0.90rem;
     @media (max-width: 767px) {
         padding: 20px .625em .625em .625em;
         height: 60px;

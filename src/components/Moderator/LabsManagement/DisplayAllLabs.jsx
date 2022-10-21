@@ -97,8 +97,8 @@ export default class DisplayAllLabs extends Component {
                             <StyledTable.TableBodyContainer>
                                 <StyledTable.TableTd className="tableBody">{lab.LabId}</StyledTable.TableTd>
                                 <StyledTable.TableTd className="tableBody">{lab.LabCapacity}</StyledTable.TableTd>
-                                <StyledTable.TableTd className="tableBody table--operation--container"><div onClick={() => this.updateToggleHandler(labIndex)} className='single--icon' ><MdOutlineEditCalendar color='#00bcd4' /></div>  </StyledTable.TableTd>
-                               <StyledTable.TableTd> <div onClick={() => this.DeleteHandel(labIndex)} className='single--icon'> <MdDeleteSweep color='#ff5722' /> </div></StyledTable.TableTd>
+                                <StyledTable.TableTd className="tableBody table--operation--container"><div onClick={() => this.updateToggleHandler(labIndex)} className='single--icon' ><MdOutlineEditCalendar className='setting--icons' color='#00bcd4' /></div>  </StyledTable.TableTd>
+                               <StyledTable.TableTd> <div onClick={() => this.DeleteHandel(labIndex)} className='single--icon'> <MdDeleteSweep className='setting--icons'  color='#ff5722' /> </div></StyledTable.TableTd>
                             </StyledTable.TableBodyContainer>
                             <StyledTable.TableHedContainer>
                                 <StyledTable.Tr>
