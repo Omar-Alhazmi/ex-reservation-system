@@ -25,6 +25,7 @@ export default class SummaryTable extends Component {
     }
     return (
         <>
+        <StyledTable.TableWithTitleWrapper>
             <StyledTable.TableWrapper>
                 <StyledTable.TableContainer>
                     <StyledTable.TableHedContainer>
@@ -40,6 +41,7 @@ export default class SummaryTable extends Component {
                     </StyledTable.TableBodyContainer>
                 </StyledTable.TableContainer>
             </StyledTable.TableWrapper>
+            </StyledTable.TableWithTitleWrapper>
         </>
     )
 }

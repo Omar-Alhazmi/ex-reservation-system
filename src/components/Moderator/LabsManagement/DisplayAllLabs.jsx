@@ -84,14 +84,14 @@ export default class DisplayAllLabs extends Component {
         if (this.state.data.length > 0) {
             allLabs = data.map((lab, labIndex) => {
                 return (
-                    <StyledTable.TableWrapper key={labIndex} >
+                    <StyledTable.TableWithTitleWrapper key={labIndex}>
+                    <StyledTable.TableWrapper>
                         <StyledTable.TableContainer>
                             <StyledTable.TableHedContainer>
                                 <StyledTable.Tr>
                                     <StyledTable.TableTh className="tableHeader"> رقم القاعة</StyledTable.TableTh>
                                     <StyledTable.TableTh className="tableHeader"> الطاقة الاستيعابية</StyledTable.TableTh>
                                     <StyledTable.TableTh colSpan={2}  className="tableHeader"> ادارة القاعة</StyledTable.TableTh>
-
                                 </StyledTable.Tr>
                             </StyledTable.TableHedContainer>
                             <StyledTable.TableBodyContainer>
@@ -123,6 +123,7 @@ export default class DisplayAllLabs extends Component {
                             </StyledTable.TableBodyContainer>
                         </StyledTable.TableContainer>
                     </StyledTable.TableWrapper>
+                    </StyledTable.TableWithTitleWrapper>
                 )
             }
             )

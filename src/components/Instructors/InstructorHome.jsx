@@ -63,7 +63,7 @@ export default class InstructorHome extends Component {
       }
     return (
       <div>
-      {(!selectedRef)?<StyledTable.TableWrapper>
+      {(!selectedRef)?<StyledTable.TableWithTitleWrapper><StyledTable.TableWrapper>
         <StyledTable.TableContainer>
           <StyledTable.TableHedContainer>
           </StyledTable.TableHedContainer>
@@ -80,6 +80,7 @@ export default class InstructorHome extends Component {
           </StyledTable.TableBodyContainer>
         </StyledTable.TableContainer>
       </StyledTable.TableWrapper >
+      </StyledTable.TableWithTitleWrapper>
      :<StudentBookedInfo data={students} toggle={this.selectHandler}/>}
       </div>
     )

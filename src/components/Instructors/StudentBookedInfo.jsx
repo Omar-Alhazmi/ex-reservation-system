@@ -50,6 +50,7 @@ export default class StudentBookedInfo extends Component {
                     />
                     <PrintStudentTable ref={el => (this.componentRef = el)} student={this.props.data.Student} subject={this.props.data.For} duration={examDuration(this.props.data.From, this.props.data.To)} />
                 </div>
+                <StyledTable.TableWithTitleWrapper>
                 <StyledTable.TableWrapper>
                     <StyledTable.TableContainer id='studentTable'>
                         <StyledTable.TableHedContainer>
@@ -64,6 +65,7 @@ export default class StudentBookedInfo extends Component {
                         </StyledTable.TableBodyContainer>
                     </StyledTable.TableContainer>
                 </StyledTable.TableWrapper >
+                </StyledTable.TableWithTitleWrapper>
             </>
         )
     }

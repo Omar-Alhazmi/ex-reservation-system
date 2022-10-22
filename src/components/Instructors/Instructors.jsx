@@ -42,9 +42,11 @@ export default class Instructors extends Component {
   render() {
     const { data, filteredData,searchIn } = this.state;
     let allDivision = "..."
-    if (data.length !== 0) {
+    if (data.length > 0) {
       allDivision = data.map((currentDiv, index) => {
-        return <TableElement.TableWrapper className={this.props.hide ? 'hide' : 'display'} key={index}>
+        return( 
+        <TableElement.TableWithTitleWrapper className={this.props.hide ? 'hide' : 'display'} key={index} > 
+          <TableElement.TableWrapper>
           <TableElement.TableContainer>
             <TableElement.TableHedContainer>
               <TableElement.TableTr>
@@ -56,7 +58,8 @@ export default class Instructors extends Component {
                   <label className='search--label' for="search">Search</label>
                   <input className='search--input' onChange={(e) => this.handleSearchChange(e, index)} id="search" type="search" pattern=".*\S.*" required />
                   <span class="caret"></span>
-                </form></TableElement.TableTh>
+                </form>
+                </TableElement.TableTh>
               </TableElement.TableTr>
             </TableElement.TableHedContainer>
             <TableElement.TableBodyContainer>
@@ -78,6 +81,8 @@ export default class Instructors extends Component {
             </TableElement.TableBodyContainer>
           </TableElement.TableContainer>
         </TableElement.TableWrapper>
+        </TableElement.TableWithTitleWrapper>
+        )
       })
     }
     return (

@@ -19,7 +19,7 @@
   margin-top: 1rem;
 }
 .hide{
-  display: none;
+  display: none!important;
 }
 .display{
   display: contents;
@@ -27,8 +27,13 @@
 .display--name{
   margin-right: 4%;
     margin-top: 2%;
-    color: #607d8b;
-}
+  }
+
+.finished--exam{background-color: #ccc!important;}
+tr.finished--exam:nth-child(even){ background-color: #ccc};
+table>thead>tr>th.finished--ex--heder:nth-child(even){background-color: #607d8b;}
+table>thead>tr>th.finished--ex--heder{background-color: #607d8b!important;}
+
 .available{
   background-color: #8bc34a;
 }

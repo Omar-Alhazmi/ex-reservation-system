@@ -32,8 +32,8 @@
     border-radius: 50%;
     box-shadow: 0 0 0 0.25em inset;
     caret-color: var(--primary);
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1.75rem;
+    height: 1.75rem;
     appearance: none;
     cursor: pointer;
 }

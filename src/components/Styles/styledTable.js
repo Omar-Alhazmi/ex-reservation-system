@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 export const TableWrapper = styled.div`
-    margin: 10px 70px 70px;
-    box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+    // margin: 10px 70px 70px;
+    box-shadow: 0px 0px 26px rgba( 0, 0, 0, 0.2 );
     @media (max-width: 767px) {
         margin: auto;
         &:before{
@@ -13,6 +13,16 @@ export const TableWrapper = styled.div`
     }
 }
 `
+export const TableTitle = styled.h3`
+    text-align: center;
+    margin-bottom: 1rem;
+`
+export const TableWithTitleWrapper = styled.div`
+    display: flow-root;
+    width: 100%;
+    padding: 2%;
+    margin-top: 2%;
+`
 export const TableContainer = styled.table`
     border-radius: 5px;
     font-size: 12px;
@@ -23,8 +33,8 @@ export const TableContainer = styled.table`
     max-width: 100%;
     white-space: nowrap;
     background-color: white;
-    box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
-    margin-top: 12%;
+    // box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+    // margin-top: 12%;
     @media (max-width: 767px) {
     display: block;
         width: 100%;
@@ -117,6 +127,7 @@ export const Tr = styled.tr`
 display: table-cell;
 }
 `
+
 export const AcReButton = styled.button`
 -webkit-appearance: none;
     padding: 6%;

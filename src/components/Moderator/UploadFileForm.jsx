@@ -52,11 +52,19 @@ export default class UploadFileForm extends Component {
             }
             ).catch(err => {
                 console.log(err.response);
+                if(err.response.data){
                 Swal.fire({
                     title: ` ${err.response.data.message}`,
                     icon: 'warning',
                     showCancelButton: false,
                 })
+            }else{
+                Swal.fire({
+                    title: ` حدث خطاء`,
+                    icon: 'warning',
+                    showCancelButton: false,
+                })   
+            }
             });
     }
     handleFileChange(e) {
