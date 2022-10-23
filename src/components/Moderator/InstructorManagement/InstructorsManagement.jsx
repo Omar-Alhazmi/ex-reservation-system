@@ -17,8 +17,9 @@ export default class InstructorsManagement extends Component {
       InstructorId: "",
       Phone: "",
       InstructorReference: "",
-      Teach: "",
-      HasPermissionTo: ""
+      Subject: "",
+      HasPermissionTo: "",
+      editClicked: false
     }
     this.handelSubmit = this.handelSubmit.bind(this);
     this.toggleHandler = this.toggleHandler.bind(this);
@@ -55,119 +56,134 @@ export default class InstructorsManagement extends Component {
     e.preventDefault();
     this.RegisterSingleInstructor(newInstructor);
   };
+  onChange = (FullName, Email, InstructorId, Phone, InstructorReference, Subject) => {
+    this.setState({ FullName, Email, InstructorId, Phone, InstructorReference, Subject })
+  }
+
   toggleHandler = (e) => {
     this.setState({ show: !this.state.show })
   }
-
+  handelEditToggle = () => {
+    const {editClicked} = this.state
+    if(editClicked) this.setState({FullName:"",InstructorId:"", Email:"", Phone:"", password:"", InstructorReference:"", Subject:""})
+    this.setState({editClicked: !editClicked});
+  }
   render() {
-    const { FullName, InstructorId, Email, Phone, password, show, InstructorReference, Teach } = this.state;
+    const { FullName, InstructorId, Email, Phone, password, show, InstructorReference, Subject, editClicked } = this.state;
+    const From = <div className="LoginContainer avoid--element-conflict">
+      <form className='login-form' >
+        <div className="flex-row">
+          <label className="lf--label" htmlFor="Email">
+            <AiOutlineMail />
+          </label>
+          <input id="Email"
+            required
+            className='lf--input'
+            placeholder='البريد الالكتروني'
+            name="Email"
+            type="text"
+            onChange={e => this.handleChange(e)}
+            value={Email} />
+        </div>
+        <div className="flex-row">
+          <label className="lf--label" htmlFor="password">
+            <CgLastpass />
+          </label>
+          <input
+            required
+            id="password"
+            className='lf--input'
+            placeholder='كلمة المرور'
+            name="password"
+            type='password'
+            onChange={e => this.handleChange(e)}
+            value={password} />
+        </div>
+        <div className="flex-row">
+          <label className="lf--label" htmlFor="NationalId">
+            <CgRename />
+          </label>
+          <input
+            required
+            id="FullName"
+            className='lf--input'
+            placeholder='اسم المدرب'
+            name="FullName"
+            type="text"
+            onChange={e => this.handleChange(e)}
+            value={FullName} />
+        </div>
+        <div className="flex-row">
+          <label className="lf--label" htmlFor="InstructorId">
+            <AiFillIdcard />
+          </label>
+          <input
+            required
+            id="InstructorId"
+            className='lf--input'
+            placeholder='رقم المدرب'
+            name="InstructorId"
+            type="number"
+            onChange={e => this.handleChange(e)}
+            value={InstructorId} />
+        </div>
+        <div className="flex-row">
+          <label className="lf--label" htmlFor="InstructorId">
+            <AiFillIdcard />
+          </label>
+          <input
+            required
+            id="InstructorReference"
+            className='lf--input'
+            placeholder='الرقم المرجعي'
+            name="InstructorReference"
+            type="number"
+            onChange={e => this.handleChange(e)}
+            value={InstructorReference} />
+        </div>
+        <div className="flex-row">
+          <label className="lf--label" htmlFor="NationalId">
+            <MdOutlineIntegrationInstructions />
+          </label>
+          <input
+            required
+            id="Subject"
+            className='lf--input'
+            placeholder='اسم المادة'
+            name="Subject"
+            type="text"
+            onChange={e => this.handleChange(e)}
+            value={Subject} />
+        </div>
+        <div className="flex-row">
+          <label className="lf--label" htmlFor="Phone">
+            <AiOutlineMobile />
+          </label>
+          <input
+            required
+            id="Phone"
+            className='lf--input'
+            placeholder='رقم الجوال '
+            name="Phone"
+            type="number"
+            onChange={e => this.handleChange(e)}
+            value={Phone} />
+        </div>
+        <input className='lf--submit' type='submit' onClick={e => this.handelSubmit(e)} value='تسجيل المدرب' />
+        {(editClicked) ? <input className='lf--submit' onClick={() => this.handelEditToggle()} value='رجوع' /> :
+          <input className='lf--submit' onClick={e => this.toggleHandler(e)} value='رفع الملف وتسجيل المدربين' />}
+      </form>
+    </div>
     return (
       <>
-        <div className="LoginContainer avoid--element-conflict">
-          <form className='login-form' >
-            <div className="flex-row">
-              <label className="lf--label" htmlFor="Email">
-                <AiOutlineMail />
-              </label>
-              <input id="Email"
-                required
-                className='lf--input'
-                placeholder='البريد الالكتروني'
-                name="Email"
-                type="text"
-                onChange={e => this.handleChange(e)}
-                value={Email} />
-            </div>
-            <div className="flex-row">
-              <label className="lf--label" htmlFor="password">
-                <CgLastpass />
-              </label>
-              <input
-                required
-                id="password"
-                className='lf--input'
-                placeholder='كلمة المرور'
-                name="password"
-                type='password'
-                onChange={e => this.handleChange(e)}
-                value={password} />
-            </div>
-            <div className="flex-row">
-              <label className="lf--label" htmlFor="NationalId">
-                <CgRename />
-              </label>
-              <input
-                required
-                id="FullName"
-                className='lf--input'
-                placeholder='اسم المدرب'
-                name="FullName"
-                type="text"
-                onChange={e => this.handleChange(e)}
-                value={FullName} />
-            </div>
-            <div className="flex-row">
-              <label className="lf--label" htmlFor="InstructorId">
-                <AiFillIdcard />
-              </label>
-              <input
-                required
-                id="InstructorId"
-                className='lf--input'
-                placeholder='رقم المدرب'
-                name="InstructorId"
-                type="number"
-                onChange={e => this.handleChange(e)}
-                value={InstructorId} />
-            </div>
-            <div className="flex-row">
-              <label className="lf--label" htmlFor="InstructorId">
-                <AiFillIdcard />
-              </label>
-              <input
-                required
-                id="InstructorReference"
-                className='lf--input'
-                placeholder='الرقم المرجعي'
-                name="InstructorReference"
-                type="number"
-                onChange={e => this.handleChange(e)}
-                value={InstructorReference} />
-            </div>
-            <div className="flex-row">
-              <label className="lf--label" htmlFor="NationalId">
-                <MdOutlineIntegrationInstructions />
-              </label>
-              <input
-                required
-                id="Teach"
-                className='lf--input'
-                placeholder='اسم المادة'
-                name="Teach"
-                type="text"
-                onChange={e => this.handleChange(e)}
-                value={Teach} />
-            </div>
-            <div className="flex-row">
-              <label className="lf--label" htmlFor="Phone">
-                <AiOutlineMobile />
-              </label>
-              <input
-                required
-                id="Phone"
-                className='lf--input'
-                placeholder='رقم الجوال '
-                name="Phone"
-                type="number"
-                onChange={e => this.handleChange(e)}
-                value={Phone} />
-            </div>
-            <input className='lf--submit' type='submit' onClick={e => this.handelSubmit(e)} value='تسجيل المدرب' />
-            <input className='lf--submit' onClick={e => this.toggleHandler(e)} value='رفع الملف وتسجيل المدربين' />
-          </form>
-        </div>
+        {
+          (!editClicked) ?
+            <>
+              {From}
+              <InstructorsTable handelEditToggle={this.handelEditToggle} onNameChange={this.onChange} />
+            </>
+            : <>{From}</>}
         {(!show) ? "" : <UploadFileForm toggleHandler={this.toggleHandler} from={"instructor"} />}
-        <InstructorsTable />
       </>
     )
   }

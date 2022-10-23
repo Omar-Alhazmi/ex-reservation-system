@@ -1,16 +1,11 @@
 import React, { Component } from 'react'
 import * as StyledTable from '../../Styles/styledTable'
 import { getInstructors} from '../../ApiConfig/Api'
-import InstructorEditForm from "./InstructorEditForm";
 export default class InstructorsTable extends Component {
-
     constructor(props) {
       super(props)
-    
       this.state = {
         Instructors:[],
-        editClicked:false,
-        currentInstructor:null
       }
     }
     componentDidMount(){
@@ -26,11 +21,14 @@ export default class InstructorsTable extends Component {
     }
 
     handleInstructorEdit = (index)=>{
-        const {editClicked,Instructors} = this.state
-        this.setState({editClicked:!editClicked,currentInstructor: Instructors[index]})
+        const {Instructors} =this.state
+        const {onNameChange,handelEditToggle} = this.props
+        console.log(Instructors[index].InstructorId);
+        onNameChange(Instructors[index].FullName,Instructors[index].Email,Instructors[index].InstructorId,Instructors[index].Phone,Instructors[index].InstructorReference,Instructors[index].Subject)
+        handelEditToggle()
     }
     render() {
-        const { Instructors,editClicked,currentInstructor } = this.state
+        const { Instructors } = this.state
         let allTimes = (
             <StyledTable.TableTr>
                 <StyledTable.TableTd className="tableBody"><div class="spinner tableSp">Loading...</div></StyledTable.TableTd>
@@ -40,7 +38,7 @@ export default class InstructorsTable extends Component {
             if (Instructors.length > 0) {
                 allTimes = Instructors.map((Instructors, index) => {
                     return (
-                        <StyledTable.TableTr key={index} onClick={this.handleInstructorEdit(index)}>
+                        <StyledTable.TableTr key={index} onClick={()=>this.handleInstructorEdit(index)}>
                             <StyledTable.TableTd className="tableBody single--icon">{Instructors.FullName}</StyledTable.TableTd>
                             <StyledTable.TableTd className="tableBody single--icon">{Instructors.InstructorReference.toString()}</StyledTable.TableTd>
                             <StyledTable.TableTd className="tableBody single--icon">{Instructors.Subject.toString()}</StyledTable.TableTd>
@@ -52,7 +50,7 @@ export default class InstructorsTable extends Component {
         }
         return (
             <>
-            {(editClicked)?<InstructorEditForm data={currentInstructor}/>:
+
                 <StyledTable.TableWithTitleWrapper>
                     <StyledTable.TableWrapper>
                         <StyledTable.TableContainer>
@@ -69,7 +67,7 @@ export default class InstructorsTable extends Component {
                             </StyledTable.TableBodyContainer>
                         </StyledTable.TableContainer>
                     </StyledTable.TableWrapper>
-                </StyledTable.TableWithTitleWrapper>}
+                </StyledTable.TableWithTitleWrapper>
             </>
         )
     }

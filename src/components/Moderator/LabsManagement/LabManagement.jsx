@@ -156,7 +156,6 @@ export default class LabManagement extends Component {
       (_id.length > 0 && LabCapacity > 0) ? this.LabUpdate(UpdateLab) : Swal.fire({ icon: 'error', title: "الرجاء التأكد  من ادخال البيانات بشكل صحيح" });
   };
   onChange = (LabCapacity, LabId, Available, _id) => {
-    console.log(LabCapacity, LabId, Available, _id);
     this.setState({ LabCapacity: LabCapacity, LabId: LabId, Available: Available, _id: _id });
   }
   RemoveOnChange = (DeleteAppointments) => {
