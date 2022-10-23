@@ -9,7 +9,7 @@ import SelectSubjectMod from './components/Instructors/SelectSubjectMod';
 import ModeratorNave from './components/Moderator/ModeratorNave';
 import Sidebar from './components/Moderator/ModeratorSidebar';
 import Home from './components/Moderator/Home'
-import InstructorsManagement from './components/Moderator/InstructorsManagement';
+import InstructorsManagement from './components/Moderator/InstructorManagement/InstructorsManagement';
 import LabsManagement from './components/Moderator/LabsManagement/LabManagement';
 import StudentManagement from './components/Moderator/StudentManagement'
 import { PrivateRouteInstructor, PrivateRouteModerator,PrivateRouteStudents } from './RouteManagement/PrivateRoutes';

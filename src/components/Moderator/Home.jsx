@@ -17,7 +17,6 @@ export default class Home extends Component {
       Instructors: [],
       StudentCount: 0,
       DivisionCount: [],
-
     }
   }
   componentDidMount() {

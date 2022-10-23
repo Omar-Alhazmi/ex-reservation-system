@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { InstructorSingleRegistration } from '../ApiConfig/Api';
+import { InstructorSingleRegistration } from '../../ApiConfig/Api';
 import Swal from "sweetalert2";
 import { AiOutlineMail, AiFillIdcard, AiOutlineMobile } from 'react-icons/ai';
 import { CgLastpass, CgRename } from 'react-icons/cg';
 import { MdOutlineIntegrationInstructions } from 'react-icons/md';
-
-import UploadFileForm from './UploadFileForm';
+import InstructorsTable from './InstructorsTable'
+import UploadFileForm from '../UploadFileForm';
 export default class InstructorsManagement extends Component {
   constructor(props) {
     super(props);
@@ -166,8 +166,8 @@ export default class InstructorsManagement extends Component {
             <input className='lf--submit' onClick={e => this.toggleHandler(e)} value='رفع الملف وتسجيل المدربين' />
           </form>
         </div>
-        {(!show) ? "" : <UploadFileForm toggleHandler={this.toggleHandler} from={"instructor"} />
-        }
+        {(!show) ? "" : <UploadFileForm toggleHandler={this.toggleHandler} from={"instructor"} />}
+        <InstructorsTable />
       </>
     )
   }
