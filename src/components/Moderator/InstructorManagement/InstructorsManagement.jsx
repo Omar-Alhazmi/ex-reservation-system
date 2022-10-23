@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { InstructorSingleRegistration } from '../../ApiConfig/Api';
+import { InstructorSingleRegistration,UpdateInstructorById } from '../../ApiConfig/Api';
 import Swal from "sweetalert2";
 import { AiOutlineMail, AiFillIdcard, AiOutlineMobile } from 'react-icons/ai';
 import { CgLastpass, CgRename } from 'react-icons/cg';
@@ -16,10 +16,11 @@ export default class InstructorsManagement extends Component {
       password: "",
       InstructorId: "",
       Phone: "",
-      InstructorReference: "",
-      Subject: "",
+      InstructorReference: [],
+      Subject: [],
       HasPermissionTo: "",
-      editClicked: false
+      editClicked: false,
+      _id:""
     }
     this.handelSubmit = this.handelSubmit.bind(this);
     this.toggleHandler = this.toggleHandler.bind(this);
@@ -44,8 +45,14 @@ export default class InstructorsManagement extends Component {
         Swal.fire({ icon: 'error', title: `حدث خطا` });
       });
   };
-
-
+UpdateInstructor = (req) =>{
+  console.log(req);
+  UpdateInstructorById(req,req._id)
+  .then(res => {
+     if (res.data.success === true)  Swal.fire({ icon: 'success', title: res.data.message });
+    })
+  .catch(error => Swal.fire({ icon: 'error', title: `حدث خطا` }) )
+}
   handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
@@ -56,16 +63,22 @@ export default class InstructorsManagement extends Component {
     e.preventDefault();
     this.RegisterSingleInstructor(newInstructor);
   };
-  onChange = (FullName, Email, InstructorId, Phone, InstructorReference, Subject) => {
-    this.setState({ FullName, Email, InstructorId, Phone, InstructorReference, Subject })
+  onChange = (FullName, Email, InstructorId, Phone, InstructorReference, Subject,_id) => {
+    this.setState({ FullName, Email, InstructorId, Phone, InstructorReference, Subject,_id })
   }
-
+  handelUpdate = e => {
+    const updateInstructor = this.state;
+    updateInstructor.InstructorReference.toString().split(',')
+    updateInstructor.Subject.toString().split(',')
+    e.preventDefault();
+    this.UpdateInstructor(updateInstructor);
+  };
   toggleHandler = (e) => {
     this.setState({ show: !this.state.show })
   }
   handelEditToggle = () => {
     const {editClicked} = this.state
-    if(editClicked) this.setState({FullName:"",InstructorId:"", Email:"", Phone:"", password:"", InstructorReference:"", Subject:""})
+    if(editClicked) this.setState({FullName:"",InstructorId:"", Email:"", Phone:"", password:"", InstructorReference:[], Subject: [] })
     this.setState({editClicked: !editClicked});
   }
   render() {
@@ -106,18 +119,18 @@ export default class InstructorsManagement extends Component {
           <input
             required
             id="FullName"
-            className='lf--input'
+            className={(editClicked)? "lf--input'": 'dis lf--input'}
             placeholder='اسم المدرب'
             name="FullName"
             type="text"
             onChange={e => this.handleChange(e)}
             value={FullName} />
         </div>
-        <div className="flex-row">
+        {(!editClicked) ?  <div className="flex-row">
           <label className="lf--label" htmlFor="InstructorId">
             <AiFillIdcard />
           </label>
-          <input
+        <input
             required
             id="InstructorId"
             className='lf--input'
@@ -126,7 +139,7 @@ export default class InstructorsManagement extends Component {
             type="number"
             onChange={e => this.handleChange(e)}
             value={InstructorId} />
-        </div>
+        </div>:""}
         <div className="flex-row">
           <label className="lf--label" htmlFor="InstructorId">
             <AiFillIdcard />
@@ -137,7 +150,7 @@ export default class InstructorsManagement extends Component {
             className='lf--input'
             placeholder='الرقم المرجعي'
             name="InstructorReference"
-            type="number"
+            type="text"
             onChange={e => this.handleChange(e)}
             value={InstructorReference} />
         </div>
@@ -169,7 +182,7 @@ export default class InstructorsManagement extends Component {
             onChange={e => this.handleChange(e)}
             value={Phone} />
         </div>
-        <input className='lf--submit' type='submit' onClick={e => this.handelSubmit(e)} value='تسجيل المدرب' />
+        <input className='lf--submit' type='submit' onClick={(editClicked)? e=>this.handelUpdate(e)  :e => this.handelSubmit(e)} value={ (editClicked)?  'حفض وارسال' : 'تسجيل المدرب'} />
         {(editClicked) ? <input className='lf--submit' onClick={() => this.handelEditToggle()} value='رجوع' /> :
           <input className='lf--submit' onClick={e => this.toggleHandler(e)} value='رفع الملف وتسجيل المدربين' />}
       </form>

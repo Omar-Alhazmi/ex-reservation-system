@@ -23,8 +23,9 @@ export default class InstructorsTable extends Component {
     handleInstructorEdit = (index)=>{
         const {Instructors} =this.state
         const {onNameChange,handelEditToggle} = this.props
-        console.log(Instructors[index].InstructorId);
-        onNameChange(Instructors[index].FullName,Instructors[index].Email,Instructors[index].InstructorId,Instructors[index].Phone,Instructors[index].InstructorReference,Instructors[index].Subject)
+        const inst = Instructors[index]
+        console.log(inst.InstructorId);
+        onNameChange(inst.FullName,inst.Email,inst.InstructorId,inst.Phone,inst.InstructorReference,inst.Subject,inst._id)
         handelEditToggle()
     }
     render() {
@@ -40,8 +41,8 @@ export default class InstructorsTable extends Component {
                     return (
                         <StyledTable.TableTr key={index} onClick={()=>this.handleInstructorEdit(index)}>
                             <StyledTable.TableTd className="tableBody single--icon">{Instructors.FullName}</StyledTable.TableTd>
-                            <StyledTable.TableTd className="tableBody single--icon">{Instructors.InstructorReference.toString()}</StyledTable.TableTd>
-                            <StyledTable.TableTd className="tableBody single--icon">{Instructors.Subject.toString()}</StyledTable.TableTd>
+                            <StyledTable.TableTd className="tableBody single--icon">{Instructors.InstructorReference}</StyledTable.TableTd>
+                            <StyledTable.TableTd className="tableBody single--icon">{Instructors.Subject}</StyledTable.TableTd>
                             <StyledTable.TableTd className="tableBody single--icon">{Instructors.TeachStudents.length}</StyledTable.TableTd>
                         </StyledTable.TableTr>
                     )
