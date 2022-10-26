@@ -21,8 +21,16 @@ export default class SearchForStudent extends Component {
         console.log(e.target.value);
         const filteredData = students.filter(Students => Students.FullName.includes(e.target.value) || Students.StudentId.includes(e.target.value))
         this.setState({filteredData})
-        if(e.target.value === "")         this.setState({filteredData:[]})
+        if(e.target.value === "")this.setState({filteredData:[]})
       }
+      handleStudentEdit = (index)=>{
+        const {filteredData} =this.state
+        const {onNameChange,handelEditToggle} = this.props
+        const student = filteredData[index]
+        console.log(student.StudentId);
+        onNameChange(student.FullName,student.Email,student.StudentId,student.Phone,student.StudentReference,student.Subject,student._id,student.Instructor)
+        handelEditToggle()
+    }
     render() {
         const {filteredData} = this.state
         let StudentFound = <StyledTable.TableTr>
@@ -31,13 +39,15 @@ export default class SearchForStudent extends Component {
     if(filteredData.length !== 0)
     {
         StudentFound =  filteredData.map((student,index)=>{
-            return <StyledTable.TableTr kye={index}>
+            return( 
+            <StyledTable.TableTr className='single--icon' kye={index} onClick={() => this.handleStudentEdit(index)}>
                 <StyledTable.TableTd className="tableBody">{student.FullName}</StyledTable.TableTd>
                 <StyledTable.TableTd className="tableBody">{student.StudentId}</StyledTable.TableTd>
                 <StyledTable.TableTd className="tableBody">{student.Phone}</StyledTable.TableTd>
-                <StyledTable.TableTd className="tableBody">{student.StudentReference.map((element,BrIndex) => {return <div key={BrIndex}> {element} <br/></div>})}</StyledTable.TableTd>
-                <StyledTable.TableTd className="tableBody">{student.Subject.map((element,BrIndex) => {return <div key={BrIndex}> {element} <br/></div>})}</StyledTable.TableTd>
+                <StyledTable.TableTd className="tableBody">{student.StudentReference.map((element,refBrIndex) => {return <div key={refBrIndex}> {element} <br/></div>})}</StyledTable.TableTd>
+                <StyledTable.TableTd className="tableBody">{student.Subject.map((element,subBrIndex) => {return <div key={subBrIndex}> {element} <br/></div>})}</StyledTable.TableTd>
             </StyledTable.TableTr>
+            )
         })
     }
         return (
@@ -46,9 +56,9 @@ export default class SearchForStudent extends Component {
                   <form
                   onSubmit={(e) => e.preventDefault()}
                   className='search--form'>
-                  <label className='search--label' for="search">Search</label>
+                  <label className='search--label' htmlFor="search">Search</label>
                   <input className='search--input' onChange={(e) => this.handleSearchChange(e)} id="search" type="search" pattern=".*\S.*" required />
-                  <span class="caret"></span>
+                  <span className="caret"></span>
                 </form>
                     <StyledTable.TableWrapper>
                         <StyledTable.TableContainer>

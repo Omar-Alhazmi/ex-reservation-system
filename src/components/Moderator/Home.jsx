@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import '../Styles/chart.css'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
-import { getAllLabs, getInstructors, getAllDivision } from '../ApiConfig/Api'
+import { getAllLabs, getInstructors, getAllDivision,RemoveCollections } from '../ApiConfig/Api'
 import SummaryTable from './SummaryTable';
 import { LabelContainer, LabelCard, CardHeadLine, ChartContainer, LabelsContainer, DoughnutContainer, CardParagraph ,DoughnutContainerLear2,DoughnutTitle} from '../Styles/StyledChart'
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -30,9 +30,9 @@ export default class Home extends Component {
       .then((response) => {
         let StudentCount = 0;
         for (let currentDivision = 0; currentDivision < response.data.length; currentDivision++) {
-          StudentCount += response.data[currentDivision].Students.length
+          StudentCount += response.data[currentDivision].StudentCount;
         }
-        this.setState({ DivisionCount: response.data, StudentCount: StudentCount });
+        this.setState({ DivisionCount: response.data, StudentCount: StudentCount, div:response.data });
       })
       .catch((error) => {
       })

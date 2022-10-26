@@ -76,12 +76,15 @@ export default class InstructorsManagement extends Component {
     const { FullName, InstructorReference, Subject, InstructorId } = this.state;
 
     e.preventDefault();
-    if ((typeof FullName === "string" && FullName.trim().length !== 0) || (typeof InstructorReference === "string" && InstructorReference.trim().length !== 0) || (typeof Subject === "string" && Subject.trim().length !== 0) || (typeof InstructorId === "string" && InstructorId.trim().length !== 0)){
+    if ((typeof FullName === "string" && FullName.trim().length !== 0) 
+    && (typeof InstructorReference === "string" && InstructorReference.trim().length !== 0) 
+    && (typeof Subject === "string" && Subject.trim().length !== 0)
+    && (typeof InstructorId === "string" && InstructorId.trim().length !== 0)){
       this.RegisterSingleInstructor(newInstructor);
     }else{
       Swal.fire({ icon: 'error', 
       title: `الرجاء التأكد من ملء الحقول
-    اسم الدرب
+    اسم المدرب
     رقم الشعبة
     مادة واحدة على الاقل
     رقم المدرب التعريفي
@@ -109,12 +112,12 @@ export default class InstructorsManagement extends Component {
   InstructorDeleteHandler = () => {
     Swal.fire({
       title: 'تأكيد الحذف',
-      text: `سيتم حف ${this.state.FullName} نهائيا من النظام`,
+      text: `سيتم حذف ${this.state.FullName} نهائيا من النظام`,
       icon: 'warning',
       showDenyButton: true,
       confirmButtonColor: '#d33',
       denyButtonColor: '#3085d6',
-      confirmButtonText: 'نعم, حذف تاكيد الحذف',
+      confirmButtonText: 'نعم, تاكيد الحذف',
       denyButtonText: `رجوع`,
     }).then((result) => {
       if (result.isConfirmed) {
@@ -124,7 +127,7 @@ export default class InstructorsManagement extends Component {
   };
   render() {
     const { FullName, InstructorId, Email, Phone, password, show, InstructorReference, Subject, editClicked } = this.state;
-    const From = <div className="LoginContainer avoid--element-conflict">
+    const Form = <div className="LoginContainer avoid--element-conflict">
       <form className='login-form' onSubmit={(editClicked) ? e => this.handelUpdate(e) : e => this.handelSubmit(e)}>
         <div className="flex-row">
           <label className="lf--label"  >
@@ -241,10 +244,10 @@ export default class InstructorsManagement extends Component {
         {
           (!editClicked) ?
             <>
-              {From}
+              {Form}
               <InstructorsTable handelEditToggle={this.handelEditToggle} onNameChange={this.onChange} />
             </>
-            : <>{From}</>}
+            : <>{Form}</>}
         {(!show) ? "" : <UploadFileForm toggleHandler={this.toggleHandler} from={"instructor"} />}
       </>
     )

@@ -95,7 +95,9 @@ export const UpdateInstructorById = async (req,id) => {
   return await axios.post(`${apiURL}api/update/Instructor/by/${id}`, req, config)
 }
 
-
+export const UpdateStudentById = async (req,id) => {
+  return await axios.post(`${apiURL}api/update/Student/by/${id}`, req, config)
+}
 //---------------All GET Request-------------------//
   export const getInstructorById = (id) => {
     return axios.get(`${apiURL}api/get/all/Instructor/${id}`);
@@ -138,7 +140,13 @@ export const RemoveExamBookedByStudentId = async (id,req) => {
   export const RemoveLabById = (id) => {
     return axios.delete(`${apiURL}api/delete/lab/by/${id}`);
 }
-
 export const RemoveInstructorById = (id) => {
-  return axios.delete(`${apiURL}api/remove/instructor/by/${id}`);
+  return axios.delete(`${apiURL}api/remove/instructor/by/${id}`,config);
+}
+export const RemoveStudentById = (id) => {
+  return axios.delete(`${apiURL}api/remove/student/by/${id}`,config);
+}
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
+export const RemoveCollections= () => {
+  return axios.delete(`${apiURL}api/remove/collections`,config);
 }

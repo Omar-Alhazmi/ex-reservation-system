@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import StudentManagement from '../Moderator/StudentManagement/StudentManagement';
+import StudentManagement from '../Moderator/StudentManagement';
 import { getInfo } from '../helperMethods';
 
 export default class AddStudent extends Component {
