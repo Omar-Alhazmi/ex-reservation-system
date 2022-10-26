@@ -32,8 +32,8 @@ export default class InstructorsTable extends Component {
         const { Instructors } = this.state
         let allTimes = (
             <StyledTable.TableTr>
-                <StyledTable.TableTd className="tableBody"><div class="spinner tableSp">Loading...</div></StyledTable.TableTd>
-                <StyledTable.TableTd className="tableBody"><div class="spinner tableSp">Loading...</div></StyledTable.TableTd>
+                <StyledTable.TableTd className="tableBody"><div className="spinner tableSp">Loading...</div></StyledTable.TableTd>
+                <StyledTable.TableTd className="tableBody"><div className="spinner tableSp">Loading...</div></StyledTable.TableTd>
             </StyledTable.TableTr>)
         if (Instructors) {
             if (Instructors.length > 0) {
@@ -41,8 +41,8 @@ export default class InstructorsTable extends Component {
                     return (
                         <StyledTable.TableTr key={index} onClick={()=>this.handleInstructorEdit(index)}>
                             <StyledTable.TableTd className="tableBody single--icon">{Instructors.FullName}</StyledTable.TableTd>
-                            <StyledTable.TableTd className="tableBody single--icon">{Instructors.InstructorReference}</StyledTable.TableTd>
-                            <StyledTable.TableTd className="tableBody single--icon">{Instructors.Subject}</StyledTable.TableTd>
+                            <StyledTable.TableTd className="tableBody single--icon">{Instructors.InstructorReference.map((element,BrIndex) => {return <div key={BrIndex}> {element} <br/></div>})}</StyledTable.TableTd>
+                            <StyledTable.TableTd className="tableBody single--icon">{Instructors.Subject.map((element,BrIndex) => {return <div key={BrIndex}> {element} <br/></div>})}</StyledTable.TableTd>
                             <StyledTable.TableTd className="tableBody single--icon">{Instructors.TeachStudents.length}</StyledTable.TableTd>
                         </StyledTable.TableTr>
                     )

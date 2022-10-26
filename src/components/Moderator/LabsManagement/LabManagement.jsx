@@ -41,7 +41,6 @@ export default class LabManagement extends Component {
         }
       })
       .catch(error => {
-        console.log(error);
         if (error.response.data) {
           if (error.response.data.header === "all_data_up_to_date") Swal.fire({ icon: 'warning', title: error.response.data.message });
         }
@@ -60,7 +59,6 @@ export default class LabManagement extends Component {
         }
       })
       .catch(error => {
-        console.log(error);
         if (error.response.data) {
           if (error.response.data.header === "all_data_up_to_date") Swal.fire({ icon: 'warning', title: error.response.data.message });
         }
@@ -79,7 +77,6 @@ export default class LabManagement extends Component {
         }
       })
       .catch(error => {
-        console.log(error);
         if (error.response.data) {
           if (error.response.data.header === "all_data_up_to_date") Swal.fire({ icon: 'warning', title: error.response.data.message });
         }
@@ -103,7 +100,6 @@ export default class LabManagement extends Component {
       let tto = timeTo.$d.toString().split(" ");
       tf = tf[4]
       tto = tto[4]
-      console.log(tf, tto);
       const From = `${ym}${d} ${tf}`
       const To = `${ym}${d} ${tto}`
       if (new Date(From).getTime() > new Date(To).getTime()) {
@@ -159,7 +155,6 @@ export default class LabManagement extends Component {
     this.setState({ LabCapacity: LabCapacity, LabId: LabId, Available: Available, _id: _id });
   }
   RemoveOnChange = (DeleteAppointments) => {
-    console.log(DeleteAppointments);
     this.setState({ DeleteAppointments: DeleteAppointments });
   }
   handelUpdate = () => {

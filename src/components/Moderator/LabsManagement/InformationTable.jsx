@@ -11,7 +11,6 @@ export default class InformationTable extends Component {
             const index = DeleteAppointments.indexOf(data[appointmentIndex])
             DeleteAppointments.includes(data[appointmentIndex]) ? DeleteAppointments.splice(index, 1) : DeleteAppointments.push(data[appointmentIndex])
             this.props.onNameChange(DeleteAppointments)
-            console.log(DeleteAppointments);
         }
     }
     render() {

@@ -5,6 +5,7 @@ import * as MainHeader from '../Styles/MainHeaderStyle'
 import { animateScroll as scroll } from 'react-scroll';
 import logo from '../Images/logo.png'
 import { Outlet } from 'react-router-dom'
+import {getFullName} from '../helperMethods';
 import '../../App.css'
 const ModeratorNave = ({ toggle }) => {
     const [scrollNav, setScroll] = useState(false);
@@ -77,6 +78,11 @@ const ModeratorNave = ({ toggle }) => {
                     </MainHeader.NavContainer>
                 </MainHeader.Nav>
             </IconContext.Provider>
+            <div>
+          <h3 className='display--name'>
+            {getFullName()}
+          </h3>
+        </div>
             <Outlet />
         </>
     )

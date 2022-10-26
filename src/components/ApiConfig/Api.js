@@ -26,7 +26,7 @@ export const InstructorSingleRegistration = async (req) => {
             InstructorId: req.InstructorId,
             Phone: req.Phone,
             InstructorReference: req.InstructorReference,
-            Teach: req.Teach,
+            Subject: req.Subject,
             HasPermissionTo: req.HasPermissionTo
         }
     },
@@ -61,8 +61,8 @@ export const StudentSingleRegistration = async (req) => {
             StudentId: req.StudentId,
             Phone: req.Phone,
             StudentReference: req.StudentReference,
-            Study: req.Study,
-            Instructor: req.Instructor
+            Subject: req.Subject,
+            Instructor_id: req.Instructor_id
         },
         config: config
     })
@@ -97,7 +97,7 @@ export const UpdateInstructorById = async (req,id) => {
 
 
 //---------------All GET Request-------------------//
-export const getInstructorById = (id) => {
+  export const getInstructorById = (id) => {
     return axios.get(`${apiURL}api/get/all/Instructor/${id}`);
   }
   export const getInstructors = () => {
@@ -116,12 +116,17 @@ export const getInstructorById = (id) => {
   export const getAllBookedLabByStudentId = (id) => {
     return axios.get(`${apiURL}api/Find/all/booked/test/${id}`,config);
   }
-  
   export const getAllLabs = () => {
     return axios.get(`${apiURL}api/get/all/lab`);
   }
-export const getStudentsByInstructorId = (id) => {
+  export const getStudentsByInstructorId = (id) => {
     return axios.get(`${apiURL}api/Find/All/Division/by/instructorId/${id}`);
+  }
+  export const getAllInstructorId = () => {
+    return axios.get(`${apiURL}api/get/all/InstructorId`,config);
+  }
+  export const getAllStudents = () => {
+    return axios.get(`${apiURL}api/get/all/Student`,config);
   }
   //---------------All remove Request-------------------//
 export const RemoveAppointmentByLabId = async (req,id) => {
@@ -132,4 +137,8 @@ export const RemoveExamBookedByStudentId = async (id,req) => {
 }
   export const RemoveLabById = (id) => {
     return axios.delete(`${apiURL}api/delete/lab/by/${id}`);
-  }
+}
+
+export const RemoveInstructorById = (id) => {
+  return axios.delete(`${apiURL}api/remove/instructor/by/${id}`);
+}

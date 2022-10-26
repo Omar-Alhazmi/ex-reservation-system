@@ -28,7 +28,7 @@
   margin-right: 4%;
     margin-top: 2%;
   }
-
+.lf--submit.red{background: #ff5722;}
 .finished--exam{background-color: #ccc!important;}
 tr.finished--exam:nth-child(even){ background-color: #ccc};
 table>thead>tr>th.finished--ex--heder:nth-child(even){background-color: #607d8b;}
