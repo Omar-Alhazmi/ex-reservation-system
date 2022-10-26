@@ -62,7 +62,7 @@ table.print--mode {
 }
 @media print {
   .hide{
-    display: table;
+    display: table!important;
   }
   .header {
     display: flex!important;
