@@ -1,7 +1,7 @@
 {
   "main.css": "/ex-reservation-system/static/css/main.780681dc.chunk.css",
-  "main.js": "/ex-reservation-system/static/js/main.209929dd.chunk.js",
-  "main.js.map": "/ex-reservation-system/static/js/main.209929dd.chunk.js.map",
+  "main.js": "/ex-reservation-system/static/js/main.82dff8e5.chunk.js",
+  "main.js.map": "/ex-reservation-system/static/js/main.82dff8e5.chunk.js.map",
   "static/js/1.7991d2d1.chunk.js": "/ex-reservation-system/static/js/1.7991d2d1.chunk.js",
   "static/js/1.7991d2d1.chunk.js.map": "/ex-reservation-system/static/js/1.7991d2d1.chunk.js.map",
   "static/js/2.ea49df78.chunk.js": "/ex-reservation-system/static/js/2.ea49df78.chunk.js",
@@ -11,6 +11,6 @@
   "static/media/logo.png": "/ex-reservation-system/static/media/logo.f9be1ee0.png",
   "static/css/main.780681dc.chunk.css.map": "/ex-reservation-system/static/css/main.780681dc.chunk.css.map",
   "index.html": "/ex-reservation-system/index.html",
-  "precache-manifest.a7c222547e9e226012522be31d37134f.js": "/ex-reservation-system/precache-manifest.a7c222547e9e226012522be31d37134f.js",
+  "precache-manifest.24cc07f8bb341e2191d7f567e8620707.js": "/ex-reservation-system/precache-manifest.24cc07f8bb341e2191d7f567e8620707.js",
   "service-worker.js": "/ex-reservation-system/service-worker.js"
 }
