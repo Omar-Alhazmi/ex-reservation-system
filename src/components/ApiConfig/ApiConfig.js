@@ -3,7 +3,7 @@ let apiURL ;
 const expressPort = 5000;
 const apiUrls = {
     development:`http://localhost:${expressPort}/`,
-    production:``,
+    production:`https://tvtc-b.herokuapp.com/`,
 } 
 
 if( window.location.hostname === 'localhost' ){
