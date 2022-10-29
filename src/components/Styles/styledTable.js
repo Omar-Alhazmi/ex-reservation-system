@@ -130,9 +130,8 @@ display: table-cell;
 
 export const AcReButton = styled.button`
 -webkit-appearance: none;
-    padding: 6%;
     background: -webkit-gradient(to right, #a2ccb6 0%, #fceeb5 50%, #ee786e 100%);
-    background: linear-gradient(to right, #4e4376, #2b5876);
+    background: ${({Blue,halfBlue}) => (halfBlue ? 'linear-gradient(to right,#ff5722 0%,#2b5876 50%,#2b5876 100%)' : Blue ?  'linear-gradient(to right,#2778c4 0%,#2b5876 50%,#2b5876 100%)' : 'linear-gradient(to right,#f27474 0%,#ff5722 50%,#ff5722 100%)')};
     border-radius: 5rem;
     border:none;
     box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
@@ -140,25 +139,13 @@ export const AcReButton = styled.button`
     cursor: pointer;
     color: #fff;
     cursor: pointer;
-    font: 1.5em Raleway, sans-serif;
+    font-size: 1rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    height: 3rem;
     letter-spacing: 0.05em;
     outline: none;
+    min-width: 228px;
     -webkit-tap-highlight-color: transparent;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    width: fit-content;
-    justify-self: center;
-    margin-top: 10%;
-    align-items: center;
-    justify-content: center;
-    align-self: center;
-    justify-self: center;
-    margin: 5%;
     &:hover {
   animation-name: gradient;
   -webkit-animation-name: gradient;
@@ -168,6 +155,19 @@ export const AcReButton = styled.button`
   -webkit-animation-iteration-count: 1;
   animation-fill-mode: forwards;
   -webkit-animation-fill-mode: forwards;
-  background: #c6e4d1;
+  background: ${({Blue}) => (Blue ?'#2778c4' : '#f27474')};
   }
+  @media (max-width: 767px) {
+    margin: 1rem 0;
+    padding: 1rem;
+  }
+`
+export const ButtonContainer = styled.div`   
+display: flex;
+justify-content: space-around;
+height: 4rem;
+margin: 2rem;
+@media (max-width: 767px) {
+    display: grid; 
+}
 `

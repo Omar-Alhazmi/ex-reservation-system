@@ -108,7 +108,6 @@ export const UpdateStudentById = async (req,id) => {
   export const getAllDivision = () => {
     return axios.get(`${apiURL}api/Find/All/Divisions`);
   }
-  
   export const getAllAvailableLabs = () => {
     return axios.get(`${apiURL}api/get/all/available/lab`,config);
   }
@@ -129,6 +128,9 @@ export const UpdateStudentById = async (req,id) => {
   }
   export const getAllStudents = () => {
     return axios.get(`${apiURL}api/get/all/Student`,config);
+  }
+  export const DownloadExcel = () => {
+    return axios.get(`${apiURL}api/export/data`,{ responseType: 'arraybuffer'},config);
   }
   //---------------All remove Request-------------------//
 export const RemoveAppointmentByLabId = async (req,id) => {

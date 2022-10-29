@@ -2,9 +2,13 @@ import React, { Component } from 'react'
 import '../Styles/chart.css'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
-import { getAllLabs, getInstructors, getAllDivision,RemoveCollections } from '../ApiConfig/Api'
+import { getAllLabs, getInstructors, getAllDivision, RemoveCollections, DownloadExcel } from '../ApiConfig/Api'
 import SummaryTable from './SummaryTable';
-import { LabelContainer, LabelCard, CardHeadLine, ChartContainer, LabelsContainer, DoughnutContainer, CardParagraph ,DoughnutContainerLear2,DoughnutTitle} from '../Styles/StyledChart'
+import Swal from "sweetalert2";
+import { AcReButton, ButtonContainer } from '../Styles/styledTable'
+import { saveAs } from 'file-saver';
+
+import { LabelContainer, LabelCard, CardHeadLine, ChartContainer, LabelsContainer, DoughnutContainer, CardParagraph, DoughnutContainerLear2, DoughnutTitle } from '../Styles/StyledChart'
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default class Home extends Component {
@@ -32,7 +36,7 @@ export default class Home extends Component {
         for (let currentDivision = 0; currentDivision < response.data.length; currentDivision++) {
           StudentCount += response.data[currentDivision].StudentCount;
         }
-        this.setState({ DivisionCount: response.data, StudentCount: StudentCount, div:response.data });
+        this.setState({ DivisionCount: response.data, StudentCount: StudentCount, div: response.data });
       })
       .catch((error) => {
       })
@@ -59,7 +63,76 @@ export default class Home extends Component {
       .catch((error) => {
       })
   }
-
+  newSemester = () => {
+    RemoveCollections()
+      .then(response => {
+        if (response.status === 200) {
+          Swal.fire({ icon: 'success', title: response.data.message });
+          window.location.reload(false);
+        }
+        else Swal.fire({ icon: 'error', title: `حدث خطا` });
+      })
+      .catch(error => {
+        Swal.fire({ icon: 'error', title: `حدث خطا` });
+      })
+  }
+  DownloadData = async () => {
+    const { Labs, Instructors, DivisionCount } = this.state
+    if ((DivisionCount.length === 0 && Instructors.length === 0) || (Labs.length === 0 && DivisionCount.length === 0)) {
+      Swal.fire({ icon: 'error', title: ` لا يوجد بينات لتحميلها` });
+    } else {
+      await DownloadExcel()
+        .then(response => {
+          const fileName = response.headers['content-disposition'].split('"')[1];
+          const blob = new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+          saveAs(blob, fileName);
+        })
+        .catch(error => {
+          Swal.fire({ icon: 'error', title: `حدث خطا` });
+        })
+    }
+  }
+  semesterWorkHandle = () => {
+    const { Labs, Instructors, DivisionCount } = this.state
+    if ((DivisionCount.length === 0 && Instructors.length === 0) || (Labs.length === 0 && DivisionCount.length === 0)) {
+      Swal.fire({ icon: 'error', title: ` لا يوجد بينات لحذفها` });
+    }
+    else Swal.fire({
+      title: 'تحذير',
+      text: " سيتم حذف جميع بيانات النظام نهائيا",
+      icon: 'warning',
+      showDenyButton: true,
+      confirmButtonColor: '#d33',
+      denyButtonColor: '#3085d6',
+      confirmButtonText: 'نعم, تأكيد الحذف  ',
+      denyButtonText: `رجوع`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.newSemester();
+      }
+    })
+  }
+  DownloadDataAndDelete = () => {
+    const { Labs, Instructors, DivisionCount } = this.state
+    if ((DivisionCount.length === 0 && Instructors.length === 0) || (Labs.length === 0 && DivisionCount.length === 0)) {
+      Swal.fire({ icon: 'error', title: ` لا يوجد بينات لحذفها` });
+    }
+    else Swal.fire({
+      title: 'تحذير',
+      text: "سيتم تحيل قاعدة البيانات و حذف جميع بيانات النظام نهائيا",
+      icon: 'warning',
+      showDenyButton: true,
+      confirmButtonColor: '#d33',
+      denyButtonColor: '#3085d6',
+      confirmButtonText: 'نعم, تأكيد الحذف  ',
+      denyButtonText: `رجوع`,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await this.DownloadData();
+        this.newSemester();
+      }
+    })
+  }
   render() {
     const { AvailableLab, BookedLab, Instructors, StudentCount, DivisionCount, Labs } = this.state
 
@@ -93,7 +166,7 @@ export default class Home extends Component {
             <DoughnutContainer>
               {AvailableLab === 0 && BookedLab === 0 ? <div className="spinner">Loading...</div> :
                 <DoughnutContainerLear2>
-                <DoughnutTitle>نسبة حجز القاعات</DoughnutTitle>
+                  <DoughnutTitle>نسبة حجز القاعات</DoughnutTitle>
                   <Doughnut data={genderData} />
                 </DoughnutContainerLear2>
               }
@@ -147,6 +220,11 @@ export default class Home extends Component {
           </ChartContainer>
         </div>
         <SummaryTable data={Instructors} />
+        <ButtonContainer>
+          <AcReButton Blue={true} onClick={() => this.DownloadData()}> تحميل الملفات  </AcReButton>
+          <AcReButton halfBlue={true} onClick={() => this.DownloadDataAndDelete()}> تحميل الملفات وحذف البيانات </AcReButton>
+          <AcReButton onClick={() => this.semesterWorkHandle()}>حذف جميع البيانات </AcReButton>
+        </ButtonContainer>
       </div>
     )
   }
