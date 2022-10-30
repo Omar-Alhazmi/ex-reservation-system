@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { getStudentsByInstructorId } from '../ApiConfig/Api';
 import * as TableElement from '../Styles/styledTable';
 import { getFullName, getId } from '../helperMethods'
+import IncreaseStudentAttempt from './IncreaseStudentAttempt'
 import '../../App.css'
 import '../Styles/searchBar.css';
 export default class Instructors extends Component {
@@ -11,7 +12,12 @@ export default class Instructors extends Component {
     this.state = {
       data: [],
       filteredData: [],
-      searchIn: null
+      searchIn: null,
+      toggle: false,
+      updateStudent: {
+        For: "",
+        id: "",
+      }
     }
   }
   componentDidMount() {
@@ -29,59 +35,71 @@ export default class Instructors extends Component {
     const filteredData = data[index].Students.filter(Students => Students.FullName.includes(e.target.value) || Students.StudentId.includes(e.target.value))
     this.setState({ filteredData, searchIn: index })
   }
-  dataSet = (students) => {
+  handleStudentAttempt = (id, For) => {
+    this.setState({ updateStudent: { id, For } })
+    this.toggleHandler()
+  }
+  toggleHandler = () => {
+    const { toggle } = this.state;
+    this.setState({ toggle: !toggle })
+  }
+  dataSet = (students, currentDiv) => {
     return (
       students.map((currentStudent, stdIndex) => {
-        return <TableElement.TableTr key={stdIndex}>
+        return <TableElement.TableTr key={stdIndex} onClick={() => this.handleStudentAttempt(currentStudent._id, currentDiv.Subject)}>
           <TableElement.TableTd>{currentStudent.StudentId}</TableElement.TableTd>
           <TableElement.TableTd>{currentStudent.FullName}</TableElement.TableTd>
           <TableElement.TableTd>{currentStudent.Phone}</TableElement.TableTd>
+          {(currentStudent.DoneTestOn.length !== 0) ? currentStudent.DoneTestOn.map(currentSubject => { return <TableElement.TableTd>{(currentSubject.subject === currentDiv.Subject) ? currentSubject.AttemptsCount : 0}</TableElement.TableTd> }) : <TableElement.TableTd>{0}</TableElement.TableTd>}
         </TableElement.TableTr>
       }))
   }
   render() {
-    const { data, filteredData,searchIn } = this.state;
+    const { data, filteredData, searchIn, toggle, updateStudent } = this.state;
     let allDivision = "..."
     if (data.length > 0) {
       allDivision = data.map((currentDiv, index) => {
-        return( 
-        <TableElement.TableWithTitleWrapper className={this.props.hide ? 'hide' : 'display'} key={index} > 
-          <TableElement.TableWrapper>
-          <TableElement.TableContainer>
-            <TableElement.TableHedContainer>
-              <TableElement.TableTr>
-                <TableElement.TableTh>رقم الشعبة</TableElement.TableTh>
-                <TableElement.TableTh>المادة</TableElement.TableTh>
-                <TableElement.TableTh className='search--body'><form
-                  onSubmit={(e) => e.preventDefault()}
-                  className='search--form'>
-                  <label className='search--label' for="search">Search</label>
-                  <input className='search--input' onChange={(e) => this.handleSearchChange(e, index)} id="search" type="search" pattern=".*\S.*" required />
-                  <span class="caret"></span>
-                </form>
-                </TableElement.TableTh>
-              </TableElement.TableTr>
-            </TableElement.TableHedContainer>
-            <TableElement.TableBodyContainer>
-              <TableElement.TableTr>
-                <TableElement.TableTd>{currentDiv.DivisionId}</TableElement.TableTd>
-                <TableElement.TableTd >{currentDiv.Subject}</TableElement.TableTd>
-                <TableElement.TableTd >{`\t\t\t\t\t\t`}</TableElement.TableTd>
-              </TableElement.TableTr>
-            </TableElement.TableBodyContainer>
-            <TableElement.TableHedContainer>
-              <TableElement.TableTr>
-                <TableElement.TableTh> الرقم الاكاديمي</TableElement.TableTh>
-                <TableElement.TableTh>اسم المتدرب</TableElement.TableTh>
-                <TableElement.TableTh>الجوال</TableElement.TableTh>
-              </TableElement.TableTr>
-            </TableElement.TableHedContainer>
-            <TableElement.TableBodyContainer>
-              {(filteredData.length > 0 && searchIn === index) ? this.dataSet(filteredData) : this.dataSet(currentDiv.Students)}
-            </TableElement.TableBodyContainer>
-          </TableElement.TableContainer>
-        </TableElement.TableWrapper>
-        </TableElement.TableWithTitleWrapper>
+        return (
+          <TableElement.TableWithTitleWrapper className={this.props.hide ? 'hide' : 'display'} key={index} >
+            <TableElement.TableWrapper>
+              <TableElement.TableContainer>
+                <TableElement.TableHedContainer>
+                  <TableElement.TableTr>
+                    <TableElement.TableTh>رقم الشعبة</TableElement.TableTh>
+                    <TableElement.TableTh>المادة</TableElement.TableTh>
+                    <TableElement.TableTh colSpan={2} className='search--body'>
+                      <form
+                        onSubmit={(e) => e.preventDefault()}
+                        className='search--form'>
+                        <label className='search--label' for="search">Search</label>
+                        <input className='search--input' onChange={(e) => this.handleSearchChange(e, index)} id="search" type="search" pattern=".*\S.*" required />
+                        <span class="caret"></span>
+                      </form>
+                    </TableElement.TableTh>
+                  </TableElement.TableTr>
+                </TableElement.TableHedContainer>
+                <TableElement.TableBodyContainer>
+                  <TableElement.TableTr>
+                    <TableElement.TableTd>{currentDiv.DivisionId}</TableElement.TableTd>
+                    <TableElement.TableTd >{currentDiv.Subject}</TableElement.TableTd>
+                    <TableElement.TableTd >{`\t\t\t\t\t\t`}</TableElement.TableTd>
+                    <TableElement.TableTd >{`\t\t\t\t\t\t`}</TableElement.TableTd>
+                  </TableElement.TableTr>
+                </TableElement.TableBodyContainer>
+                <TableElement.TableHedContainer>
+                  <TableElement.TableTr>
+                    <TableElement.TableTh> الرقم الاكاديمي</TableElement.TableTh>
+                    <TableElement.TableTh>اسم المتدرب</TableElement.TableTh>
+                    <TableElement.TableTh>الجوال</TableElement.TableTh>
+                    <TableElement.TableTh>عدد المحاولات</TableElement.TableTh>
+                  </TableElement.TableTr>
+                </TableElement.TableHedContainer>
+                <TableElement.TableBodyContainer>
+                  {(filteredData.length > 0 && searchIn === index) ? this.dataSet(filteredData, currentDiv) : this.dataSet(currentDiv.Students, currentDiv)}
+                </TableElement.TableBodyContainer>
+              </TableElement.TableContainer>
+            </TableElement.TableWrapper>
+          </TableElement.TableWithTitleWrapper>
         )
       })
     }
@@ -92,6 +110,7 @@ export default class Instructors extends Component {
             {getFullName()}
           </h3>
         </div>
+        {(toggle) ? <IncreaseStudentAttempt data={updateStudent} toggle={()=>this.toggleHandler()}/> : ""}
         {allDivision}
       </div>
     )

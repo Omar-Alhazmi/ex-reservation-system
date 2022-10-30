@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import '../Styles/chart.css'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
-import { getAllLabs, getInstructors, getAllDivision, RemoveCollections, DownloadExcel } from '../ApiConfig/Api'
+import { getAllLabs, getInstructors, getAllDivision, RemoveCollections, DownloadExcel,expiredAppointment } from '../ApiConfig/Api'
 import SummaryTable from './SummaryTable';
 import Swal from "sweetalert2";
 import { AcReButton, ButtonContainer } from '../Styles/styledTable'
@@ -27,6 +27,7 @@ export default class Home extends Component {
     this.getLabs();
     this.getAllInstructors();
     this.getDivisions();
+    expiredAppointment()
   }
 
   getDivisions() {

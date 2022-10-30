@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { getAllBookedLabByInstructorId, RemoveAppointmentByInstructorById } from '../ApiConfig/Api';
+import { getAllBookedLabByInstructorId, RemoveAppointmentByInstructorById,expiredAppointment } from '../ApiConfig/Api';
 import { getId,dateFormat,timeFormat, DayIs } from '../helperMethods';
 import * as StyledTable from '../Styles/styledTable'
 import StudentBookedInfo from './StudentBookedInfo';
@@ -27,6 +27,7 @@ export default class InstructorHome extends Component {
       })
       .catch((error) => {
       })
+      expiredAppointment();
   }
   removeBookedAppointment = (id, currentAppointment) => {
     RemoveAppointmentByInstructorById(id, currentAppointment)

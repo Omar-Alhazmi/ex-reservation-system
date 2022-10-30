@@ -283,7 +283,7 @@ export default class StudentManagement extends Component {
           (!editClicked) ?
             <>
               {Form}
-              <SearchForStudent  handelEditToggle={this.handelEditToggle} onNameChange={this.onChange}/>
+             {(this.props.id ) ? "" : <SearchForStudent  handelEditToggle={this.handelEditToggle} onNameChange={this.onChange}/>}
             </>
             :<>{Form} </>
         }

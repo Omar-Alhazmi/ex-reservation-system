@@ -98,6 +98,10 @@ export const UpdateInstructorById = async (req,id) => {
 export const UpdateStudentById = async (req,id) => {
   return await axios.post(`${apiURL}api/update/Student/by/${id}`, req, config)
 }
+export const UpdateStudentAttemptsById = async (req,id) => {
+  return await axios.post(`${apiURL}api/instructor/update/Student/Attempts/${id}`, req, config)
+}
+
 //---------------All GET Request-------------------//
   export const getInstructorById = (id) => {
     return axios.get(`${apiURL}api/get/all/Instructor/${id}`);
@@ -132,6 +136,10 @@ export const UpdateStudentById = async (req,id) => {
   export const DownloadExcel = () => {
     return axios.get(`${apiURL}api/export/data`,config,{ responseType: 'arraybuffer'});
   }
+  export const expiredAppointment = () => {
+    return axios.get(`${apiURL}api/Check/out/date`,config,{ responseType: 'arraybuffer'});
+  }
+
   //---------------All remove Request-------------------//
 export const RemoveAppointmentByLabId = async (req,id) => {
     return await axios.post(`${apiURL}api/remove/appointment/by/Lab/${id}`, req, config)
