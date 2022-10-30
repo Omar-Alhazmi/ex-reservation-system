@@ -130,7 +130,7 @@ export const UpdateStudentById = async (req,id) => {
     return axios.get(`${apiURL}api/get/all/Student`,config);
   }
   export const DownloadExcel = () => {
-    return axios.get(`${apiURL}api/export/data`,{ responseType: 'arraybuffer'},config);
+    return axios.get(`${apiURL}api/export/data`,config,{ responseType: 'arraybuffer'});
   }
   //---------------All remove Request-------------------//
 export const RemoveAppointmentByLabId = async (req,id) => {
@@ -148,6 +148,10 @@ export const RemoveInstructorById = (id) => {
 export const RemoveStudentById = (id) => {
   return axios.delete(`${apiURL}api/remove/student/by/${id}`,config);
 }
+export const RemoveAppointmentByInstructorById = (id,data) => {
+  return axios.post(`${apiURL}api/Instructor/delete/booked/lab/by/${id}`,data ,config);
+}
+
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 export const RemoveCollections= () => {
   return axios.delete(`${apiURL}api/remove/collections`,config);
