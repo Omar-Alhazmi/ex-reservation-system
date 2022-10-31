@@ -10,11 +10,11 @@
 	color: var(--fg);
 	font: 1em/1.5 ,sans-serif;
 }
-.search--body {
+/* .search--body {
 	background: var(--bg);
 	display: flex;
 	height: fit-content;
-}
+} */
 .search--form, .search--input, .caret {
 	margin: auto;
 }

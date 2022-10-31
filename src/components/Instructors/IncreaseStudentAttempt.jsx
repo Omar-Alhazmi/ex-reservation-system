@@ -22,7 +22,20 @@ constructor(props) {
         const { id, For } = this.props.data
         const {increaseAttempts} = this.state
         const data ={For , increaseAttempts}
-        this.updateAttempt(id, data )
+        Swal.fire({
+            title: 'اضافة محاولات',
+            text: `سيتم زيادة عدد المحاولات بمقدار : ${increaseAttempts}`,
+            icon: 'info',
+            showDenyButton: true,
+            confirmButtonColor: '#d33',
+            denyButtonColor: '#3085d6',
+            confirmButtonText: 'نعم, تأكيد الاضافة  ',
+            denyButtonText: `رجوع`,
+          }).then((result) => {
+            if (result.isConfirmed) {
+                this.updateAttempt(id, data )
+            }
+          })
     }
     render() {
         return (

@@ -37,7 +37,8 @@ export default class Home extends Component {
         for (let currentDivision = 0; currentDivision < response.data.length; currentDivision++) {
           StudentCount += response.data[currentDivision].StudentCount;
         }
-        this.setState({ DivisionCount: response.data, StudentCount: StudentCount, div: response.data });
+        console.log(response);
+        this.setState({ DivisionCount: response.data, StudentCount: StudentCount });
       })
       .catch((error) => {
       })

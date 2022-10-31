@@ -48,7 +48,7 @@ export default class StudentExamBooking extends Component {
       render() {
         const { AvailableTest, toggle, labId, from, to, lab_id, LabCapacity } = this.state
         const propsData = { From: from, To: to, Lab: lab_id, labId: labId, LabCapacity: LabCapacity,For: this.props.For }
-        let allLabs = <div class="spinner">Loading...</div>
+        let allLabs =  <h1>لايوجد اختبارات متاحة</h1>
         if (AvailableTest.length > 0) {
           allLabs = AvailableTest.map((available, labIndex) => {
               return (

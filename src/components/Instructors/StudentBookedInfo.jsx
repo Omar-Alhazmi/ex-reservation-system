@@ -19,15 +19,9 @@ export default class StudentBookedInfo extends Component {
 
     render() {
         let allStudents = (
-            <StyledTable.TableContainer>
-                <StyledTable.TableBodyContainer>
-                    <StyledTable.TableTr>
-                        <StyledTable.TableTd className="tableBody"><div class="spinner tableSp">Loading...</div></StyledTable.TableTd>
-                        <StyledTable.TableTd className="tableBody"><div class="spinner tableSp">Loading...</div></StyledTable.TableTd>
-                        <StyledTable.TableTd className="tableBody"><div class="spinner tableSp">Loading...</div></StyledTable.TableTd>
-                    </StyledTable.TableTr>
-                </StyledTable.TableBodyContainer>
-            </StyledTable.TableContainer>
+            <StyledTable.TableTr>
+            <StyledTable.TableTd colSpan={5} className="tableBody">لايوجد متدربين</StyledTable.TableTd>
+          </StyledTable.TableTr>
         )
         if (this.props.data.Student.length > 0) {
             allStudents = this.props.data.Student.map((currentStudent, currentStudentIndex) => {

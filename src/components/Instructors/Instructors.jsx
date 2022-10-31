@@ -23,7 +23,6 @@ export default class Instructors extends Component {
   componentDidMount() {
     getStudentsByInstructorId(getId())
       .then(response => {
-        console.log(response);
         this.setState({ data: response.data })
       })
       .catch(error => {
@@ -46,11 +45,11 @@ export default class Instructors extends Component {
   dataSet = (students, currentDiv) => {
     return (
       students.map((currentStudent, stdIndex) => {
-        return <TableElement.TableTr key={stdIndex} onClick={() => this.handleStudentAttempt(currentStudent._id, currentDiv.Subject)}>
+        return <TableElement.TableTr className='single--icon' key={stdIndex} onClick={() => this.handleStudentAttempt(currentStudent._id, currentDiv.Subject)}>
           <TableElement.TableTd>{currentStudent.StudentId}</TableElement.TableTd>
           <TableElement.TableTd>{currentStudent.FullName}</TableElement.TableTd>
           <TableElement.TableTd>{currentStudent.Phone}</TableElement.TableTd>
-          {(currentStudent.DoneTestOn.length !== 0) ? currentStudent.DoneTestOn.map(currentSubject => { return <TableElement.TableTd>{(currentSubject.subject === currentDiv.Subject) ? currentSubject.AttemptsCount : 0}</TableElement.TableTd> }) : <TableElement.TableTd>{0}</TableElement.TableTd>}
+          {(currentStudent.DoneTestOn.length !== 0) ? currentStudent.DoneTestOn.map((currentSubject ,index)=> { return <TableElement.TableTd key={index}>{(currentSubject.subject === currentDiv.Subject) ? currentSubject.AttemptsCount : 0}</TableElement.TableTd> }) : <TableElement.TableTd>{0}</TableElement.TableTd>}
         </TableElement.TableTr>
       }))
   }
@@ -92,7 +91,7 @@ export default class Instructors extends Component {
                     <TableElement.TableTh>اسم المتدرب</TableElement.TableTh>
                     <TableElement.TableTh>الجوال</TableElement.TableTh>
                     <TableElement.TableTh>عدد المحاولات</TableElement.TableTh>
-                  </TableElement.TableTr>
+                  </TableElement.TableTr >
                 </TableElement.TableHedContainer>
                 <TableElement.TableBodyContainer>
                   {(filteredData.length > 0 && searchIn === index) ? this.dataSet(filteredData, currentDiv) : this.dataSet(currentDiv.Students, currentDiv)}
