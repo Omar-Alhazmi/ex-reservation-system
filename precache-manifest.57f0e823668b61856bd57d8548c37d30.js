@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "6d4a3a6e204321ff2557",
+    "revision": "eabf5975908929e74aae",
     "url": "/ex-reservation-system/static/css/main.15b04755.chunk.css"
   },
   {
-    "revision": "6d4a3a6e204321ff2557",
-    "url": "/ex-reservation-system/static/js/main.6d4a3a6e.chunk.js"
+    "revision": "eabf5975908929e74aae",
+    "url": "/ex-reservation-system/static/js/main.eabf5975.chunk.js"
   },
   {
     "revision": "255667dbea0b73219cea",
@@ -24,7 +24,7 @@ self.__precacheManifest = [
     "url": "/ex-reservation-system/static/media/logo.f9be1ee0.png"
   },
   {
-    "revision": "d338f4f9fcef7e434ddab334ed33859b",
+    "revision": "7c2ad79df1d62c8aa3f5aa14fc13a32d",
     "url": "/ex-reservation-system/index.html"
   }
 ];
