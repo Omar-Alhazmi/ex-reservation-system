@@ -1,16 +1,16 @@
 {
-  "main.css": "/ex-reservation-system/static/css/main.1ea6f7f0.chunk.css",
-  "main.js": "/ex-reservation-system/static/js/main.8c605668.chunk.js",
-  "main.js.map": "/ex-reservation-system/static/js/main.8c605668.chunk.js.map",
+  "main.css": "/ex-reservation-system/static/css/main.15b04755.chunk.css",
+  "main.js": "/ex-reservation-system/static/js/main.6d4a3a6e.chunk.js",
+  "main.js.map": "/ex-reservation-system/static/js/main.6d4a3a6e.chunk.js.map",
   "static/js/1.255667db.chunk.js": "/ex-reservation-system/static/js/1.255667db.chunk.js",
   "static/js/1.255667db.chunk.js.map": "/ex-reservation-system/static/js/1.255667db.chunk.js.map",
-  "static/js/2.9f5c94c8.chunk.js": "/ex-reservation-system/static/js/2.9f5c94c8.chunk.js",
-  "static/js/2.9f5c94c8.chunk.js.map": "/ex-reservation-system/static/js/2.9f5c94c8.chunk.js.map",
+  "static/js/2.0fd989eb.chunk.js": "/ex-reservation-system/static/js/2.0fd989eb.chunk.js",
+  "static/js/2.0fd989eb.chunk.js.map": "/ex-reservation-system/static/js/2.0fd989eb.chunk.js.map",
   "runtime~main.js": "/ex-reservation-system/static/js/runtime~main.ef45b950.js",
   "runtime~main.js.map": "/ex-reservation-system/static/js/runtime~main.ef45b950.js.map",
   "static/media/logo.png": "/ex-reservation-system/static/media/logo.f9be1ee0.png",
-  "static/css/main.1ea6f7f0.chunk.css.map": "/ex-reservation-system/static/css/main.1ea6f7f0.chunk.css.map",
+  "static/css/main.15b04755.chunk.css.map": "/ex-reservation-system/static/css/main.15b04755.chunk.css.map",
   "index.html": "/ex-reservation-system/index.html",
-  "precache-manifest.a2eeff3598dd1372b0badbe6b83d5f02.js": "/ex-reservation-system/precache-manifest.a2eeff3598dd1372b0badbe6b83d5f02.js",
+  "precache-manifest.0510cbc3f40291e4828352b00262723f.js": "/ex-reservation-system/precache-manifest.0510cbc3f40291e4828352b00262723f.js",
   "service-worker.js": "/ex-reservation-system/service-worker.js"
 }
