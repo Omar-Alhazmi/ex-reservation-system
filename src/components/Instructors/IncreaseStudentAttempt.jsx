@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { UpdateStudentAttemptsById } from '../ApiConfig/Api';
+// import { UpdateStudentAttemptsById } from '../ApiConfig/Api';
 import Swal from "sweetalert2";
 
 export default class IncreaseStudentAttempt extends Component {
@@ -11,12 +11,12 @@ constructor(props) {
   }
 }
     updateAttempt = ( id, For ) => {
-        UpdateStudentAttemptsById(For, id)
-            .then(response => {
-                if (response.status === 200) Swal.fire({ icon: 'success', title: response.data.message });
-                else Swal.fire({ icon: 'success', title: response.data.message });
-            })
-            .catch(error => Swal.fire({ icon: 'error', title: "حدث خطا" }))
+        // UpdateStudentAttemptsById(For, id)
+        //     .then(response => {
+        //         if (response.status === 200) Swal.fire({ icon: 'success', title: response.data.message });
+        //         else Swal.fire({ icon: 'success', title: response.data.message });
+        //     })
+        //     .catch(error => Swal.fire({ icon: 'error', title: "حدث خطا" }))
     }
     handleSubmit =()=>{
         const { id, For } = this.props.data
@@ -33,7 +33,7 @@ constructor(props) {
             denyButtonText: `رجوع`,
           }).then((result) => {
             if (result.isConfirmed) {
-                this.updateAttempt(id, data )
+                // this.updateAttempt(id, data )
             }
           })
     }

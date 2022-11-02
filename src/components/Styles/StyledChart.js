@@ -42,7 +42,7 @@ export const LabelCard = styled.div`
         height: 133px;
         width: 254px;
     color:${({white}) => (white ? '#ffff' : '#0000')};
-    background-color:${({green,gray,darkBlue,darkGreen}) => (green ? '#00968857' : gray ? '#636467 ': darkBlue ? '#528fa7' :darkGreen? '#157c79':'#000')};
+    background-color:${({green,gray,darkBlue,darkGreen}) => (green ? '#3cc1d8' : gray ? '#636467 ': darkBlue ? '#528fa7' :darkGreen? '#157c79':'#000')};
     &:hover{
     transform: scale(1.02);
     transition: all 0.2s ease-in-out;

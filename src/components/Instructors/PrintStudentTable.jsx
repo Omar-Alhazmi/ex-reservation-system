@@ -11,8 +11,8 @@ export default class PrintStudentTable extends Component {
                 return (
                     <tr className='cell--border print--break' key={currentStudentIndex}>
                         <td className="table--cell">{currentStudentIndex + 1}</td>
-                        <td className="table--cell">{currentStudent.StudentId}</td>
-                        <td className="table--cell">{currentStudent.FullName}</td>
+                        <td className="table--cell">{currentStudent.Student.StudentId}</td>
+                        <td className="table--cell">{currentStudent.Student.FullName}</td>
                         <td className="table--cell">{"  \t\t\t \t "}</td>
                     </tr>
                 )

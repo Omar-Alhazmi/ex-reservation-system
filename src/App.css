@@ -5,63 +5,95 @@
   padding: 0;
   box-sizing: border-box;
 }
-.MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-outlined.MuiFormLabel-colorPrimary.Mui-error.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-outlined.css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root
-{
-  left: auto!important;
+
+.MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-outlined.MuiFormLabel-colorPrimary.Mui-error.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-outlined.css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root {
+  left: auto !important;
   margin: 0 2rem;
 }
-.isBooked{
+
+.isBooked {
   background-color: #ff5722;
-  cursor: auto!important;
-  
+  cursor: auto !important;
+
 }
-.avoid--element-conflict{
+
+.avoid--element-conflict {
   margin-top: 1rem;
 }
-.hide{
-  display: none!important;
+
+.hide {
+  display: none !important;
 }
-.display{
+
+.display {
   display: contents;
 }
-.display--name{
-  margin-right: 4%;
-    margin-top: 2%;
-  }
-.lf--submit.red{background: #ff5722;}
-.finished--exam{background-color: #ccc!important;}
-tr.finished--exam:nth-child(even){ background-color: #ccc};
-table>thead>tr>th.finished--ex--heder:nth-child(even){background-color: #607d8b;}
-table>thead>tr>th.finished--ex--heder{background-color: #607d8b!important;}
 
-.available{
+.display--name {
+  margin-right: 4%;
+  margin-top: 2%;
+}
+
+.lf--submit.red {
+  background: #ff5722;
+}
+
+.finished--exam {
+  background-color: #ccc !important;
+}
+
+tr.finished--exam:nth-child(even) {
+  background-color: #ccc
+}
+
+;
+
+table>thead>tr>th.finished--ex--heder:nth-child(even) {
+  background-color: #607d8b;
+}
+
+table>thead>tr>th.finished--ex--heder {
+  background-color: #607d8b !important;
+}
+
+.available {
   background-color: #8bc34a;
 }
-.delete-appointment-clicked{
-  background-color: #ff5722!important;
+
+.delete-appointment-clicked {
+  background-color: #ff5722 !important;
   text-decoration: line-through;
   cursor: pointer;
-  
+
 }
-.delete-appointment{
+
+.delete-appointment {
   cursor: pointer;
 }
-.tableBody.table--operation--container{
+
+.tableBody.table--operation--container {
   display: flex;
   justify-content: space-around;
   font-size: 1.4rem;
 }
-.date-cell{
+
+.date-cell {
   direction: ltr;
 }
-.single--icon{
+
+.single--icon {
   cursor: pointer;
 }
-.setting--icons{
+
+.setting--icons {
   font-size: 1.5rem;
 }
-.setting--icons:hover{
+
+.setting--icons:hover {
   font: 1.8em;
+}
+.checkbox--container{
+  display: block;
 }
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
@@ -70,15 +102,57 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+td.tableBody input[type=checkbox] {
+  position: absolute;
+  opacity: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+
+}
+
+td.tableBody input[type=checkbox]:focus~span {
+  border: 2px solid #aab0b9;
+}
+
+td.tableBody input[type=checkbox]:focus:checked~span {
+  border: 2px solid #20644c;
+}
+
+td.tableBody input[type=checkbox]:checked~span {
+  color: #FFFFFF;
+  background: #329E78 url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+DQo8c3ZnIHdpZHRoPSIxMiIgaGVpZ2h0PSI5IiB2aWV3Qm94PSIwIDAgMTIgOSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCiAgPHBhdGggZD0iTTQuNTc1IDguOTc3cy0uNDA0LS4wMDctLjUzNi0uMTY1TC4wNTcgNS42NGwuODI5LTEuMjI3TDQuNDcgNy4yNjggMTAuOTIxLjA4NmwuOTIzIDEuMTAzLTYuODYzIDcuNjRjLS4xMzQtLjAwMy0uNDA2LjE0OC0uNDA2LjE0OHoiIGZpbGw9IiNGRkYiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPg0KPC9zdmc+) 50% 40% no-repeat;
+  border: 2px solid #329E78;
+}
+
+td.tableBody span {
+  position: absolute;
+
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: #d4d7dc;
+  border: 2px solid #d4d7dc;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.grade--input {
+  max-width: 4vw;
+  text-align: center;
+}
+
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
 }
+
 @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@700&display=swap');
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding: 0; 
-    font-family:' Amiri-normal Encode Sans Expanded Roboto', sans-serif;
-    font-family: 'Amiri-normal', normal;
-  }
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Impact, Haettenschweiler', 'Arial Narrow Bold', system-ui;
+}

@@ -25,6 +25,7 @@ export default class InstructorHome extends Component {
     // Mack API call 
     getAllBookedLabByInstructorId(getId())
       .then((response) => {
+        console.log(response);
         this.setState({ currentBooking: response.data.currentBooking, finishedExam: response.data.finishedExam })
       })
       .catch((error) => {

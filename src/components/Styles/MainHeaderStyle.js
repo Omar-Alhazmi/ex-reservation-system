@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 
 export const Nav = styled.nav`
 
-background: ${({ scrollNav }) => (scrollNav ? '#c6e4d1' : 'transparent')};
+background: ${({ scrollNav }) => (scrollNav ? '#175e6d' : 'transparent')};
 height: 103px;
 /* margin-top: -80px; */
 display: flex;
@@ -55,7 +55,7 @@ text-decoration: none;
 
 `;
 export const Image = styled.img`
-    width: ${({ scrollNav }) => (scrollNav ? `100px` : `227px`)};
+    width: ${({ scrollNav }) => (scrollNav ? `20vw` : `30vw`)};
     margin: auto;
     @media screen and (max-width:960px){
         width: 130px;

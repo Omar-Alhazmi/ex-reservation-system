@@ -99,8 +99,8 @@ export const UpdateInstructorById = async (req, id) => {
 export const UpdateStudentById = async (req, id) => {
   return await axios.post(`${apiURL}api/update/Student/by/${id}`, req, config)
 }
-export const UpdateStudentAttemptsById = async (req, id) => {
-  return await axios.post(`${apiURL}api/instructor/update/Student/Attempts/${id}`, req, config)
+export const UpdateStudentAttendantsByExamId = async (req, exam_id) => {
+  return await axios.post(`${apiURL}api/instructor/update/Student/Attendants/${exam_id}`, req, config)
 }
 
 //---------------All GET Request-------------------//
