@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { getStudentsByInstructorId } from '../ApiConfig/Api';
 import * as TableElement from '../Styles/styledTable';
 import { getFullName, getId } from '../helperMethods'
-import IncreaseStudentAttempt from './IncreaseStudentAttempt'
+// import IncreaseStudentAttempt from './IncreaseStudentAttempt'
 import '../../App.css'
 import '../Styles/searchBar.css';
 export default class Instructors extends Component {
@@ -49,12 +49,11 @@ export default class Instructors extends Component {
           <TableElement.TableTd>{currentStudent.StudentId}</TableElement.TableTd>
           <TableElement.TableTd>{currentStudent.FullName}</TableElement.TableTd>
           <TableElement.TableTd>{currentStudent.Phone}</TableElement.TableTd>
-          {(currentStudent.DoneTestOn.length !== 0) ? currentStudent.DoneTestOn.map((currentSubject ,index)=> { return <TableElement.TableTd key={index}>{(currentSubject.subject === currentDiv.Subject) ? currentSubject.AttemptsCount : 0}</TableElement.TableTd> }) : <TableElement.TableTd>{0}</TableElement.TableTd>}
         </TableElement.TableTr>
       }))
   }
   render() {
-    const { data, filteredData, searchIn, toggle, updateStudent } = this.state;
+    const { data, filteredData, searchIn } = this.state;
     let allDivision = "..."
     if (data.length > 0) {
       allDivision = data.map((currentDiv, index) => {
@@ -90,7 +89,6 @@ export default class Instructors extends Component {
                     <TableElement.TableTh> الرقم الاكاديمي</TableElement.TableTh>
                     <TableElement.TableTh>اسم المتدرب</TableElement.TableTh>
                     <TableElement.TableTh>الجوال</TableElement.TableTh>
-                    <TableElement.TableTh>عدد المحاولات</TableElement.TableTh>
                   </TableElement.TableTr >
                 </TableElement.TableHedContainer>
                 <TableElement.TableBodyContainer>
@@ -109,7 +107,7 @@ export default class Instructors extends Component {
             {getFullName()}
           </h3>
         </div>
-        {(toggle) ? <IncreaseStudentAttempt data={updateStudent} toggle={()=>this.toggleHandler()}/> : ""}
+        {/* {(toggle) ? <IncreaseStudentAttempt data={updateStudent} toggle={()=>this.toggleHandler()}/> : ""} */}
         {allDivision}
       </div>
     )

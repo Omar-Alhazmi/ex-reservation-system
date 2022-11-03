@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import logo from '../Images/logo.png'
+import logo from '../Images/tvtc_logo.png'
 import * as MainHeader from '../Styles/MainHeaderStyle'
 import '../Styles/printStyle.css'
+import {getFullName} from '../helperMethods'
 
 export default class PrintStudentTable extends Component {
     render() {
@@ -23,8 +24,10 @@ export default class PrintStudentTable extends Component {
                 <table className='print--container table--direction hide' >
                     <thead><tr><td>
                         <div class="header-space">  <div class="header"><MainHeader.Image src={logo} alt="" /> </div>
-                            <h3 className='print--heder--subject'>{`اختبار مادة:\t  ${this.props.subject}`}</h3>
-                            <h4 className='print--heder--duration'>{`مدة الاختبار : ${this.props.duration} س`}</h4>
+                            <p className='print--heder heder--subject'>{`المادة:\t  ${this.props.subject}`}</p>
+                            <p className='print--heder heder--instructor'>{` المدرب : ${getFullName()} `}</p>
+                            <p className='print--heder heder--date'>{` ${this.props.startAt}  :التاريخ `}</p>
+                            <p className='print--heder heder--duration'>{`المدة  : ${this.props.duration} س`}</p>
                         </div>
                     </td></tr></thead>
                     <tbody><tr><td className='content--container'>

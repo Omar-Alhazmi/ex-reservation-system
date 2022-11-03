@@ -3,6 +3,7 @@ import { FaBars } from 'react-icons/fa';
 import { IconContext } from 'react-icons';
 import * as MainHeader from '../Styles/MainHeaderStyle'
 import logo from '../Images/logo.png'
+import logo_2 from '../Images/Logo_Used.png'
 import { Outlet } from 'react-router-dom'
 import Instructors from './Instructors';
 import '../../App.css'
@@ -35,7 +36,7 @@ const InstructorNav = ({ toggle }) => {
             <IconContext.Provider value={{ color: '#607d8b' }}>
                 <MainHeader.Nav scrollNav={scrollNav}>
                     <MainHeader.NavContainer >
-                        <MainHeader.NavLogo to='/Instructor/' onClick={displayDivision}><MainHeader.Image scrollNav={scrollNav} duration={500} src={logo} alt="" /> </MainHeader.NavLogo>
+                        <MainHeader.NavLogo to='/Instructor/' onClick={displayDivision}><MainHeader.Image scrollNav={scrollNav} duration={500} src={(scrollNav) ? logo_2 : logo}  alt="" /> </MainHeader.NavLogo>
                         <MainHeader.ResponsiveIcon onClick={toggle}>
                             <FaBars className="FaBarsIcon" />
                         </MainHeader.ResponsiveIcon>

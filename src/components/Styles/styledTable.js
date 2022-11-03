@@ -61,10 +61,10 @@ export const TableTh = styled.th`
     padding: 8px;
     color: #ffffff;
     font-size: 1.2rem;
-    background: #4FC3A1;
+    background: #0f8490;
     &:nth-child(odd) {
     color: #ffffff;
-    background: #324960;
+    background: #1b5f6e;
 }
 @media (max-width: 767px) {
     display: block;

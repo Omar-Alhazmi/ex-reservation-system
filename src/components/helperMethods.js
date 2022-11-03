@@ -62,6 +62,7 @@ export const timeFormat = (date) => {
   return displayDate[0] + ':' + displayDate[1]
 }
 export const getHoursDiff = (startDate, endDate) => {
+  console.log(startDate, endDate);
   const msInHour = 1000 * 60 * 60;
   return Math.round(Math.abs(endDate - startDate) / msInHour);
 }

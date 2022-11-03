@@ -1,7 +1,6 @@
 .modalContainer {
   --light: hsl(0, 0%, 100%);
   --background: linear-gradient(to right bottom, hsl(140deg 6% 57%), hsl(184deg 31% 42%));
-  /* --background: linear-gradient(to right bottom, hsl(236, 50%, 50%), hsl(195, 50%, 50%)); */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -87,7 +86,10 @@
   width: fit-content;
   margin-bottom: 1em;
 }
-
+.modal__btn.back--button{
+  padding: 0.5rem 0.5rem;
+  border: 1px solid #607d8b;
+}
 .lf-label-file {
   font-size: 3rem;
   display: contents;
@@ -138,8 +140,7 @@
   transform: translateY(-.2rem);
 }
 
-/* links */
-/* =============================================== */
+
 .link-1 {
   font-size: 1.8rem;
 
@@ -190,8 +191,7 @@
   transform: translateY(-.2rem);
 }
 
-/* Second Version Link */
-/* =============================================== */
+
 .second-version-link,
 .second-version-link:link {
   color: hsl(236, 50%, 50%);

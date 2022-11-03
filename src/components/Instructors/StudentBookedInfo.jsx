@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import * as StyledTable from '../Styles/styledTable'
 import PrintStudentTable from './PrintStudentTable'
-import { examDuration } from '../helperMethods';
+import { examDuration, dateFormat } from '../helperMethods';
 import ReactToPrint from "react-to-print";
 import Swal from "sweetalert2";
 
@@ -35,6 +35,8 @@ export default class StudentBookedInfo extends Component {
             .then(response => {
                 if (response.status === 200) Swal.fire({ icon: 'success', title: response.data.message });
                 else Swal.fire({ icon: 'success', title: response.data.message });
+                this.props.toggle()
+                window.location.reload(false);
             })
             .catch(error => {
                 console.log(error);
@@ -45,7 +47,20 @@ export default class StudentBookedInfo extends Component {
         const { Students } = this.state;
         const { data } = this.props
         const DATA = { Students, For: data.For }
-        this.examFinish(DATA, data._id)
+        Swal.fire({
+            title: 'تأكيد العملية',
+            text: "في حال الإرسال لن تستطيع العودة الى هذه الصفحة مجددا سيتم نقل الإختبار الى قائمة اختبارات تم الانتهاء منها",
+            icon: 'info',
+            showDenyButton: true,
+            confirmButtonColor: '#329e78',
+            denyButtonColor: '#324960',
+            confirmButtonText: 'نعم, تأكيد الإرسال  ',
+            denyButtonText: `رجوع`,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.examFinish(DATA, data._id)
+            }
+        })
     }
     handleAttendance = () => {
         let Students = Object.assign(this.state.Students);
@@ -82,15 +97,14 @@ export default class StudentBookedInfo extends Component {
 
         return (
             <>
+                <button className="modal__btn back--button" onClick={() => this.props.toggle()}>العودة االى استعراض الحجوزات &rarr;</button>
                 <div className='print--icon--container'>
                     <ReactToPrint
                         trigger={() => <FcPrint className='print--icon' />}
                         content={() => this.componentRef}
                     />
-                    <PrintStudentTable ref={el => (this.componentRef = el)} student={this.props.data.Students} subject={this.props.data.For} duration={examDuration(this.props.data.From, this.props.data.To)} />
+                    <PrintStudentTable ref={el => (this.componentRef = el)} student={this.props.data.Students} subject={this.props.data.For} duration={examDuration(this.props.data.From, this.props.data.To)} startAt={dateFormat(this.props.data.From)} />
                 </div>
-                <PrintStudentTable  student={this.props.data.Students} subject={this.props.data.For} duration={examDuration(this.props.data.From, this.props.data.To)} />
-
                 <StyledTable.TableWithTitleWrapper>
                     <StyledTable.TableWrapper>
                         <StyledTable.TableContainer id='studentTable'>

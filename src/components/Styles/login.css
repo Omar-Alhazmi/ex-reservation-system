@@ -14,7 +14,7 @@
 }
 
 .logo {
-  width: 200px;
+  width: 50vw;
   display: grid;
   justify-content: center;
 }
@@ -62,6 +62,9 @@
     width: -webkit-fill-available;
     height: -webkit-fill-available;
   }
+  .LoginContainer.LoginContainer--with-logo{
+    display: grid;
+  }
 }
 
 .flex-row {
@@ -97,7 +100,7 @@
   display: block;
   padding: 1em;
   width: 100%;
-  background: linear-gradient(to right, #35c3c1, #00d6b7);
+  background: linear-gradient(to right, #35c3c1, #0e828d);
   border: 0;
   color: #fff;
   cursor: pointer;

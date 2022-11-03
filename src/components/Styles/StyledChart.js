@@ -59,7 +59,7 @@ export const LabelCard = styled.div`
 export const CardHeadLine = styled.h2`
     color:${({white}) => (white ? '#ffff' : '#0000')};
         font-weight: 600;
-        font-size: 1.5rem;
+        font-size: 1rem;
         line-height: none!important;
             margin: auto;
 @media (max-width:1024px) {

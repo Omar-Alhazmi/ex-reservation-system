@@ -95,11 +95,11 @@ class Login extends Component {
   render() {
     return (
       <>
-        <div className="LoginContainer">
+        <div className="LoginContainer LoginContainer--with-logo">
+          <div className="login-logo-container">
+            <img className='logo' src={logo} alt="logo" />
+          </div>
           <form className='login-form' onSubmit={e => this.handelSubmit(e)}>
-            <div className="login-logo-container">
-              <img className='logo' src={logo} alt="logo" />
-            </div>
             <div className="flex-row">
               <label className="lf--label" htmlFor="Id">
                 <IoMdFingerPrint />

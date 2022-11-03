@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { getAllBookedLabByStudentId, RemoveExamBookedByStudentId, expiredAppointment } from '../ApiConfig/Api';
-import { getId, dateFormat, timeFormat, getHoursDiff, DayIs, getInfo } from '../helperMethods';
+import { getId, dateFormat, timeFormat, getHoursDiff, DayIs } from '../helperMethods';
 import * as StyledTable from '../Styles/styledTable'
 import { MdDeleteSweep } from 'react-icons/md';
 import FinishedExams from './FinishedExams'
@@ -79,10 +79,6 @@ export default class StudentsHome extends Component {
               <StyledTable.TableTd className="tableBody">{DayIs(BookedLab.From)}</StyledTable.TableTd>
               <StyledTable.TableTd className="tableBody date-cell">{dateFormat(BookedLab.From)}</StyledTable.TableTd>
               <StyledTable.TableTd className="tableBody date-cell">{`${timeFormat(BookedLab.From)} - ${timeFormat(BookedLab.To)}`}</StyledTable.TableTd>
-              {(getInfo().data.DoneTestOn && getInfo().data.DoneTestOn.length !== 0) ?
-                getInfo().data.DoneTestOn.map(currentSubject => {
-                  return <StyledTable.TableTd className="tableBody">{(currentSubject.subject === BookedLab.For) ? 3 - currentSubject.AttemptsCount : 2}</StyledTable.TableTd>
-                }) : <StyledTable.TableTd className="tableBody">2</StyledTable.TableTd>}
               <StyledTable.TableTd className="tableBody table--operation--container"><div onClick={() => this.removeAppointment(BookedLabIndex)} className='single--icon' > <MdDeleteSweep className='setting--icons' color='#ff5722' /></div>  </StyledTable.TableTd>
             </StyledTable.TableTr>
           )
@@ -104,7 +100,6 @@ export default class StudentsHome extends Component {
                   <StyledTable.TableTh className="tableHeader"> اليوم</StyledTable.TableTh>
                   <StyledTable.TableTh className="tableHeader"> التاريخ</StyledTable.TableTh>
                   <StyledTable.TableTh className="tableHeader"> الوقت</StyledTable.TableTh>
-                  <StyledTable.TableTh className="tableHeader">المحاولات المتبقية</StyledTable.TableTh>
                   <StyledTable.TableTh className="tableHeader"> ادارة الحجز</StyledTable.TableTh>
                 </StyledTable.TableTr>
               </StyledTable.TableHedContainer>

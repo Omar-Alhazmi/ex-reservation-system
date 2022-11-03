@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { NewLabBooking,StudentReserveNewTest } from '../ApiConfig/Api'
 import Swal from "sweetalert2";
-import { getId, dateFormat, timeFormat, getInfo } from '../helperMethods';
+import { getId, dateFormat, timeFormat, getInfo,getHoursDiff } from '../helperMethods';
 import { createBrowserHistory } from 'history';
 
 const history = createBrowserHistory();
@@ -36,7 +36,23 @@ export default class BookingConformation extends Component {
         e.preventDefault();
         const { From, To, Lab, labId, LabCapacity, For } = this.props.data;
         const newBooking = { From: From, To: To, Lab_id: Lab, LabReference: labId, LabCapacity: LabCapacity, For: For }
-        this.NewBooking(newBooking);
+        if(getInfo().data.Role === "Student"){
+            Swal.fire({
+                title: 'تأكيد العملية',
+                text: ` في حال الإرسال لن تستطيع حذف الموعد قبل بداية الفترة ب 24 ساعة الوقت المتبيقي على بداية الاختبار ${getHoursDiff(new Date(From),new Date())} ساعة`,
+                icon: 'info',
+                showDenyButton: true,
+                confirmButtonColor: '#329e78',
+                denyButtonColor: '#324960',
+                confirmButtonText: 'نعم, تأكيد الإرسال  ',
+                denyButtonText: `رجوع`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.NewBooking(newBooking);
+                }
+            })
+        }
+        else this.NewBooking(newBooking);
     }
     render() {
         const { From, To, labId } = this.props.data

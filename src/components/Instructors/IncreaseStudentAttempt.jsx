@@ -10,18 +10,18 @@ constructor(props) {
     increaseAttempts:0
   }
 }
-    updateAttempt = ( id, For ) => {
+    // updateAttempt = ( id, For ) => {
         // UpdateStudentAttemptsById(For, id)
         //     .then(response => {
         //         if (response.status === 200) Swal.fire({ icon: 'success', title: response.data.message });
         //         else Swal.fire({ icon: 'success', title: response.data.message });
         //     })
         //     .catch(error => Swal.fire({ icon: 'error', title: "حدث خطا" }))
-    }
+    // }
     handleSubmit =()=>{
-        const { id, For } = this.props.data
+        // const { id, For } = this.props.data
         const {increaseAttempts} = this.state
-        const data ={For , increaseAttempts}
+        // const data ={For , increaseAttempts}
         Swal.fire({
             title: 'اضافة محاولات',
             text: `سيتم زيادة عدد المحاولات بمقدار : ${increaseAttempts}`,
